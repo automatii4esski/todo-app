@@ -1,0 +1,70 @@
+.header {
+  padding: 30px 35px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px -30px 90px rgba(28, 29, 34, 0.2);
+}
+
+.header__greet {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.header-service {
+  display: flex;
+  align-items: center;
+}
+
+.header-service__form,
+.header-service__calendar {
+  display: flex;
+  align-items: center;
+}
+
+.header-service__form {
+  position: relative;
+}
+
+.header-service__item {
+  margin-right: 22px;
+}
+
+.header-service__search-icon {
+  position: absolute;
+  right: 10px;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.header-service__search-icon--active {
+  pointer-events: none;
+}
+
+.header-service__search {
+  width: 0px;
+  opacity: 0;
+  padding: 0;
+  transition: width 0.2s, opacity 0.2s 0.1s, padding 0s 0.3s;
+}
+
+.header-service__search--active {
+  width: 220px;
+  opacity: 1;
+  padding: 5px 15px;
+  transition: width 0.2s, opacity 0.2s;
+}
+
+.header-service__calendar-icon {
+  margin-right: 8px;
+}
+
+.header-service__calendar-date {
+  font-size: 16px;
+  color: $font-secondary;
+}
+
+.header-service__user {
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}

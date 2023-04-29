@@ -1,5 +1,6 @@
 body {
   font-size: 14px;
+  font-weight: 600;
   color: $font-primary;
   font-family: 'Exo 2', sans-serif;
 }
@@ -8,4 +9,25 @@ body {
   display: flex;
   min-height: 100vh;
   align-items: stretch;
+}
+
+.content {
+  flex: 1 1 auto;
+}
+
+.page {
+  padding: 35px;
+}
+
+.input {
+  background: $ui;
+  border-radius: 19px;
+  padding: 5px 15px;
+  border: 2px solid transparent;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: $secondary;
+    outline: none;
+  }
 }

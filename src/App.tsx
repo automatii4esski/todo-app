@@ -1,4 +1,5 @@
 import Aside from './components/Aside';
+import Header from './components/Header';
 import Tasks from './pages/Tasks';
 import './style/main.scss';
 import React from 'react';
@@ -10,11 +11,16 @@ function App() {
       <div className="App">
         <div className="wrapper">
           <Aside />
-          <Routes>
-            <Route path="/user" element={<h1>user</h1>}></Route>
-            <Route path="/tasks" element={<Tasks />}></Route>
-            <Route path="*" element={<Navigate to="/tasks" />}></Route>
-          </Routes>
+          <div className="content">
+            <Header />
+            <div className="page">
+              <Routes>
+                <Route path="/user" element={<h1>user</h1>}></Route>
+                <Route path="/tasks" element={<Tasks />}></Route>
+                <Route path="*" element={<Navigate to="/tasks" />}></Route>
+              </Routes>
+            </div>
+          </div>
         </div>
       </div>
     </BrowserRouter>
