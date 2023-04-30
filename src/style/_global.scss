@@ -5,18 +5,35 @@ body {
   font-family: 'Exo 2', sans-serif;
 }
 
+::-webkit-scrollbar {
+  width: 5px; /* ширина скроллбара */
+  background-color: transparent; /* цвет фона скроллбара */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $secondary; /* цвет ползунка скроллбара */
+  border-radius: 5px; /* скругление углов ползунка скроллбара */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* цвет трека скроллбара */
+}
+
 .wrapper {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   align-items: stretch;
 }
 
 .content {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .page {
   padding: 35px;
+  height: calc(100vh - $header-height);
 }
 
 .input {
@@ -30,4 +47,12 @@ body {
     border-color: $secondary;
     outline: none;
   }
+}
+
+.date {
+  background: $ui;
+  padding: 8px 16px;
+  color: $font-secondary;
+  display: inline-block;
+  border-radius: 17px;
 }

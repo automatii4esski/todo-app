@@ -1,7 +1,9 @@
 .header {
-  padding: 30px 35px;
+  padding: 10px 35px;
+  height: $header-height;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   box-shadow: 0px -30px 90px rgba(28, 29, 34, 0.2);
 }
 
