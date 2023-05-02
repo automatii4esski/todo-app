@@ -1,6 +1,6 @@
 export const getAdditionClassName = function (
   className: string,
-  condition: boolean,
+  condition: boolean | undefined,
   addition: string = '--active'
 ) {
   return condition ? className.concat(' ', className + addition) : className;

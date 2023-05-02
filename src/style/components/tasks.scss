@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: stretch;
-  max-height: 100%;
+  height: 100%;
 }
 
 .task-column + .task-column {
@@ -15,28 +15,135 @@
   flex-direction: column;
 }
 
-.task-column__content {
-  padding: 15px;
+.task-column__header {
   display: flex;
-  flex: 1 1 auto;
-  align-content: start;
-  column-gap: 15px;
+  position: relative;
+  padding: 0 15px 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    left: 0;
+    height: 4px;
+    background: transparent;
+    border-radius: 10px;
+  }
+}
+
+.task-column__header--red {
+  &::before {
+    background: $red-color;
+  }
+}
+
+.task-column__header--yellow {
+  &::before {
+    background: $yellow-color;
+  }
+}
+
+.task-column__header--green {
+  &::before {
+    background: $green-color;
+  }
+}
+
+.task-column__create-btn {
+  background: $secondary;
+  color: $font-tertiary;
+  position: relative;
+  padding: 8px 40px 8px 20px;
+  border-radius: 19px;
+  border: 2px solid $secondary;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &::before {
+    content: '+';
+    position: absolute;
+    font-size: 20px;
+    line-height: 17px;
+    width: 20px;
+    height: 20px;
+    background: $primary;
+    right: 10px;
+    bottom: 50%;
+    transform: translateY(50%);
+    color: $font-primary;
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  &:hover {
+    background: $primary;
+    color: $font-primary;
+  }
+
+  &:hover::before {
+    color: $font-tertiary;
+    background: $secondary;
+  }
+}
+
+.task-column__title {
+  font-size: 20px;
+  color: $font-primary;
+}
+
+.task-column__content {
+  display: flex;
+  align-items: center;
   border: 2px dashed $ui;
+  justify-content: center;
   border-radius: 12px;
-  flex-wrap: wrap;
+  flex: 1 1 auto;
   overflow-y: auto;
+}
+
+.task-column__tasks-wrapper {
+  padding: 15px;
+  height: 100%;
+  flex: 1 1 auto;
+  position: relative;
+  align-content: flex-start;
+  column-gap: 15px;
+  flex-wrap: wrap;
+}
+
+.task-column__loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .task-column--small {
   flex: 0 1 20%;
 }
 
+.task-column__tasks-plug {
+  color: $font-secondary;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 0 15px;
+  text-align: center;
+}
+
 .task-item {
   border: 2px solid $ui;
   border-radius: 12px;
   margin-bottom: 15px;
-  padding: 20px;
-  flex: 1 1 400px;
+  padding: 15px;
+  flex: 1 1 350px;
+}
+
+.task-column--small .task-item {
+  padding: 10px;
 }
 
 .task-item__title {
@@ -89,9 +196,17 @@
   }
 }
 
-.task-item__done-btn {
+.task-item__actions {
+  display: flex;
+}
+
+.task-item__btn + .task-item__btn {
+  margin-left: 7px;
+}
+
+.task-item__btn {
   background: transparent;
-  border: 2px solid rgb(18, 189, 18);
+  border: 2px solid transparent;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -100,16 +215,41 @@
   align-items: center;
   cursor: pointer;
   transition: background 0.2s;
+}
+
+.task-column--small .task-item__btn {
+  width: 30px;
+  height: 30px;
+}
+
+.task-item__delete-btn {
+  border-color: $red-color;
+
+  & path {
+    transition: stroke 0.2s;
+  }
+
+  &:hover path {
+    stroke: #fff;
+  }
+
+  &:hover {
+    background: $red-color;
+  }
+}
+
+.task-item__done-btn {
+  border-color: $green-color;
 
   & path {
     transition: fill 0.2s;
   }
 
-  &:hover {
-    background: rgb(18, 189, 18);
-  }
-
   &:hover path {
     fill: #fff;
+  }
+
+  &:hover {
+    background: $green-color;
   }
 }

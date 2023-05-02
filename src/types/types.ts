@@ -7,3 +7,13 @@ export type MyFC<TProps = {}> = FC<
 export type RefObj<TElement = HTMLElement> = Partial<{
   reference: RefObject<TElement> | undefined;
 }>;
+
+type TaskStatus = 'outdated' | 'active' | 'done';
+
+export interface ITask {
+  id: number;
+  title: string;
+  desc: string;
+  status: TaskStatus;
+  date: number;
+}
