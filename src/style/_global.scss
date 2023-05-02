@@ -69,3 +69,27 @@ body {
   border-radius: 50%;
   animation: loader 1s infinite ease-in-out;
 }
+
+.popup {
+  display: none;
+  position: fixed;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+
+  &--active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.popup__content {
+  background: $primary;
+  padding: 30px;
+  border-radius: 19px;
+}

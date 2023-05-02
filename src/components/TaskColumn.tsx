@@ -1,8 +1,9 @@
-import React, { HTMLAttributes, memo } from 'react';
+import React, { HTMLAttributes, memo, useRef, useState } from 'react';
 import TaskItem from './TaskItem';
 import { ITask, MyFC } from '../types/types';
 import { getAdditionClassName } from '../utils/getClassName';
 import Loader from './UI/loader/Loader';
+import PopupTemplate from './UI/popup/PopupTemplate';
 
 type HeaderVariant = 'yellow' | 'green' | 'red';
 
@@ -11,7 +12,10 @@ interface ITaskColumn {
   tasks: ITask[];
   isLoading: boolean;
   small?: boolean;
-  main?: boolean;
+  main?: {
+    createTaskHandler: () => void;
+    isPopupActive: boolean;
+  };
   headerVariant?: HeaderVariant;
 }
 
@@ -26,7 +30,7 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   isLoading,
 }) => {
   const limit = 100;
-  console.log(title);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={getAdditionClassName('task-column', small, '--small')}>
@@ -40,7 +44,12 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
         <h3 className="task-column__title">{title}</h3>
         <div className="task-column__actions">
           {main && (
-            <button className="task-column__create-btn">Create task</button>
+            <button
+              onClick={main.createTaskHandler}
+              className="task-column__create-btn"
+            >
+              Create task
+            </button>
           )}
         </div>
       </div>

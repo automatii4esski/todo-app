@@ -5,6 +5,7 @@ import { getConcatClassName } from '../utils/getClassName';
 import { TaskService } from '../API/TaskService';
 import { useFetch } from '../hooks/useFetch';
 import { useTasks } from '../hooks/useTasks';
+import PopupTemplate from '../components/UI/popup/PopupTemplate';
 
 const Tasks: MyFC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -24,10 +25,15 @@ const Tasks: MyFC = () => {
     );
   });
   const [test, setTest] = useState('');
+  const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
 
   useEffect(() => {
     fetchTasks();
   }, []);
+
+  const createTaskHandler = function () {
+    setIsPopupActive(true);
+  };
 
   return (
     <div className="task">
@@ -50,7 +56,10 @@ const Tasks: MyFC = () => {
         tasks={inProgressTasks}
         isLoading={isTasksLoading}
         title="In Progress"
-        main
+        main={{
+          createTaskHandler,
+          isPopupActive,
+        }}
         headerVariant="yellow"
       />
 
@@ -60,6 +69,12 @@ const Tasks: MyFC = () => {
         title="Done"
         small
         headerVariant="green"
+      />
+      <PopupTemplate
+        onHideHandler={() => {
+          setIsPopupActive(false);
+        }}
+        active={isPopupActive}
       />
     </div>
   );
