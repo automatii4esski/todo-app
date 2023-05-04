@@ -15,6 +15,9 @@ interface ITaskColumn {
   onDoneTask: (task: ITask) => void;
   onDeleteTask: (task: ITask) => void;
   small?: boolean;
+  done?: {
+    onReturnTask: (task: ITask) => void;
+  };
   main?: {
     createTaskHandler: () => void;
     isPopupActive: boolean;
@@ -33,6 +36,7 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   isLoading,
   onDoneTask,
   onDeleteTask,
+  done,
 }) => {
   const limit = 100;
   const popupRef = useRef<HTMLDivElement>(null);
@@ -67,6 +71,7 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
               <TaskItem
                 onDoneTask={onDoneTask}
                 onDeleteTask={onDeleteTask}
+                done={done}
                 task={task}
                 limit={limit}
                 key={task.id}

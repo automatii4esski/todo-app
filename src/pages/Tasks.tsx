@@ -36,6 +36,21 @@ const Tasks: MyFC = () => {
   const [test, setTest] = useState('');
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
 
+  const onReturnTask = function (
+    currentTasksArr: ITask[],
+    setCurrentTasks: (newArr: ITask[]) => any
+  ) {
+    return (taskToInteract: ITask) => {
+      const newTasks = [taskToInteract, ...inProgressTasks];
+      setCurrentTasks(
+        currentTasksArr.filter((task) => task.id !== taskToInteract.id)
+      );
+      setInProgressTasks(newTasks);
+      taskToInteract.status = 'active';
+      TaskService.put(taskToInteract);
+    };
+  };
+
   const onDeleteTask = function (
     currentTasksArr: ITask[],
     setCurrentTasks: (newArr: ITask[]) => any
@@ -85,14 +100,6 @@ const Tasks: MyFC = () => {
 
   return (
     <div className="task">
-      {/* <input
-        value={test}
-        onChange={(e) => {
-          setTasks([]);
-          setTest(e.target.value);
-        }}
-        type="text"
-      /> */}
       <TaskColumn
         tasks={outdatedTasks}
         title="Outdated"
@@ -120,6 +127,9 @@ const Tasks: MyFC = () => {
         tasks={doneTasks}
         onDoneTask={onDoneTask(doneTasks, setDoneTasks)}
         onDeleteTask={onDeleteTask(doneTasks, setDoneTasks)}
+        done={{
+          onReturnTask: onReturnTask(doneTasks, setDoneTasks),
+        }}
         title="Done"
         small
         headerVariant="green"

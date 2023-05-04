@@ -3,19 +3,30 @@ import { ITask, MyFC } from '../types/types';
 import DateElement from './UI/date/DateElement';
 import { ReactComponent as DoneIcon } from '../images/icons/done.svg';
 import { ReactComponent as DeleteIcon } from '../images/icons/cross.svg';
+import { ReactComponent as ArrowLeftIcon } from '../images/icons/arrow-left.svg';
 import { cutString } from '../utils/cutString';
 import { getDate } from '../utils/getDate';
+import RoundButton from './UI/button/RoundButton';
 
 interface ITaskComponent {
   limit: number;
   task: ITask;
   onDoneTask: (task: ITask) => void;
   onDeleteTask: (task: ITask) => void;
+  done?: {
+    onReturnTask: (task: ITask) => void;
+  };
 }
 
 type TaskProps = ITaskComponent;
 
-const Task: MyFC<TaskProps> = ({ limit, task, onDoneTask, onDeleteTask }) => {
+const Task: MyFC<TaskProps> = ({
+  limit,
+  task,
+  onDoneTask,
+  onDeleteTask,
+  done,
+}) => {
   const taskDesc = cutString(task.desc, limit);
 
   return (
@@ -28,18 +39,28 @@ const Task: MyFC<TaskProps> = ({ limit, task, onDoneTask, onDeleteTask }) => {
       <div className="task-item__box">
         <DateElement>{getDate(task.date)}</DateElement>
         <div className="task-item__actions">
-          <button
-            onClick={() => onDoneTask(task)}
-            className="task-item__btn task-item__done-btn"
-          >
-            <DoneIcon />
-          </button>
-          <button
+          {done ? (
+            <RoundButton
+              onClick={() => done.onReturnTask(task)}
+              className="task-item__btn task-item__return-btn"
+            >
+              <ArrowLeftIcon />
+            </RoundButton>
+          ) : (
+            <RoundButton
+              onClick={() => onDoneTask(task)}
+              className="task-item__btn task-item__done-btn"
+            >
+              <DoneIcon />
+            </RoundButton>
+          )}
+
+          <RoundButton
             onClick={() => onDeleteTask(task)}
             className="task-item__btn task-item__delete-btn"
           >
             <DeleteIcon />
-          </button>
+          </RoundButton>
         </div>
       </div>
     </div>
