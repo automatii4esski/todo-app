@@ -69,10 +69,12 @@ const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
             max="2030-04-30"
             required
             onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              setData({
-                ...data,
-                date: new Date(e.target.value).getTime(),
-              });
+              if (e.target.value) {
+                setData({
+                  ...data,
+                  date: new Date(e.target.value).getTime(),
+                });
+              }
             }}
             value={new Date(data.date).toISOString().substring(0, 10)}
             type="date"
