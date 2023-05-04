@@ -41,11 +41,17 @@ const Tasks: MyFC = () => {
     setCurrentTasks: (newArr: ITask[]) => any
   ) {
     return (taskToInteract: ITask) => {
-      const newTasks = [taskToInteract, ...inProgressTasks];
       setCurrentTasks(
         currentTasksArr.filter((task) => task.id !== taskToInteract.id)
       );
-      setInProgressTasks(newTasks);
+      let newTasks;
+      if (isOutdate(taskToInteract.date)) {
+        newTasks = [taskToInteract, ...outdatedTasks];
+        setOIutdatedTasks(newTasks);
+      } else {
+        newTasks = [taskToInteract, ...inProgressTasks];
+        setInProgressTasks(newTasks);
+      }
       taskToInteract.status = 'active';
       TaskService.put(taskToInteract);
     };
