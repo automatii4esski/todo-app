@@ -1,10 +1,17 @@
-import React, { HTMLAttributes, memo, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  HTMLAttributes,
+  memo,
+  useRef,
+  useState,
+} from 'react';
 import TaskItem from './TaskItem';
-import { ITask, MyFC } from '../types/types';
+import { ISortOption, ITask, MyFC } from '../types/types';
 import { getAdditionClassName } from '../utils/getClassName';
 import Loader from './UI/loader/Loader';
 import PopupTemplate from './UI/popup/PopupTemplate';
 import MyButton from './UI/button/MyButton';
+import MySelect from './UI/select/MySelect';
 
 type HeaderVariant = 'yellow' | 'green' | 'red';
 
@@ -12,8 +19,11 @@ interface ITaskColumn {
   title: string;
   tasks: ITask[];
   isLoading: boolean;
+  options: ISortOption[];
   onDoneTask: (task: ITask) => void;
   onDeleteTask: (task: ITask) => void;
+  onSortChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  sort: string;
   small?: boolean;
   done?: {
     onReturnTask: (task: ITask) => void;
@@ -32,6 +42,9 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   headerVariant,
   main,
   tasks,
+  options,
+  onSortChange,
+  sort,
   title,
   isLoading,
   onDoneTask,
@@ -39,7 +52,6 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   done,
 }) => {
   const limit = 100;
-  const popupRef = useRef<HTMLDivElement>(null);
 
   return (
     <div className={getAdditionClassName('task-column', small, '--small')}>
@@ -51,16 +63,22 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
         )}
       >
         <h3 className="task-column__title">{title}</h3>
-        <div className="task-column__actions">
-          {main && (
+        {main && (
+          <div className="task-column__actions">
+            <MySelect
+              className="task-column__sort"
+              sort={sort}
+              onChange={onSortChange}
+              options={options}
+            />
             <MyButton
               onClick={main.createTaskHandler}
               className="task-column__create-btn"
             >
               Create Task
             </MyButton>
-          )}
-        </div>
+          </div>
+        )}
       </div>
       <div className="task-column__content">
         {isLoading ? (

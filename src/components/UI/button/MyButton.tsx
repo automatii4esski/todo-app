@@ -2,9 +2,9 @@ import React, { ButtonHTMLAttributes } from 'react';
 import { MyFC, RefObj } from '../../../types/types';
 import { getConcatClassName } from '../../../utils/getClassName';
 
-type MyInputProps = ButtonHTMLAttributes<any> & RefObj<HTMLButtonElement>;
+type MyButtonProps = ButtonHTMLAttributes<any> & RefObj<HTMLButtonElement>;
 
-const MyButton: MyFC<MyInputProps> = ({
+const MyButton: MyFC<MyButtonProps> = ({
   reference,
   className,
   children,

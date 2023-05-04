@@ -1,13 +1,33 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { ITask, MyFC } from '../types/types';
+import React, { useEffect, ChangeEvent, useMemo, useState } from 'react';
+import { ISortOption, ITask, MyFC } from '../types/types';
 import TaskColumn from '../components/TaskColumn';
 import { getConcatClassName } from '../utils/getClassName';
 import { TaskService } from '../API/TaskService';
 import { useFetch } from '../hooks/useFetch';
-import { useTasks } from '../hooks/useTasks';
+import { useSortedTasks } from '../hooks/useTasks';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
 import CreateTaskForm from '../components/CreateTaskForm';
 import { isOutdate } from '../utils/isOutdate';
+
+interface ITaskSortOption extends ISortOption {
+  value: keyof Pick<ITask, 'title' | 'desc' | 'date'>;
+  text: string;
+}
+
+const sortOptions: ITaskSortOption[] = [
+  {
+    value: 'date',
+    text: 'By date',
+  },
+  {
+    value: 'title',
+    text: 'By title',
+  },
+  {
+    value: 'desc',
+    text: 'By desc',
+  },
+];
 
 const Tasks: MyFC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -33,7 +53,20 @@ const Tasks: MyFC = () => {
     setOIutdatedTasks(outdated);
     setInProgressTasks(inProgress);
   });
-  const [test, setTest] = useState('');
+  const [outdatedSort, setOutdatedSort] = useState<
+    ITaskSortOption['value'] | string
+  >('');
+  const [doneSort, setDoneSort] = useState<ITaskSortOption['value'] | string>(
+    ''
+  );
+  const [inProgressSort, setInProgressSort] = useState<
+    ITaskSortOption['value'] | string
+  >('');
+
+  const outdatedTasksArr = useSortedTasks(outdatedTasks, outdatedSort);
+  const inProgressTasksArr = useSortedTasks(inProgressTasks, inProgressSort);
+  const doneTasksArr = useSortedTasks(doneTasks, doneSort);
+
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
 
   const onReturnTask = function (
@@ -84,6 +117,25 @@ const Tasks: MyFC = () => {
     };
   };
 
+  const onSortChange = function (
+    tasks: ITask[],
+    setSort: (sort: ITaskSortOption['value']) => void
+  ) {
+    return (e: ChangeEvent<HTMLSelectElement>) => {
+      const sort = e.target.value as ITaskSortOption['value'];
+      tasks.sort((a, b) => {
+        if (a[sort] < b[sort]) {
+          return -1;
+        }
+        if (a.title > b.title) {
+          return 1;
+        }
+        return 0;
+      });
+      setSort(sort);
+    };
+  };
+
   const onSubmit = function (task: ITask) {
     let newTasks;
     if (isOutdate(task.date)) {
@@ -109,6 +161,9 @@ const Tasks: MyFC = () => {
       <TaskColumn
         tasks={outdatedTasks}
         title="Outdated"
+        onSortChange={onSortChange(outdatedTasks, setOutdatedSort)}
+        sort={outdatedSort}
+        options={sortOptions}
         onDoneTask={onDoneTask(outdatedTasks, setOIutdatedTasks)}
         onDeleteTask={onDeleteTask(outdatedTasks, setOIutdatedTasks)}
         isLoading={isTasksLoading}
@@ -116,6 +171,9 @@ const Tasks: MyFC = () => {
         headerVariant="red"
       />
       <TaskColumn
+        options={sortOptions}
+        sort={inProgressSort}
+        onSortChange={onSortChange(inProgressTasks, setInProgressSort)}
         tasks={inProgressTasks}
         onDoneTask={onDoneTask(inProgressTasks, setInProgressTasks)}
         onDeleteTask={onDeleteTask(inProgressTasks, setInProgressTasks)}
@@ -130,6 +188,9 @@ const Tasks: MyFC = () => {
 
       <TaskColumn
         isLoading={isTasksLoading}
+        sort={doneSort}
+        onSortChange={onSortChange(doneTasks, setDoneSort)}
+        options={sortOptions}
         tasks={doneTasks}
         onDoneTask={onDoneTask(doneTasks, setDoneTasks)}
         onDeleteTask={onDeleteTask(doneTasks, setDoneTasks)}

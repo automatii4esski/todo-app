@@ -41,7 +41,8 @@ body {
 }
 
 .input,
-.textarea {
+.textarea,
+.select {
   background: $primary;
   border-radius: 19px;
   padding: 5px 15px;
@@ -125,4 +126,7 @@ body {
   align-items: center;
   cursor: pointer;
   transition: background 0.2s;
+}
+
+.option {
 }

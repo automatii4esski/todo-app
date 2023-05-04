@@ -17,3 +17,8 @@ export interface ITask {
   status: TaskStatus;
   date: number;
 }
+
+export interface ISortOption {
+  value: string;
+  text: string;
+}
