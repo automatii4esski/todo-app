@@ -8,7 +8,18 @@ export class TaskService {
   }
 
   static async put(task: ITask) {
-    const response = await axios.put('http://localhost:3001/tasks', task);
+    const response = await axios.put(
+      `http://localhost:3001/tasks/${task.id}`,
+      task
+    );
+
+    return response;
+  }
+
+  static async delete(task: ITask) {
+    const response = await axios.delete(
+      `http://localhost:3001/tasks/${task.id}`
+    );
 
     return response;
   }

@@ -36,6 +36,33 @@ const Tasks: MyFC = () => {
   const [test, setTest] = useState('');
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
 
+  const onDeleteTask = function (
+    currentTasksArr: ITask[],
+    setCurrentTasks: (newArr: ITask[]) => any
+  ) {
+    return (taskToInteract: ITask) => {
+      setCurrentTasks(
+        currentTasksArr.filter((task) => task.id !== taskToInteract.id)
+      );
+      TaskService.delete(taskToInteract);
+    };
+  };
+
+  const onDoneTask = function (
+    currentTasksArr: ITask[],
+    setCurrentTasks: (newArr: ITask[]) => any
+  ) {
+    return (taskToInteract: ITask) => {
+      const newTasks = [taskToInteract, ...doneTasks];
+      setDoneTasks(newTasks);
+      setCurrentTasks(
+        currentTasksArr.filter((task) => task.id !== taskToInteract.id)
+      );
+      taskToInteract.status = 'done';
+      TaskService.put(taskToInteract);
+    };
+  };
+
   const onSubmit = function (task: ITask) {
     let newTasks;
     if (isOutdate(task.date)) {
@@ -69,12 +96,16 @@ const Tasks: MyFC = () => {
       <TaskColumn
         tasks={outdatedTasks}
         title="Outdated"
+        onDoneTask={onDoneTask(outdatedTasks, setOIutdatedTasks)}
+        onDeleteTask={onDeleteTask(outdatedTasks, setOIutdatedTasks)}
         isLoading={isTasksLoading}
         small
         headerVariant="red"
       />
       <TaskColumn
         tasks={inProgressTasks}
+        onDoneTask={onDoneTask(inProgressTasks, setInProgressTasks)}
+        onDeleteTask={onDeleteTask(inProgressTasks, setInProgressTasks)}
         isLoading={isTasksLoading}
         title="In Progress"
         main={{
@@ -87,6 +118,8 @@ const Tasks: MyFC = () => {
       <TaskColumn
         isLoading={isTasksLoading}
         tasks={doneTasks}
+        onDoneTask={onDoneTask(doneTasks, setDoneTasks)}
+        onDeleteTask={onDeleteTask(doneTasks, setDoneTasks)}
         title="Done"
         small
         headerVariant="green"

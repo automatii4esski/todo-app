@@ -9,11 +9,13 @@ import { getDate } from '../utils/getDate';
 interface ITaskComponent {
   limit: number;
   task: ITask;
+  onDoneTask: (task: ITask) => void;
+  onDeleteTask: (task: ITask) => void;
 }
 
 type TaskProps = ITaskComponent;
 
-const Task: MyFC<TaskProps> = ({ limit, task }) => {
+const Task: MyFC<TaskProps> = ({ limit, task, onDoneTask, onDeleteTask }) => {
   const taskDesc = cutString(task.desc, limit);
 
   return (
@@ -26,10 +28,16 @@ const Task: MyFC<TaskProps> = ({ limit, task }) => {
       <div className="task-item__box">
         <DateElement>{getDate(task.date)}</DateElement>
         <div className="task-item__actions">
-          <button className="task-item__btn task-item__done-btn">
+          <button
+            onClick={() => onDoneTask(task)}
+            className="task-item__btn task-item__done-btn"
+          >
             <DoneIcon />
           </button>
-          <button className="task-item__btn task-item__delete-btn">
+          <button
+            onClick={() => onDeleteTask(task)}
+            className="task-item__btn task-item__delete-btn"
+          >
             <DeleteIcon />
           </button>
         </div>
