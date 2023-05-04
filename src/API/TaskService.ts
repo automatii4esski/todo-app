@@ -12,4 +12,10 @@ export class TaskService {
 
     return response;
   }
+
+  static async post(task: ITask) {
+    const response = await axios.post('http://localhost:3001/tasks', task);
+
+    return response;
+  }
 }

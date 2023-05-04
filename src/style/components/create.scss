@@ -1,0 +1,33 @@
+.create {
+}
+
+.create__title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.create__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create__item {
+  margin-bottom: 20px;
+}
+
+.create__label {
+  display: flex;
+  align-items: center;
+}
+
+.create__label-title {
+  font-size: 24px;
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.create__textarea {
+  height: 200px;
+}

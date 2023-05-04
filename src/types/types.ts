@@ -8,7 +8,7 @@ export type RefObj<TElement = HTMLElement> = Partial<{
   reference: RefObject<TElement> | undefined;
 }>;
 
-type TaskStatus = 'outdated' | 'active' | 'done';
+type TaskStatus = 'active' | 'done';
 
 export interface ITask {
   id: number;

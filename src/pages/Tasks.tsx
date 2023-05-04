@@ -6,6 +6,8 @@ import { TaskService } from '../API/TaskService';
 import { useFetch } from '../hooks/useFetch';
 import { useTasks } from '../hooks/useTasks';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
+import CreateTaskForm from '../components/CreateTaskForm';
+import { isOutdate } from '../utils/isOutdate';
 
 const Tasks: MyFC = () => {
   const [tasks, setTasks] = useState<ITask[]>([]);
@@ -16,16 +18,35 @@ const Tasks: MyFC = () => {
   const [fetchTasks, isTasksLoading, tasksError] = useFetch(async () => {
     const response = await TaskService.getAll();
     setTasks(response.data);
-    setDoneTasks(response.data.filter((task) => task.status === 'done'));
-    setOIutdatedTasks(
-      response.data.filter((task) => task.status === 'outdated')
-    );
-    setInProgressTasks(
-      response.data.filter((task) => task.status === 'active')
-    );
+    const done: ITask[] = [];
+    const outdated: ITask[] = [];
+    const inProgress: ITask[] = [];
+
+    response.data.forEach((task) => {
+      if (task.status === 'done') {
+        done.push(task);
+      } else {
+        isOutdate(task.date) ? outdated.push(task) : inProgress.push(task);
+      }
+    });
+    setDoneTasks(done);
+    setOIutdatedTasks(outdated);
+    setInProgressTasks(inProgress);
   });
   const [test, setTest] = useState('');
   const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
+
+  const onSubmit = function (task: ITask) {
+    let newTasks;
+    if (isOutdate(task.date)) {
+      newTasks = [task, ...outdatedTasks];
+      setOIutdatedTasks(newTasks);
+    } else {
+      newTasks = [task, ...inProgressTasks];
+      setInProgressTasks(newTasks);
+    }
+    TaskService.post(task);
+  };
 
   useEffect(() => {
     fetchTasks();
@@ -74,8 +95,11 @@ const Tasks: MyFC = () => {
         onHideHandler={() => {
           setIsPopupActive(false);
         }}
+        className="task__popup-wrapper"
         active={isPopupActive}
-      />
+      >
+        {<CreateTaskForm onSubmit={onSubmit} />}
+      </PopupTemplate>
     </div>
   );
 };

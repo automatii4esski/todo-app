@@ -1,6 +1,9 @@
 import React, { HTMLAttributes } from 'react';
 import { MyFC } from '../../../types/types';
-import { getAdditionClassName } from '../../../utils/getClassName';
+import {
+  getAdditionClassName,
+  getConcatClassName,
+} from '../../../utils/getClassName';
 
 interface IPopup {
   active: boolean;
@@ -12,6 +15,7 @@ type PopupProps = HTMLAttributes<HTMLElement> & IPopup;
 const PopupTemplate: MyFC<PopupProps> = ({
   children,
   active,
+  className,
   onHideHandler,
 }) => {
   return (
@@ -23,7 +27,7 @@ const PopupTemplate: MyFC<PopupProps> = ({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        className="popup__content"
+        className={getConcatClassName('popup__content', className)}
       >
         {children}
       </div>

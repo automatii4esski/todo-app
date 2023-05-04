@@ -54,14 +54,7 @@
 }
 
 .task-column__create-btn {
-  background: $secondary;
-  color: $font-tertiary;
-  position: relative;
-  padding: 8px 40px 8px 20px;
-  border-radius: 19px;
-  border: 2px solid $secondary;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  padding-right: 40px;
 
   &::before {
     content: '+';
@@ -77,11 +70,6 @@
     color: $font-primary;
     border-radius: 50%;
     transition: background 0.2s, color 0.2s;
-  }
-
-  &:hover {
-    background: $primary;
-    color: $font-primary;
   }
 
   &:hover::before {
@@ -252,4 +240,9 @@
   &:hover {
     background: $green-color;
   }
+}
+
+.task__popup-wrapper {
+  max-width: 600px;
+  width: 100%;
 }

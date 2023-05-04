@@ -4,6 +4,7 @@ import { ITask, MyFC } from '../types/types';
 import { getAdditionClassName } from '../utils/getClassName';
 import Loader from './UI/loader/Loader';
 import PopupTemplate from './UI/popup/PopupTemplate';
+import MyButton from './UI/button/MyButton';
 
 type HeaderVariant = 'yellow' | 'green' | 'red';
 
@@ -44,12 +45,12 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
         <h3 className="task-column__title">{title}</h3>
         <div className="task-column__actions">
           {main && (
-            <button
+            <MyButton
               onClick={main.createTaskHandler}
               className="task-column__create-btn"
             >
-              Create task
-            </button>
+              Create Task
+            </MyButton>
           )}
         </div>
       </div>

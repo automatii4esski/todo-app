@@ -36,15 +36,19 @@ body {
   height: calc(100vh - $header-height);
 }
 
-.input {
-  background: $ui;
+.textarea {
+  resize: none;
+}
+
+.input,
+.textarea {
+  background: $primary;
   border-radius: 19px;
   padding: 5px 15px;
-  border: 2px solid transparent;
+  border: 2px solid $secondary;
   transition: border-color 0.2s;
 
   &:focus {
-    border-color: $secondary;
     outline: none;
   }
 }
@@ -92,4 +96,20 @@ body {
   background: $primary;
   padding: 30px;
   border-radius: 19px;
+}
+
+.button {
+  background: $secondary;
+  color: $font-tertiary;
+  position: relative;
+  padding: 8px 20px 8px 20px;
+  border-radius: 19px;
+  border: 2px solid $secondary;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: $primary;
+    color: $font-primary;
+  }
 }

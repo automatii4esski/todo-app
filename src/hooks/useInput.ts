@@ -8,7 +8,6 @@ export const useInput = function (): [
 
   const onChange = function (e: ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);
-    console.log(e.target.value);
   };
 
   return [value, onChange];
