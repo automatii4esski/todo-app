@@ -1,4 +1,4 @@
-import React, { useState, useRef, ChangeEvent } from 'react';
+import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import MyInput from './UI/Input/MyInput';
 import MyTextarea from './UI/textarea/MyTextarea';
 import MyButton from './UI/button/MyButton';
@@ -8,6 +8,7 @@ import { useInput } from '../hooks/useInput';
 
 interface ICreateTaskForm {
   onSubmit: (task: ITask) => void;
+  task: ITask | undefined;
 }
 
 const initData: ITask = {
@@ -18,20 +19,21 @@ const initData: ITask = {
   title: '',
 };
 
-const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
+const EditTaskForm: MyFC<ICreateTaskForm> = ({ task, onSubmit }) => {
   const [data, setData] = useState<ITask>(initData);
+
+  useEffect(() => {
+    setData(task || initData);
+  }, [task]);
 
   return (
     <div className="create">
-      <h4 className="create__title">Create Task</h4>
+      <h4 className="create__title">Edit Task</h4>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          const finalData = {
-            ...data,
-            id: Date.now(),
-          };
-          onSubmit(finalData);
+
+          onSubmit(data);
           setData(initData);
         }}
         className="create__form"
@@ -78,10 +80,10 @@ const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
             type="date"
           />
         </label>
-        <MyButton>Add Task</MyButton>
+        <MyButton>Edit Task</MyButton>
       </form>
     </div>
   );
 };
 
-export default CreateTaskForm;
+export default EditTaskForm;

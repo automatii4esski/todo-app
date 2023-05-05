@@ -104,6 +104,7 @@
 .task-column__tasks-wrapper {
   padding: 15px;
   height: 100%;
+  display: flex;
   flex: 1 1 auto;
   position: relative;
   align-content: flex-start;
@@ -136,6 +137,9 @@
   margin-bottom: 15px;
   padding: 15px;
   flex: 1 1 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .task-column--small .task-item {
@@ -180,12 +184,6 @@
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.2s;
-
-  &::before {
-    content: '...';
-    position: absolute;
-    bottom: 7px;
-  }
 
   &:hover {
     background: $ui;

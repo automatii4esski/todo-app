@@ -9,6 +9,7 @@ import PopupTemplate from '../components/UI/popup/PopupTemplate';
 import CreateTaskForm from '../components/CreateTaskForm';
 import { isOutdate } from '../utils/isOutdate';
 import { distributeTasks } from '../utils/distributeTasks';
+import EditTaskForm from '../components/EditTaskForm';
 
 const sortOptions: ITaskSortOption[] = [
   {
@@ -80,7 +81,13 @@ const TasksPage: MyFC = () => {
     setTasks(newObj);
   };
 
-  const [isPopupActive, setIsPopupActive] = useState<boolean>(false);
+  const [isCreatePopupActive, setIsCreatePopupActive] =
+    useState<boolean>(false);
+  const [isEditPopupActive, setIsEditPopupActive] = useState<boolean>(false);
+  const [editTask, setEditTask] = useState<{
+    value: ITask;
+    set: (task: ITask) => void;
+  } | null>(null);
 
   const onReturnTask = function () {
     return (taskToInteract: ITask) => {
@@ -132,8 +139,23 @@ const TasksPage: MyFC = () => {
     const newTasks = [task, ...tasks[taskName]];
 
     setTasksHelper([taskName], [newTasks]);
-    setIsPopupActive(false);
+    setIsCreatePopupActive(false);
     TaskService.post(task);
+  };
+
+  const onEditClickHandler = function (
+    task: ITask,
+    setTask: (task: ITask) => void
+  ) {
+    setIsEditPopupActive(true);
+    setEditTask({ value: task, set: setTask });
+  };
+
+  const onEditSubmit = function (task: ITask) {
+    setIsEditPopupActive(false);
+    editTask!.set(task);
+    setEditTask(null);
+    TaskService.put(task);
   };
 
   useEffect(() => {
@@ -141,7 +163,7 @@ const TasksPage: MyFC = () => {
   }, []);
 
   const createTaskHandler = function () {
-    setIsPopupActive(true);
+    setIsCreatePopupActive(true);
   };
 
   return (
@@ -172,6 +194,7 @@ const TasksPage: MyFC = () => {
         isLoading={isTasksLoading}
         small
         headerVariant="red"
+        onEditClickHandler={onEditClickHandler}
       />
       <TaskColumn
         options={sortOptions}
@@ -185,6 +208,7 @@ const TasksPage: MyFC = () => {
           },
         }}
         limit={100}
+        onEditClickHandler={onEditClickHandler}
         sort={sort.inProgress}
         onSortChange={(e) => {
           setSort({
@@ -199,7 +223,7 @@ const TasksPage: MyFC = () => {
         title="In Progress"
         main={{
           createTaskHandler,
-          isPopupActive,
+          isPopupActive: isCreatePopupActive,
         }}
         headerVariant="yellow"
       />
@@ -207,6 +231,7 @@ const TasksPage: MyFC = () => {
       <TaskColumn
         isLoading={isTasksLoading}
         sort={sort.done}
+        onEditClickHandler={onEditClickHandler}
         query={{
           value: query.done,
           set: (value: string) => {
@@ -236,12 +261,21 @@ const TasksPage: MyFC = () => {
       />
       <PopupTemplate
         onHideHandler={() => {
-          setIsPopupActive(false);
+          setIsCreatePopupActive(false);
         }}
         className="task__popup-wrapper"
-        active={isPopupActive}
+        active={isCreatePopupActive}
       >
         {<CreateTaskForm onSubmit={onSubmit} />}
+      </PopupTemplate>
+      <PopupTemplate
+        onHideHandler={() => {
+          setIsEditPopupActive(false);
+        }}
+        className="task__popup-wrapper"
+        active={isEditPopupActive}
+      >
+        {<EditTaskForm task={editTask?.value} onSubmit={onEditSubmit} />}
       </PopupTemplate>
     </div>
   );

@@ -22,6 +22,7 @@ interface ITaskColumn {
   tasks: ITask[];
   isLoading: boolean;
   options: ISortOption[];
+  onEditClickHandler: (task: ITask, set: (task: ITask) => void) => void;
   limit: number;
   onDoneTask: (task: ITask) => void;
   onDeleteTask: (task: ITask) => void;
@@ -54,6 +55,7 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   query,
   limit,
   sort,
+  onEditClickHandler,
   title,
   isLoading,
   onDoneTask,
@@ -108,6 +110,7 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
                 onDoneTask={onDoneTask}
                 onDeleteTask={onDeleteTask}
                 done={done}
+                onEditClickHandler={onEditClickHandler}
                 task={task}
                 limit={limit}
                 key={task.id}

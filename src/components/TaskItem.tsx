@@ -4,6 +4,7 @@ import DateElement from './UI/date/DateElement';
 import { ReactComponent as DoneIcon } from '../images/icons/done.svg';
 import { ReactComponent as DeleteIcon } from '../images/icons/cross.svg';
 import { ReactComponent as ArrowLeftIcon } from '../images/icons/arrow-left.svg';
+import { ReactComponent as EditIcon } from '../images/icons/edit.svg';
 import { cutString } from '../utils/cutString';
 import { getDate } from '../utils/getDate';
 import RoundButton from './UI/button/RoundButton';
@@ -13,6 +14,7 @@ interface ITaskComponent {
   task: ITask;
   onDoneTask: (task: ITask) => void;
   onDeleteTask: (task: ITask) => void;
+  onEditClickHandler: (task: ITask, set: (task: ITask) => void) => void;
   done?: {
     onReturnTask: (task: ITask) => void;
   };
@@ -24,6 +26,7 @@ const Task: MyFC<TaskProps> = ({
   limit,
   task,
   onDoneTask,
+  onEditClickHandler,
   onDeleteTask,
   done,
 }) => {
@@ -33,21 +36,30 @@ const Task: MyFC<TaskProps> = ({
     isShow: false,
     subText: 'Show',
   });
+
+  const [taskData, setTaskData] = useState<ITask>(task);
   useEffect(() => {
-    const taskDesc = cutString(task.desc, limit);
+    const taskDesc = cutString(taskData.desc, limit);
     setDesc({
       textToShow: taskDesc.stringSlice,
       sliceString: taskDesc.stringSlice,
       isShow: taskDesc.isCutted,
       subText: 'Show',
     });
-  }, []);
+  }, [taskData]);
 
   return (
     <div className="task-item">
       <div className="task-item__header">
-        <h4 className="task-item__title">{task.title}</h4>
-        <button className="task-item__service"></button>
+        <h4 className="task-item__title">{taskData.title}</h4>
+        <button
+          onClick={() => {
+            onEditClickHandler(taskData, setTaskData);
+          }}
+          className="task-item__service"
+        >
+          <EditIcon />
+        </button>
       </div>
       <p className="task-item__desc">
         {desc.textToShow}
@@ -58,7 +70,7 @@ const Task: MyFC<TaskProps> = ({
               if (desc.subText === 'Show') {
                 setDesc({
                   ...desc,
-                  textToShow: task.desc,
+                  textToShow: taskData.desc,
                   subText: 'Hide',
                 });
               } else {
@@ -76,18 +88,18 @@ const Task: MyFC<TaskProps> = ({
       </p>
 
       <div className="task-item__box">
-        <DateElement>{getDate(task.date)}</DateElement>
+        <DateElement>{getDate(taskData.date)}</DateElement>
         <div className="task-item__actions">
           {done ? (
             <RoundButton
-              onClick={() => done.onReturnTask(task)}
+              onClick={() => done.onReturnTask(taskData)}
               className="task-item__btn task-item__return-btn"
             >
               <ArrowLeftIcon />
             </RoundButton>
           ) : (
             <RoundButton
-              onClick={() => onDoneTask(task)}
+              onClick={() => onDoneTask(taskData)}
               className="task-item__btn task-item__done-btn"
             >
               <DoneIcon />
@@ -95,7 +107,7 @@ const Task: MyFC<TaskProps> = ({
           )}
 
           <RoundButton
-            onClick={() => onDeleteTask(task)}
+            onClick={() => onDeleteTask(taskData)}
             className="task-item__btn task-item__delete-btn"
           >
             <DeleteIcon />
