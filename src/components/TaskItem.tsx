@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ITask, MyFC } from '../types/types';
 import DateElement from './UI/date/DateElement';
 import { ReactComponent as DoneIcon } from '../images/icons/done.svg';
@@ -27,7 +27,21 @@ const Task: MyFC<TaskProps> = ({
   onDeleteTask,
   done,
 }) => {
-  const taskDesc = cutString(task.desc, limit);
+  const [desc, setDesc] = useState({
+    textToShow: '',
+    sliceString: '',
+    isShow: false,
+    subText: 'Show',
+  });
+  useEffect(() => {
+    const taskDesc = cutString(task.desc, limit);
+    setDesc({
+      textToShow: taskDesc.stringSlice,
+      sliceString: taskDesc.stringSlice,
+      isShow: taskDesc.isCutted,
+      subText: 'Show',
+    });
+  }, []);
 
   return (
     <div className="task-item">
@@ -35,7 +49,32 @@ const Task: MyFC<TaskProps> = ({
         <h4 className="task-item__title">{task.title}</h4>
         <button className="task-item__service"></button>
       </div>
-      <p className="task-item__desc">{taskDesc.firstPart}</p>
+      <p className="task-item__desc">
+        {desc.textToShow}
+        {desc.isShow && (
+          <span
+            className="task-item__sub-desc"
+            onClick={() => {
+              if (desc.subText === 'Show') {
+                setDesc({
+                  ...desc,
+                  textToShow: task.desc,
+                  subText: 'Hide',
+                });
+              } else {
+                setDesc({
+                  ...desc,
+                  textToShow: desc.sliceString,
+                  subText: 'Show',
+                });
+              }
+            }}
+          >
+            {desc.subText}
+          </span>
+        )}
+      </p>
+
       <div className="task-item__box">
         <DateElement>{getDate(task.date)}</DateElement>
         <div className="task-item__actions">

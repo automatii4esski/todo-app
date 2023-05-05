@@ -7,7 +7,10 @@ export const useSortedTasks = function (
   sort: ITaskSortOption['value']
 ) {
   const sortedTasks = useMemo(() => {
-    return tasks.sort((a, b) => {
+    if (!sort) return tasks;
+
+    return [...tasks].sort((a, b) => {
+      if (sort !== 'date') return a[sort].localeCompare(b[sort]);
       if (a[sort] < b[sort]) {
         return -1;
       }
@@ -20,11 +23,18 @@ export const useSortedTasks = function (
   return sortedTasks;
 };
 
-export const useTasksSort = function () {
-  const [sort, setSort] = useState({
-    outdated: '',
-    inProgress: '',
-    done: '',
-  });
-  return [sort, setSort];
+export const useTasks = function (
+  tasks: ITask[],
+  sort: ITaskSortOption['value'],
+  query: string
+) {
+  const sortedTasks = useSortedTasks(tasks, sort);
+  const searchedAndSortedTasks = useMemo(() => {
+    return sortedTasks.filter(
+      (task) =>
+        task.title.toLowerCase().includes(query) ||
+        task.desc.toLowerCase().includes(query)
+    );
+  }, [sortedTasks, query]);
+  return searchedAndSortedTasks;
 };

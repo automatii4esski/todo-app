@@ -4,7 +4,7 @@ import TaskColumn from '../components/TaskColumn';
 import { getConcatClassName } from '../utils/getClassName';
 import { TaskService } from '../API/TaskService';
 import { useFetch } from '../hooks/useFetch';
-import { useSortedTasks } from '../hooks/useTasks';
+import { useSortedTasks, useTasks } from '../hooks/useTasks';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
 import CreateTaskForm from '../components/CreateTaskForm';
 import { isOutdate } from '../utils/isOutdate';
@@ -38,16 +38,22 @@ const TasksPage: MyFC = () => {
     done: '' as ITaskSortOption['value'],
   });
 
+  const [query, setQuery] = useState({
+    outdated: '',
+    inProgress: '',
+    done: '',
+  });
+
   const [tasks, setTasks] = useState<ITasks>({
     outdated: [],
     inProgress: [],
     done: [],
   });
 
-  const tasksSorted: ITasks = {
-    outdated: useSortedTasks(tasks.outdated, sort.outdated),
-    inProgress: useSortedTasks(tasks.inProgress, sort.inProgress),
-    done: useSortedTasks(tasks.done, sort.done),
+  const tasksSortedAndSearched: ITasks = {
+    outdated: useTasks(tasks.outdated, sort.outdated, query.outdated),
+    inProgress: useTasks(tasks.inProgress, sort.inProgress, query.inProgress),
+    done: useTasks(tasks.done, sort.done, query.done),
   };
 
   const [fetchTasks, isTasksLoading, tasksError] = useFetch(async () => {
@@ -141,7 +147,7 @@ const TasksPage: MyFC = () => {
   return (
     <div className="task">
       <TaskColumn
-        tasks={tasksSorted.outdated}
+        tasks={tasksSortedAndSearched.outdated}
         title="Outdated"
         onSortChange={(e) => {
           setSort({
@@ -149,16 +155,36 @@ const TasksPage: MyFC = () => {
             outdated: e.target.value as ITaskSortOption['value'],
           });
         }}
+        query={{
+          value: query.outdated,
+          set: (value: string) => {
+            setQuery({
+              ...query,
+              outdated: value,
+            });
+          },
+        }}
+        limit={50}
         sort={sort.outdated}
         options={sortOptions}
-        onDoneTask={onDoneTask(tasksSorted.outdated, 'outdated')}
-        onDeleteTask={onDeleteTask(tasksSorted.outdated, 'outdated')}
+        onDoneTask={onDoneTask(tasksSortedAndSearched.outdated, 'outdated')}
+        onDeleteTask={onDeleteTask(tasksSortedAndSearched.outdated, 'outdated')}
         isLoading={isTasksLoading}
         small
         headerVariant="red"
       />
       <TaskColumn
         options={sortOptions}
+        query={{
+          value: query.inProgress,
+          set: (value: string) => {
+            setQuery({
+              ...query,
+              inProgress: value,
+            });
+          },
+        }}
+        limit={100}
         sort={sort.inProgress}
         onSortChange={(e) => {
           setSort({
@@ -166,7 +192,7 @@ const TasksPage: MyFC = () => {
             inProgress: e.target.value as ITaskSortOption['value'],
           });
         }}
-        tasks={tasksSorted.inProgress}
+        tasks={tasksSortedAndSearched.inProgress}
         onDoneTask={onDoneTask(tasks.inProgress, 'inProgress')}
         onDeleteTask={onDeleteTask(tasks.inProgress, 'inProgress')}
         isLoading={isTasksLoading}
@@ -181,6 +207,16 @@ const TasksPage: MyFC = () => {
       <TaskColumn
         isLoading={isTasksLoading}
         sort={sort.done}
+        query={{
+          value: query.done,
+          set: (value: string) => {
+            setQuery({
+              ...query,
+              done: value,
+            });
+          },
+        }}
+        limit={50}
         onSortChange={(e) => {
           setSort({
             ...sort,
@@ -188,7 +224,7 @@ const TasksPage: MyFC = () => {
           });
         }}
         options={sortOptions}
-        tasks={tasksSorted.done}
+        tasks={tasksSortedAndSearched.done}
         onDoneTask={onDoneTask(tasks.done, 'done')}
         onDeleteTask={onDeleteTask(tasks.done, 'done')}
         done={{

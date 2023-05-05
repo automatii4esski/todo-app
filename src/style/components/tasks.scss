@@ -18,9 +18,10 @@
 .task-column__header {
   display: flex;
   position: relative;
-  padding: 0 15px 10px;
+  padding-bottom: 10px;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 
   &::before {
@@ -53,6 +54,11 @@
   }
 }
 
+.task-column__search {
+  margin-right: 15px;
+  max-width: 150px;
+}
+
 .task-column__create-btn {
   padding-right: 40px;
 
@@ -81,6 +87,8 @@
 .task-column__title {
   font-size: 20px;
   color: $font-primary;
+  margin-right: 20px;
+  padding-left: 15px;
 }
 
 .task-column__content {
@@ -184,8 +192,15 @@
   }
 }
 
+.task-column__actions {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+}
+
 .task-item__actions {
   display: flex;
+  align-items: center;
 }
 
 .task-item__btn + .task-item__btn {
@@ -255,4 +270,12 @@
   font-size: 14px;
   font-weight: 600;
   padding: 7px 10px;
+}
+
+.task-item__sub-desc {
+  color: $secondary;
+  display: block;
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 5px;
 }

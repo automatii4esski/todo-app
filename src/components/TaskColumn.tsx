@@ -12,6 +12,8 @@ import Loader from './UI/loader/Loader';
 import PopupTemplate from './UI/popup/PopupTemplate';
 import MyButton from './UI/button/MyButton';
 import MySelect from './UI/select/MySelect';
+import MyInput from './UI/Input/MyInput';
+import { useInput } from '../hooks/useInput';
 
 type HeaderVariant = 'yellow' | 'green' | 'red';
 
@@ -20,9 +22,14 @@ interface ITaskColumn {
   tasks: ITask[];
   isLoading: boolean;
   options: ISortOption[];
+  limit: number;
   onDoneTask: (task: ITask) => void;
   onDeleteTask: (task: ITask) => void;
   onSortChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  query: {
+    set: (value: any) => void;
+    value: string;
+  };
   sort: string;
   small?: boolean;
   done?: {
@@ -44,6 +51,8 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   tasks,
   options,
   onSortChange,
+  query,
+  limit,
   sort,
   title,
   isLoading,
@@ -51,8 +60,6 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   onDeleteTask,
   done,
 }) => {
-  const limit = 100;
-
   return (
     <div className={getAdditionClassName('task-column', small, '--small')}>
       <div
@@ -62,23 +69,34 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
           `--${headerVariant}`
         )}
       >
-        <h3 className="task-column__title">{title}</h3>
-        {main && (
-          <div className="task-column__actions">
-            <MySelect
-              className="task-column__sort"
-              sort={sort}
-              onChange={onSortChange}
-              options={options}
-            />
-            <MyButton
-              onClick={main.createTaskHandler}
-              className="task-column__create-btn"
-            >
-              Create Task
-            </MyButton>
-          </div>
-        )}
+        <h3 className="task-column__title">{title + ` (${tasks.length})`}</h3>
+        <div className="task-column__actions">
+          <MyInput
+            placeholder="Search"
+            value={query.value}
+            onChange={(e: ChangeEvent<HTMLInputElement>) => {
+              query.set(e.target.value.toLowerCase());
+            }}
+            className="task-column__search"
+          />
+
+          <MySelect
+            className="task-column__sort"
+            sort={sort}
+            onChange={onSortChange}
+            options={options}
+          />
+          {main && (
+            <>
+              <MyButton
+                onClick={main.createTaskHandler}
+                className="task-column__create-btn"
+              >
+                Create Task
+              </MyButton>
+            </>
+          )}
+        </div>
       </div>
       <div className="task-column__content">
         {isLoading ? (

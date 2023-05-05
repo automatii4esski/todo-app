@@ -1,16 +1,15 @@
 interface ICutStringReturn {
-  firstPart: string;
-  secondPart: string | null;
+  stringSlice: string;
+  isCutted: boolean;
 }
 
 export const cutString = function (
   str: string,
   limit: number
 ): ICutStringReturn {
-  if (str.length <= limit) return { firstPart: str, secondPart: null };
+  if (str.length <= limit) return { stringSlice: str, isCutted: false };
 
   const firstPart = str.slice(0, limit - 3) + '...';
-  const secondPart = str.slice(limit - 3);
 
-  return { firstPart, secondPart };
+  return { stringSlice: firstPart, isCutted: true };
 };
