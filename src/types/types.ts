@@ -22,3 +22,8 @@ export interface ISortOption {
   value: string;
   text: string;
 }
+
+export interface ITaskSortOption extends ISortOption {
+  value: keyof Pick<ITask, 'title' | 'desc' | 'date'>;
+  text: string;
+}
