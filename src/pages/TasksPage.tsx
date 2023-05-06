@@ -87,6 +87,7 @@ const TasksPage: MyFC = () => {
   const [editTask, setEditTask] = useState<{
     value: ITask;
     set: (task: ITask) => void;
+    taskName: keyof typeof tasks;
   } | null>(null);
 
   const onReturnTask = function () {
@@ -143,19 +144,40 @@ const TasksPage: MyFC = () => {
     TaskService.post(task);
   };
 
-  const onEditClickHandler = function (
-    task: ITask,
-    setTask: (task: ITask) => void
-  ) {
-    setIsEditPopupActive(true);
-    setEditTask({ value: task, set: setTask });
+  const onEditClickHandler = function name(taskName: keyof typeof tasks) {
+    return (task: ITask, setTask: (task: ITask) => void) => {
+      setIsEditPopupActive(true);
+      setEditTask({ value: task, set: setTask, taskName });
+    };
   };
 
-  const onEditSubmit = function (task: ITask) {
+  const onEditSubmit = function (taskToInteract: ITask) {
     setIsEditPopupActive(false);
-    editTask!.set(task);
+    editTask!.set(taskToInteract);
     setEditTask(null);
-    TaskService.put(task);
+    TaskService.put(taskToInteract);
+
+    if (taskToInteract.status === 'done') return;
+
+    const isNewTaskOutdate = isOutdate(taskToInteract.date);
+
+    if (
+      (isNewTaskOutdate && editTask!.taskName === 'outdated') ||
+      (!isNewTaskOutdate && editTask!.taskName === 'inProgress')
+    )
+      return;
+
+    const newCurTasks = tasksSortedAndSearched[editTask!.taskName].filter(
+      (task) => task.id !== taskToInteract.id
+    );
+    const newTaskName = isNewTaskOutdate ? 'outdated' : 'inProgress';
+
+    const newAnotherTasks = [taskToInteract, ...tasks[newTaskName]];
+
+    setTasksHelper(
+      [editTask!.taskName, newTaskName],
+      [newCurTasks, newAnotherTasks]
+    );
   };
 
   useEffect(() => {
@@ -194,7 +216,7 @@ const TasksPage: MyFC = () => {
         isLoading={isTasksLoading}
         small
         headerVariant="red"
-        onEditClickHandler={onEditClickHandler}
+        onEditClickHandler={onEditClickHandler('outdated')}
       />
       <TaskColumn
         options={sortOptions}
@@ -208,7 +230,7 @@ const TasksPage: MyFC = () => {
           },
         }}
         limit={100}
-        onEditClickHandler={onEditClickHandler}
+        onEditClickHandler={onEditClickHandler('inProgress')}
         sort={sort.inProgress}
         onSortChange={(e) => {
           setSort({
@@ -231,7 +253,7 @@ const TasksPage: MyFC = () => {
       <TaskColumn
         isLoading={isTasksLoading}
         sort={sort.done}
-        onEditClickHandler={onEditClickHandler}
+        onEditClickHandler={onEditClickHandler('done')}
         query={{
           value: query.done,
           set: (value: string) => {
