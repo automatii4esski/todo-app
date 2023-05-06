@@ -5,6 +5,7 @@ import './style/main.scss';
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import UserPage from './pages/UserPage';
+import ProjectsPage from './pages/ProjectsPage';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
               <Routes>
                 <Route path="/user" element={<UserPage />}></Route>
                 <Route path="/tasks" element={<TasksPage />}></Route>
+                <Route path="/projects" element={<ProjectsPage />}></Route>
+                <Route path="/projects/:id" element={<ProjectsPage />}></Route>
                 <Route path="*" element={<Navigate to="/tasks" />}></Route>
               </Routes>
             </div>

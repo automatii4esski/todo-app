@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { HtmlHTMLAttributes } from 'react';
 import { MyFC } from '../../../types/types';
 import { getConcatClassName } from '../../../utils/getClassName';
 
-const DateElement: MyFC = ({ children, className }) => {
+type DateElementProps = HtmlHTMLAttributes<any>;
+
+const DateElement: MyFC<DateElementProps> = ({ children, className }) => {
   return (
     <div className={getConcatClassName('date', className)}>{children}</div>
   );

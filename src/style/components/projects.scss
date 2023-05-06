@@ -1,0 +1,56 @@
+.projects {
+  display: flex;
+}
+
+.project-item {
+  padding: 15px;
+  border: 2px solid $secondary;
+  border-radius: 10px;
+  flex: 0 1 500px;
+  box-shadow: 0px 0px 20px -10px $secondary;
+}
+
+.project-item__title {
+  font-size: 24px;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+  text-align: center;
+  border-bottom: 1px solid $ui;
+}
+
+.project-item__desc {
+  margin-bottom: 15px;
+  color: $font-secondary;
+}
+
+.project-item__pre-desc {
+  color: $font-primary;
+  font-weight: 700;
+}
+
+.project-item__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-item__progress {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  border-bottom: 5px solid $ui;
+  padding-bottom: 4px;
+  margin-bottom: 20px;
+}
+
+.project-item__progress-line {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 5px;
+  width: 0px;
+}
+
+.project-item__deadline-date {
+  margin-left: 15px;
+}

@@ -7,6 +7,7 @@ import { getAdditionClassName } from '../utils/getClassName';
 import { useInput } from '../hooks/useInput';
 import { MyFC } from '../types/types';
 import { getDate } from '../utils/getDate';
+import { Link } from 'react-router-dom';
 
 const HeaderService: MyFC = () => {
   const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
@@ -52,9 +53,9 @@ const HeaderService: MyFC = () => {
         <CalendarIcon className="header-service__calendar-icon" />
         <div ref={calendarDate} className="header-service__calendar-date"></div>
       </div>
-      <div className="header-service__user">
+      <Link className="header-service__user" to="/user">
         <img src={Avatar} alt="avatar" />
-      </div>
+      </Link>
     </div>
   );
 };

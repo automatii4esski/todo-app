@@ -20,11 +20,11 @@ const asideLinkProps: IAsideLinkProps[] = [
     element: <UserIcon />,
   },
   {
-    to: '/graph',
+    to: '/tasks',
     element: <GraphIcon />,
   },
   {
-    to: '/settings',
+    to: '/projects',
     element: <SettingsIcon />,
   },
   {
