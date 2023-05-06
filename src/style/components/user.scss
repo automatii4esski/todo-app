@@ -1,0 +1,116 @@
+.user {
+  padding: 25px;
+  border-radius: 19px;
+  height: 100%;
+  box-shadow: 0px 0px 20px -10px $secondary;
+  overflow: scroll;
+  display: flex;
+}
+
+.box {
+  height: 200px;
+}
+
+.user-info {
+  margin-right: 50px;
+  flex: 0 1 50%;
+}
+
+.user-info__top {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 50px;
+  border-left: 5px solid $secondary;
+  padding: 10px 0;
+  padding-left: 20px;
+}
+
+.user-info__avatar {
+  border-radius: 50%;
+  width: 100px;
+  overflow: hidden;
+  height: 100px;
+  margin-right: 30px;
+  box-shadow: 0px 0px 20px -10px $secondary;
+}
+
+.user-info__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-info__nickname {
+  font-size: 64px;
+}
+
+.user-info__data {
+  padding-left: 35px;
+}
+
+.user__item {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+}
+
+.user-info__item {
+  padding: 20px 0;
+}
+
+.user__name {
+  margin-right: 20px;
+  font-weight: 700;
+}
+
+.user-info__text {
+  font-weight: 500;
+}
+
+.user-info__item + .user-info__item {
+  border-top: 2px solid $ui;
+}
+
+.user-tasks {
+  flex: 1 1 auto;
+}
+
+.user-tasks__title {
+  font-size: 44px;
+  border-radius: 19px;
+  margin-bottom: 20px;
+
+  &::first-letter {
+    color: $primary;
+    background: $secondary;
+    padding: 0 15px;
+    border-radius: 5px;
+  }
+}
+
+.user-tasks__item {
+  padding-top: 20px;
+  border-top: 1px solid $secondary;
+}
+
+.user-tasks__item + .user-tasks__item {
+  margin-top: 50px;
+}
+
+.user__count {
+  border-radius: 50%;
+  border: 2px solid $green-color;
+  background: $green-color;
+  color: $primary;
+  box-shadow: 0px 0px 30px -10px $green-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  transform: translateY(3px);
+  height: 40px;
+}
+
+.user-tasks__item-content {
+  padding-left: 35px;
+}
