@@ -2,6 +2,7 @@ import React from 'react';
 import MyButton from '../components/UI/button/MyButton';
 import DateElement from '../components/UI/date/DateElement';
 import { getDate } from '../utils/getDate';
+import ProgressLine from '../components/UI/progressLine/ProgressLine';
 
 const ProjectsPage = () => {
   return (
@@ -16,11 +17,7 @@ const ProjectsPage = () => {
             esse nobis voluptates inventore dolorum sint iure minus quas
             aliquam.
           </p>
-          <div className="project-item__progress">
-            <div className="project-item__progress-text">Progress</div>
-            <div className="project-item__progress-count">1/10</div>
-            <div className="project-item__progress-line"></div>
-          </div>
+          <ProgressLine width={0} count="1/10" />
           <div className="project-item__bottom">
             <div className="project-item__deadline">
               Deadline:

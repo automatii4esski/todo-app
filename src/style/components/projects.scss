@@ -34,23 +34,6 @@
   align-items: center;
 }
 
-.project-item__progress {
-  display: flex;
-  position: relative;
-  justify-content: space-between;
-  border-bottom: 5px solid $ui;
-  padding-bottom: 4px;
-  margin-bottom: 20px;
-}
-
-.project-item__progress-line {
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  height: 5px;
-  width: 0px;
-}
-
 .project-item__deadline-date {
   margin-left: 15px;
 }
