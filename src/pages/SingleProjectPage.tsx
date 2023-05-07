@@ -62,20 +62,155 @@ const SingleProjectPage = () => {
             </div>
             <div className="singleproject-microtasks__filter-item">All</div>
           </div>
-          <div className="singleproject-microtasks__content">
-            <div className="singleproject-microtasks__item">
-              <p className="singleproject-microtasks__item-desc">
-                Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
-              </p>
-              <div className="singleproject-microtasks__item-actions">
-                <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
-                  <DoneIcon className="singleproject-microtasks__item-icon" />
-                </button>
-                <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
-                  <DeleteIcon className="singleproject-microtasks__item-icon" />
-                </button>
+          <div className="singleproject-microtasks__content-wrapper">
+            <div className="singleproject-microtasks__content">
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>{' '}
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>{' '}
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
+              </div>
+              <div className="singleproject-microtasks__item">
+                <p className="singleproject-microtasks__item-desc">
+                  Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit
+                </p>
+                <div className="singleproject-microtasks__item-actions">
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-done">
+                    <DoneIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                  <button className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete">
+                    <DeleteIcon className="singleproject-microtasks__item-icon" />
+                  </button>
+                </div>
               </div>
             </div>
+            <button className="singleproject-microtasks__add">
+              <span className="singleproject-microtasks__add-span">+</span>
+            </button>
           </div>
         </div>
       </div>
