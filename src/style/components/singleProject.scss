@@ -1,0 +1,238 @@
+.singleproject {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.singleproject__title {
+  font-size: 44px;
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px;
+  position: relative;
+
+  &::before {
+    content: '';
+    width: 50px;
+    height: 3px;
+    position: absolute;
+    background: $secondary;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+  }
+}
+
+.singleproject__content {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.singleproject__info {
+  padding-right: 50px;
+  flex: 1 1 70%;
+}
+
+.singleproject__description {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid $ui;
+}
+
+.singleproject__sub-title {
+  margin-bottom: 30px;
+}
+
+.singleproject__description-title {
+  position: relative;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+
+  &::before {
+    content: '';
+    width: 50px;
+    height: 2px;
+    position: absolute;
+    background: $secondary;
+    left: 0;
+    bottom: 0;
+  }
+}
+
+.singleproject__description-text {
+  margin-bottom: 20px;
+}
+
+.singleproject__description-box {
+  display: flex;
+  justify-content: center;
+}
+
+.singleproject__description-add {
+  background: transparent;
+  border: none;
+  color: $font-secondary;
+  cursor: pointer;
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 44px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: $font-primary;
+  }
+}
+
+.singleproject__description-date {
+  color: $font-secondary;
+  margin-bottom: 5px;
+  display: block;
+  padding-left: 10px;
+  border-left: 1px solid $font-primary;
+}
+
+.singleproject__info-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.singleproject__date {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.singleproject__date-text {
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.singleproject__actions-btn {
+  margin: 0 10px;
+}
+
+.singleproject__actions-complete {
+  border-color: $green-color;
+  background: $green-color;
+
+  &:hover {
+    box-shadow: 0px 0px 22px -10px $green-color;
+  }
+}
+
+.singleproject__actions-delete {
+  border-color: $red-color;
+  background: $red-color;
+
+  &:hover {
+    box-shadow: 0px 0px 22px -10px $red-color;
+  }
+}
+
+.singleproject-microtasks {
+  flex: 1 1 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.singleproject-microtasks__title {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.singleproject-microtasks__content {
+  border: 2px solid $secondary;
+  border-radius: 10px;
+  background: $secondary;
+  flex: 1 1 auto;
+  padding: 15px;
+}
+
+.singleproject-microtasks__item {
+  border: 3px solid $yellow-color;
+  overflow: hidden;
+  background: $primary;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top: 15px solid $yellow-color;
+    border-right: 20px solid transparent;
+  }
+}
+
+.singleproject-microtasks__filter {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.singleproject-microtasks__filter-item {
+  background: $secondary;
+  color: $font-tertiary;
+  border: 3px solid $secondary;
+  border-bottom: none;
+  padding: 5px 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+.singleproject-microtasks__filter-item--active {
+  background: $primary;
+  color: $font-primary;
+}
+
+.singleproject-microtasks__item-desc {
+  padding: 10px;
+}
+
+.singleproject-microtasks__item-actions {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.singleproject-microtasks__item-btn {
+  flex: 1 1 50%;
+  background: transparent;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.singleproject-microtasks__item-done {
+  background: $green-color;
+
+  & path {
+    fill: $font-tertiary;
+  }
+
+  &:hover {
+    background: darken($green-color, 20);
+  }
+}
+
+.singleproject-microtasks__item-delete {
+  background: $red-color;
+
+  & path {
+    stroke: $font-tertiary;
+  }
+
+  &:hover {
+    background: darken($red-color, 20);
+  }
+}
+
+.singleproject-microtasks__item-icon {
+  width: 20px;
+  height: 20px;
+}

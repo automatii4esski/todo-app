@@ -6,6 +6,7 @@ import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import UserPage from './pages/UserPage';
 import ProjectsPage from './pages/ProjectsPage';
+import SingleProjectPage from './pages/SingleProjectPage';
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
                 <Route path="/user" element={<UserPage />}></Route>
                 <Route path="/tasks" element={<TasksPage />}></Route>
                 <Route path="/projects" element={<ProjectsPage />}></Route>
-                <Route path="/projects/:id" element={<ProjectsPage />}></Route>
+                <Route
+                  path="/projects/:id"
+                  element={<SingleProjectPage />}
+                ></Route>
                 <Route path="*" element={<Navigate to="/tasks" />}></Route>
               </Routes>
             </div>
