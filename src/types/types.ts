@@ -36,9 +36,15 @@ export interface IProjectTask {
   status: ProgectTaskStatus;
 }
 
+export interface IAditionalDesc {
+  date: number;
+  text: string;
+}
+
 export interface IProject {
   id: number;
   desc: string;
+  additionalDescs: IAditionalDesc[];
   title: string;
   deadline: number;
   tasksDone: number;

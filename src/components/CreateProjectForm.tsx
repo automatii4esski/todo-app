@@ -14,6 +14,7 @@ const initData: IProject = {
   desc: '',
   title: '',
   tasks: [],
+  additionalDescs: [],
   tasksTotal: 0,
   tasksDone: 0,
 };
@@ -54,8 +55,12 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
 
   const onFormSubmit = function (e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    ProjectService.post(data);
-    addProject(data);
+    const finalData = {
+      ...data,
+      id: Date.now(),
+    };
+    ProjectService.post(finalData);
+    addProject(finalData);
     setData(initData);
   };
 

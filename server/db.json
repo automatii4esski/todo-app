@@ -1,112 +1,24 @@
 {
   "projects": [
     {
-      "id": 23123,
-      "desc": "asdasdasd",
-      "title": "title",
-      "deadline": 1238712983,
-      "tasksDone": 0,
-      "tasksTotal": 8,
-      "tasks": [
-        {
-          "id": 1111,
-          "desc": "to do ",
-          "status": "in progress"
-        }
-      ]
-    },
-    {
-      "id": 2312223,
-      "desc": "asdasdasd",
-      "title": "title",
-      "deadline": 1238712983,
-      "tasksDone": 0,
-      "tasksTotal": 8,
-      "tasks": [
-        {
-          "id": 11311,
-          "desc": "to do ",
-          "status": "in progress"
-        }
-      ]
-    },
-    {
-      "id": 2312224,
-      "deadline": 1683551158053,
-      "desc": "asdasdssss",
-      "title": "лфываощлшфыв",
-      "tasks": [],
-      "tasksTotal": 0,
-      "tasksDone": 0
-    },
-    {
-      "id": 2312225,
-      "deadline": 1683551597043,
+      "id": 1683559422450,
+      "deadline": 1683559411257,
       "desc": "",
-      "title": "sss",
+      "title": "fadfSKDJKd",
       "tasks": [
         {
-          "id": 1683551623236,
-          "desc": "asdasd",
-          "status": "in progress"
-        }
-      ],
-      "tasksTotal": 0,
-      "tasksDone": 0
-    },
-    {
-      "id": 2312226,
-      "deadline": 1683551627322,
-      "desc": "",
-      "title": "sssssss",
-      "tasks": [
-        {
-          "id": 1683551642286,
-          "desc": "asdasdasdsa",
-          "status": "in progress"
-        }
-      ],
-      "tasksTotal": 0,
-      "tasksDone": 0
-    },
-    {
-      "id": 2312227,
-      "deadline": 1683552316232,
-      "desc": "asdasd",
-      "title": "asdasd",
-      "tasks": [
-        {
-          "id": 1683552358873,
-          "desc": "sssss",
+          "id": 1683559419527,
+          "desc": "zzz",
           "status": "in progress"
         },
         {
-          "id": 1683552357522,
-          "desc": "aaa",
-          "status": "in progress"
-        },
-        {
-          "id": 1683552356505,
-          "desc": "aaaa",
+          "id": 1683559418221,
+          "desc": "asd",
           "status": "in progress"
         }
       ],
-      "tasksTotal": 3,
-      "tasksDone": 0
-    },
-    {
-      "id": 2312228,
-      "deadline": 1683552316232,
-      "desc": "",
-      "title": "zzzzzzzzzzzzzzz",
-      "tasks": [
-        {
-          "id": 1683552417976,
-          "desc": "asdad",
-          "status": "in progress"
-        }
-      ],
-      "tasksTotal": 1,
+      "additionalDescs": [],
+      "tasksTotal": 2,
       "tasksDone": 0
     }
   ],

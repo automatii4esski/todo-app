@@ -14,4 +14,11 @@ export class ProjectService {
     );
     return response;
   }
+
+  static async getById(id: number | string) {
+    const response = await axios<IProject[]>(
+      `http://localhost:3001/projects?id=${id}`
+    );
+    return response;
+  }
 }
