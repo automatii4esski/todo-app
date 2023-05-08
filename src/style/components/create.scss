@@ -8,9 +8,11 @@
   margin-bottom: 40px;
 }
 
-.create__form {
+.create__form,
+.create-project__data {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .create__item {
@@ -30,4 +32,111 @@
 
 .create__textarea {
   height: 200px;
+}
+
+.create-project__data {
+  flex: 0 1 60%;
+  padding-right: 30px;
+}
+
+.create-project__tasks {
+  flex: 0 1 40%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.create-project__from {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.create-project__submit {
+  flex: 0 0 100%;
+}
+
+.create-project__tasks-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.create-project__tasks-add {
+  background: transparent;
+  padding: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 700;
+  border: 2px solid $secondary;
+  border-radius: 50%;
+  transition: background 0.2s;
+
+  &:hover {
+    background: $ui;
+  }
+}
+
+.create-project__tasks-span {
+  margin-bottom: 4px;
+  margin-left: 1px;
+}
+
+.create-project__tasks-content {
+  flex: 1 1 auto;
+  height: 10px;
+  border: 2px solid $secondary;
+  border-radius: 19px;
+  background: $ui;
+  overflow: auto;
+  padding: 10px;
+}
+
+.create-project__tasks-item + .create-project__tasks-item {
+  margin-top: 6px;
+}
+
+.create-project__tasks-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  background: $primary;
+  border: 1px solid $secondary;
+  border-radius: 19px;
+}
+
+.create-project__tasks-desc {
+  margin-right: 10px;
+}
+
+.create-project__tasks-delete {
+  border-color: $red-color;
+  flex: 0 0 30px;
+  height: 30px;
+
+  & path {
+    transition: stroke 0.2s;
+  }
+
+  &:hover {
+    background: $red-color;
+  }
+
+  &:hover path {
+    stroke: #fff;
+  }
+}
+
+.create-project__tasks-plug {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

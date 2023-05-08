@@ -5,6 +5,8 @@ import { ISortOption, MyFC, RefObj } from '../../../types/types';
 interface IMySelect {
   options: ISortOption[];
   sort: string;
+  onChange: (...args: any) => any;
+  defaultText?: string;
 }
 
 type MySelectProps = SelectHTMLAttributes<any> &
@@ -15,6 +17,7 @@ const MySelect: MyFC<MySelectProps> = ({
   className,
   options,
   sort,
+  defaultText = 'Select sort',
   ...props
 }) => {
   return (
@@ -24,7 +27,7 @@ const MySelect: MyFC<MySelectProps> = ({
       className={getConcatClassName('select', className)}
     >
       <option className="option" disabled value="">
-        Select sort
+        {defaultText}
       </option>
       {options.map((option) => (
         <option className="option" key={option.value} value={option.value}>

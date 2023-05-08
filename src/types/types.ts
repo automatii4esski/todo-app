@@ -27,3 +27,21 @@ export interface ITaskSortOption extends ISortOption {
   value: keyof Pick<ITask, 'title' | 'desc' | 'date'>;
   text: string;
 }
+
+export type ProgectTaskStatus = 'done' | 'in progress';
+
+export interface IProjectTask {
+  id: number;
+  desc: string;
+  status: ProgectTaskStatus;
+}
+
+export interface IProject {
+  id: number;
+  desc: string;
+  title: string;
+  deadline: number;
+  tasksDone: number;
+  tasksTotal: number;
+  tasks: IProjectTask[];
+}

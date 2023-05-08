@@ -135,7 +135,7 @@ const TasksPage: MyFC = () => {
     };
   };
 
-  const onSubmit = function (task: ITask) {
+  const onCreateSubmit = function (task: ITask) {
     const taskName = isOutdate(task.date) ? 'outdated' : 'inProgress';
     const newTasks = [task, ...tasks[taskName]];
 
@@ -288,7 +288,7 @@ const TasksPage: MyFC = () => {
         className="task__popup-wrapper"
         active={isCreatePopupActive}
       >
-        {<CreateTaskForm onSubmit={onSubmit} />}
+        {<CreateTaskForm onSubmit={onCreateSubmit} />}
       </PopupTemplate>
       <PopupTemplate
         onHideHandler={() => {
