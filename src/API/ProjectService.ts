@@ -21,4 +21,12 @@ export class ProjectService {
     );
     return response;
   }
+
+  static async putById(project: IProject) {
+    const response = await axios.put<IProject[]>(
+      `http://localhost:3001/projects/${project.id}`,
+      project
+    );
+    return response;
+  }
 }

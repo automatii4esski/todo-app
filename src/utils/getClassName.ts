@@ -8,11 +8,9 @@ export const getAdditionClassName = function (
 
 export const getConcatClassName = function (
   className: string,
-  potentialClassName: string | undefined
+  potentialClassName: string = ''
 ) {
-  const finalClassName = potentialClassName
-    ? className.concat(' ', potentialClassName)
-    : className;
+  const finalClassName = className.concat(' ', potentialClassName);
 
   return finalClassName;
 };

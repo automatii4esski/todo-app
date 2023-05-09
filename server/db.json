@@ -17,7 +17,12 @@
           "status": "in progress"
         }
       ],
-      "additionalDescs": [],
+      "additionalDescs": [
+        {
+          "date": 1683642112559,
+          "text": "HKSGDKLSDGJKHSDJ"
+        }
+      ],
       "tasksTotal": 2,
       "tasksDone": 0
     }
