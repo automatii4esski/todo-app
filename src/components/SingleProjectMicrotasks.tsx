@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, ChangeEvent } from 'react';
 import { MyFC, ProgectTaskStatus } from '../types/types';
 import ProgressLine from './UI/progressLine/ProgressLine';
 import { IProjectTask } from '../types/types';
 import { useTasks } from '../hooks/useProjectTasks';
 import SingleProjectTask from './SingleProjectTask';
+import MyTextarea from './UI/textarea/MyTextarea';
+import { ProjectService } from '../API/ProjectService';
 
 interface ISingleProjectMicrotasks {
   microtasks: IProjectTask[];
+  onCreateTask: (task: IProjectTask) => void;
 }
 
 const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
   microtasks,
+  onCreateTask,
 }) => {
   const [filter, setFilter] = useState<ProgectTaskStatus | ''>('');
   const [filterClasses, setFilterClasses] = useState({
@@ -18,6 +22,8 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
     active: '',
     all: '--active',
   });
+  const [createClass, setCreateClass] = useState<'' | '--active'>('');
+  const createInputRef = useRef<HTMLTextAreaElement>(null);
 
   const setFilterHelper = function (name: keyof typeof filterClasses) {
     return () => {
@@ -30,6 +36,19 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
       });
       setFilter(name === 'all' ? '' : name);
     };
+  };
+
+  const onCreateSubmit = function (e: ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setCreateClass('');
+    if (!createInputRef.current!.value) return;
+    const newTask: IProjectTask = {
+      desc: createInputRef.current!.value,
+      status: 'active',
+      id: Date.now(),
+    };
+    onCreateTask(newTask);
+    createInputRef.current!.value = '';
   };
 
   const filteredTasks = useTasks(microtasks, filter);
@@ -61,6 +80,45 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
       </div>
       <div className="singleproject-microtasks__content-wrapper">
         <div className="singleproject-microtasks__content">
+          <div
+            onClick={() => {
+              setCreateClass('');
+            }}
+            className={`singleproject-microtasks__create${createClass}`}
+          >
+            <form
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+              onSubmit={onCreateSubmit}
+              className="singleproject-microtasks__create-form"
+            >
+              <MyTextarea
+                reference={createInputRef}
+                className="singleproject-microtasks__create-input"
+                placeholder="Description"
+              />
+              <div className="singleproject-microtasks__create-btn">
+                <button
+                  className="singleproject__btn singleproject-microtasks__create-submit"
+                  type="submit"
+                >
+                  Add
+                </button>
+                <button
+                  onClick={() => {
+                    createInputRef.current!.value = '';
+                    setCreateClass('');
+                  }}
+                  className="singleproject__btn 
+                singleproject-microtasks__create-close"
+                  type="button"
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+          </div>
           {filteredTasks.length !== 0 ? (
             filteredTasks.map((task) => (
               <SingleProjectTask key={task.id} task={task} />
@@ -78,7 +136,14 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
             count="1/10"
           />
           <button className="singleproject-microtasks__add">
-            <span className="singleproject-microtasks__add-span">+</span>
+            <span
+              onClick={() => {
+                setCreateClass('--active');
+              }}
+              className="singleproject-microtasks__add-span"
+            >
+              +
+            </span>
           </button>
         </div>
       </div>

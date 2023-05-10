@@ -86,12 +86,15 @@ const SingleProjectDescription: MyFC<ISingleProjectDescription> = ({
             placeholder="Type desc"
           />
           <div className="singleproject__description-btns">
-            <button className="singleproject__description-submit" type="submit">
+            <button
+              className="singleproject__btn singleproject__description-submit"
+              type="submit"
+            >
               Add
             </button>
             <button
               onClick={onCloseAdditionalDesc}
-              className="singleproject__description-close"
+              className="singleproject__btn singleproject__description-close"
             >
               Close
             </button>

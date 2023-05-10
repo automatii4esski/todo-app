@@ -160,9 +160,49 @@
   }
 }
 
+.singleproject-microtasks__create,
+.singleproject-microtasks__create--active {
+  position: absolute;
+  height: 0;
+  overflow: hidden;
+  width: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: rgba($secondary, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.singleproject-microtasks__create--active {
+  height: 100%;
+}
+
+.singleproject-microtasks__create-form {
+  max-width: 400px;
+  width: 100%;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.singleproject-microtasks__create-btn {
+  display: flex;
+  justify-content: center;
+}
+
+.singleproject-microtasks__create-input {
+  height: 100px;
+  width: 100%;
+  border: none;
+}
+
 .singleproject-microtasks__content-wrapper {
   flex: 1 1 auto;
   overflow: hidden;
+  position: relative;
   padding: 15px 0 15px 15px;
   border: 2px solid $secondary;
   border-radius: 10px;
@@ -394,8 +434,7 @@
   overflow: hidden;
 }
 
-.singleproject__description-submit,
-.singleproject__description-close {
+.singleproject__btn {
   border: none;
   padding: 5px 15px;
   color: $font-tertiary;
@@ -403,7 +442,8 @@
   transition: background 0.2s;
 }
 
-.singleproject__description-submit {
+.singleproject__description-submit,
+.singleproject-microtasks__create-submit {
   background: $yellow-color;
   border-radius: 0 0 0 10px;
 
@@ -412,7 +452,8 @@
   }
 }
 
-.singleproject__description-close {
+.singleproject__description-close,
+.singleproject-microtasks__create-close {
   background: $red-color;
   border-radius: 0 0 10px 0;
 

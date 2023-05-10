@@ -6,7 +6,7 @@ import MyButton from '../components/UI/button/MyButton';
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
 import SingleProjectTask from '../components/SingleProjectTask';
 import { useParams } from 'react-router-dom';
-import { IProject } from '../types/types';
+import { IProject, IProjectTask } from '../types/types';
 import { useFetch } from '../hooks/useFetch';
 import { ProjectService } from '../API/ProjectService';
 import Loader from '../components/UI/loader/Loader';
@@ -45,6 +45,16 @@ const SingleProjectPage = () => {
       </div>
     );
   }
+
+  const onCreateTask = function (task: IProjectTask) {
+    const newTasks = [task, ...data.tasks];
+    const newData = {
+      ...data,
+      tasks: newTasks,
+    };
+    ProjectService.patchTask(id as string, { tasks: newTasks });
+    setData(newData);
+  };
 
   const onSubmitAdditionalDesc = function (newDesc: string) {
     const newData = {
@@ -86,7 +96,10 @@ const SingleProjectPage = () => {
             </div>
           </div>
         </div>
-        <SingleProjectMicrotasks microtasks={data.tasks} />
+        <SingleProjectMicrotasks
+          onCreateTask={onCreateTask}
+          microtasks={data.tasks}
+        />
       </div>
     </div>
   );
