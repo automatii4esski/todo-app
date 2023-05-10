@@ -28,7 +28,7 @@ export interface ITaskSortOption extends ISortOption {
   text: string;
 }
 
-export type ProgectTaskStatus = 'done' | 'in progress';
+export type ProgectTaskStatus = 'done' | 'active';
 
 export interface IProjectTask {
   id: number;

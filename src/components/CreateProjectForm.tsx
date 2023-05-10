@@ -35,7 +35,7 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
         {
           id: Date.now(),
           desc: taskValue,
-          status: 'in progress',
+          status: 'active',
         },
         ...data.tasks,
       ],
