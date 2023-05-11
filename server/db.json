@@ -7,8 +7,18 @@
       "title": "fadfSKDJKd",
       "tasks": [
         {
+          "desc": "asd",
+          "status": "done",
+          "id": 1683766297758
+        },
+        {
+          "desc": "asd",
+          "status": "done",
+          "id": 1683766242403
+        },
+        {
           "desc": "zxczxc",
-          "status": "active",
+          "status": "done",
           "id": 1683765583834
         }
       ],
@@ -66,8 +76,8 @@
           "text": "xxx"
         }
       ],
-      "tasksTotal": 1,
-      "tasksDone": 0
+      "tasksTotal": 3,
+      "tasksDone": 3
     }
   ],
   "tasks": [

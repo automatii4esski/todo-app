@@ -20,7 +20,7 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
           {project.desc}
         </p>
         <ProgressLine
-          width={0}
+          width={(project.tasksDone / project.tasksTotal) * 100}
           count={`${project.tasksDone}/${project.tasksTotal}`}
         />
         <div className="project-item__bottom">

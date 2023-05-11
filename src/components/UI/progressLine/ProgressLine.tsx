@@ -2,14 +2,22 @@ import React, { HtmlHTMLAttributes } from 'react';
 import { MyFC } from '../../../types/types';
 import { getConcatClassName } from '../../../utils/getClassName';
 
+type Color = 'yellow' | 'green';
+
 interface IProgressLine {
   count: string;
   width: number;
+  color?: Color;
 }
 
 type ProgressLineProps = HtmlHTMLAttributes<any> & IProgressLine;
 
-const ProgressLine: MyFC<ProgressLineProps> = ({ className, width, count }) => {
+const ProgressLine: MyFC<ProgressLineProps> = ({
+  className,
+  width,
+  count,
+  color = width < 100 ? 'yellow' : 'green',
+}) => {
   return (
     <div className={getConcatClassName('progress', className)}>
       <div className="progress-text">Progress</div>
@@ -18,7 +26,7 @@ const ProgressLine: MyFC<ProgressLineProps> = ({ className, width, count }) => {
         style={{
           width: `${width}%`,
         }}
-        className="progress-line"
+        className={`progress-line progress-line--${color}`}
       ></div>
     </div>
   );

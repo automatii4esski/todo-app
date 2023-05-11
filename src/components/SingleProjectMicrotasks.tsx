@@ -208,7 +208,7 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
         <div className="singleproject-microtasks__bottom">
           <ProgressLine
             className="singleproject-microtasks__progress"
-            width={10}
+            width={(data.tasksDone / data.tasksTotal) * 100}
             count={`${data.tasksDone}/${data.tasksTotal}`}
           />
           <button className="singleproject-microtasks__add">
