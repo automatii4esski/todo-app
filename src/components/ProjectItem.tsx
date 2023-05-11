@@ -5,6 +5,7 @@ import MyButton from './UI/button/MyButton';
 import { getDate } from '../utils/getDate';
 import { MyFC, IProject } from '../types/types';
 import { Link } from 'react-router-dom';
+import { cutString } from '../utils/cutString';
 
 interface IProjectItem {
   project: IProject;
@@ -17,7 +18,7 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
       <div className="project-item__content">
         <p className="project-item__desc">
           <span className="project-item__pre-desc">Description: </span>
-          {project.desc}
+          {cutString(project.desc, 100).stringSlice}
         </p>
         <ProgressLine
           width={(project.tasksDone / project.tasksTotal) * 100}
