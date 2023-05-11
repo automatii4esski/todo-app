@@ -7,44 +7,9 @@
       "title": "fadfSKDJKd",
       "tasks": [
         {
-          "desc": "zzz",
+          "desc": "zxczxc",
           "status": "active",
-          "id": 1683718504187
-        },
-        {
-          "desc": "asdasd",
-          "status": "active",
-          "id": 1683718499955
-        },
-        {
-          "desc": "",
-          "status": "active",
-          "id": 1683718454445
-        },
-        {
-          "desc": "zzz",
-          "status": "active",
-          "id": 1683718326529
-        },
-        {
-          "desc": "zzz",
-          "status": "active",
-          "id": 1683718264032
-        },
-        {
-          "desc": "zzz",
-          "status": "active",
-          "id": 1683718262122
-        },
-        {
-          "id": 1683559419527,
-          "desc": "zzz",
-          "status": "done"
-        },
-        {
-          "id": 1683559418221,
-          "desc": "asd",
-          "status": "active"
+          "id": 1683765583834
         }
       ],
       "additionalDescs": [
@@ -95,9 +60,13 @@
         {
           "date": 1683643171635,
           "text": "asdasdasdsazzzz"
+        },
+        {
+          "date": 1683765727960,
+          "text": "xxx"
         }
       ],
-      "tasksTotal": 2,
+      "tasksTotal": 1,
       "tasksDone": 0
     }
   ],

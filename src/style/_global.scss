@@ -143,4 +143,8 @@ body {
   left: 0;
   height: 5px;
   width: 0px;
+
+  &--green {
+    background: $green-color;
+  }
 }

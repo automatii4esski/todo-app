@@ -442,8 +442,13 @@
   transition: background 0.2s;
 }
 
+.singleproject__btn--disabled {
+  display: none;
+}
+
 .singleproject__description-submit,
-.singleproject-microtasks__create-submit {
+.singleproject-microtasks__create-submit,
+.singleproject-microtasks__create-edit {
   background: $yellow-color;
   border-radius: 0 0 0 10px;
 

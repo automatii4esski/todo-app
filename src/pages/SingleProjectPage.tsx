@@ -6,7 +6,7 @@ import MyButton from '../components/UI/button/MyButton';
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
 import SingleProjectTask from '../components/SingleProjectTask';
 import { useParams } from 'react-router-dom';
-import { IProject, IProjectTask } from '../types/types';
+import { IProject, IProjectTask, ProgectTaskStatus } from '../types/types';
 import { useFetch } from '../hooks/useFetch';
 import { ProjectService } from '../API/ProjectService';
 import Loader from '../components/UI/loader/Loader';
@@ -46,14 +46,72 @@ const SingleProjectPage = () => {
     );
   }
 
-  const onCreateTask = function (task: IProjectTask) {
-    const newTasks = [task, ...data.tasks];
+  const onEditTaskSubmit = function (editedTask: IProjectTask) {
+    const newTasks = data.tasks.map((task) => {
+      if (editedTask.id === task.id) {
+        return editedTask;
+      }
+      return task;
+    });
     const newData = {
       ...data,
       tasks: newTasks,
     };
-    ProjectService.patchTask(id as string, { tasks: newTasks });
     setData(newData);
+    ProjectService.patchTask(id as string, { tasks: newTasks });
+  };
+
+  const onCreateTask = function (task: IProjectTask) {
+    const newTasks = [task, ...data.tasks];
+    const newData: Partial<IProject> = {
+      tasksTotal: data.tasksTotal + 1,
+      tasks: newTasks,
+    };
+    ProjectService.patchTask(id as string, newData);
+    setData({ ...data, ...newData });
+  };
+
+  const onTaskDoneOrReturnClick = function (
+    taskToInteract: IProjectTask,
+    status: ProgectTaskStatus
+  ) {
+    return () => {
+      const newTask: IProjectTask = {
+        ...taskToInteract,
+        status,
+      };
+      const newTasks = data.tasks.map((task) => {
+        if (newTask.id === task.id) {
+          return newTask;
+        }
+        return task;
+      });
+      const newData: Partial<IProject> = {
+        tasksDone: data.tasksDone + (status === 'active' ? -1 : 1),
+        tasks: newTasks,
+      };
+      ProjectService.patchTask(id as string, newData);
+      setData({
+        ...data,
+        ...newData,
+      });
+    };
+  };
+
+  const onTaskDeleteClick = function (taskToInteract: IProjectTask) {
+    return () => {
+      const newTasks = data.tasks.filter(
+        (task) => taskToInteract.id !== task.id
+      );
+      const newData: Partial<IProject> = {
+        tasksTotal: data.tasksTotal - 1,
+        tasksDone: data.tasksDone - Number(taskToInteract.status === 'done'),
+        tasks: newTasks,
+      };
+      ProjectService.patchTask(id as string, newData);
+
+      setData({ ...data, ...newData });
+    };
   };
 
   const onSubmitAdditionalDesc = function (newDesc: string) {
@@ -98,7 +156,10 @@ const SingleProjectPage = () => {
         </div>
         <SingleProjectMicrotasks
           onCreateTask={onCreateTask}
-          microtasks={data.tasks}
+          onTaskDeleteClick={onTaskDeleteClick}
+          onEditTaskSubmit={onEditTaskSubmit}
+          onTaskDoneOrReturnClick={onTaskDoneOrReturnClick}
+          data={data}
         />
       </div>
     </div>
