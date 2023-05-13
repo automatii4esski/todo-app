@@ -8,9 +8,9 @@
 
 //Components
 @import './components/aside.scss';
-@import './components/header.scss';
-@import './components/tasks.scss';
+@import './components/header/header.scss';
+@import './components/tasks/tasks.scss';
 @import './components/create.scss';
 @import './components/user.scss';
-@import './components/projects.scss';
-@import './components/singleProject.scss';
+@import './components/projects/projects.scss';
+@import './components/singleproject/singleProject.scss';

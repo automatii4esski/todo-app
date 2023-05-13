@@ -6,14 +6,14 @@ import React, {
   useState,
 } from 'react';
 import TaskItem from './TaskItem';
-import { ISortOption, ITask, MyFC } from '../types/types';
-import { getAdditionClassName } from '../utils/getClassName';
-import Loader from './UI/loader/Loader';
-import PopupTemplate from './UI/popup/PopupTemplate';
-import MyButton from './UI/button/MyButton';
-import MySelect from './UI/select/MySelect';
-import MyInput from './UI/Input/MyInput';
-import { useInput } from '../hooks/useInput';
+import { ISortOption, ITask, MyFC } from '../../types/types';
+import { getAdditionClassName } from '../../utils/getClassName';
+import Loader from '../UI/loader/Loader';
+import PopupTemplate from '../UI/popup/PopupTemplate';
+import MyButton from '../UI/button/MyButton';
+import MySelect from '../UI/select/MySelect';
+import MyInput from '../UI/Input/MyInput';
+import { useInput } from '../../hooks/useInput';
 
 type HeaderVariant = 'yellow' | 'green' | 'red';
 

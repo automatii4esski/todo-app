@@ -6,17 +6,17 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 3px; /* ширина скроллбара */
-  background-color: transparent; /* цвет фона скроллбара */
+  width: 3px;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $secondary; /* цвет ползунка скроллбара */
-  border-radius: 20px; /* скругление углов ползунка скроллбара */
+  background-color: $secondary;
+  border-radius: 20px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: transparent; /* цвет трека скроллбара */
+  background-color: transparent;
 }
 
 .wrapper {

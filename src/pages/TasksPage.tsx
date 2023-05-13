@@ -1,15 +1,15 @@
 import React, { useEffect, ChangeEvent, useMemo, useState } from 'react';
 import { ISortOption, ITask, ITaskSortOption, MyFC } from '../types/types';
-import TaskColumn from '../components/TaskColumn';
+import TaskColumn from '../components/Tasks/TaskColumn';
 import { getConcatClassName } from '../utils/getClassName';
 import { TaskService } from '../API/TaskService';
 import { useFetch } from '../hooks/useFetch';
 import { useSortedTasks, useTasks } from '../hooks/useTasks';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
-import CreateTaskForm from '../components/CreateTaskForm';
+import CreateTaskForm from '../components/CreateForms/CreateTaskForm';
 import { isOutdate } from '../utils/isOutdate';
 import { distributeTasks } from '../utils/distributeTasks';
-import EditTaskForm from '../components/EditTaskForm';
+import EditTaskForm from '../components/CreateForms/EditTaskForm';
 
 const sortOptions: ITaskSortOption[] = [
   {

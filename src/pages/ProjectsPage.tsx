@@ -3,14 +3,14 @@ import MyButton from '../components/UI/button/MyButton';
 import DateElement from '../components/UI/date/DateElement';
 import { getDate } from '../utils/getDate';
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
-import ProjectItem from '../components/ProjectItem';
+import ProjectItem from '../components/Projects/ProjectItem';
 import { IProject, MyFC } from '../types/types';
 import { useFetch } from '../hooks/useFetch';
 import { ProjectService } from '../API/ProjectService';
 import MyInput from '../components/UI/Input/MyInput';
 import MySelect from '../components/UI/select/MySelect';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
-import CreateProjectForm from '../components/CreateProjectForm';
+import CreateProjectForm from '../components/CreateForms/CreateProjectForm';
 
 const ProjectsPage: MyFC = () => {
   const [projects, setProjects] = useState<IProject[]>([]);

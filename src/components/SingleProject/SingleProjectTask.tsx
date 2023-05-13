@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { ReactComponent as DoneIcon } from '../images/icons/done.svg';
-import { ReactComponent as DeleteIcon } from '../images/icons/cross.svg';
-import { ReactComponent as ArrowLeftIcon } from '../images/icons/arrow-left.svg';
-import { ReactComponent as EditIcon } from '../images/icons/edit.svg';
+import { ReactComponent as DoneIcon } from '../../images/icons/done.svg';
+import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
+import { ReactComponent as ArrowLeftIcon } from '../../images/icons/arrow-left.svg';
+import { ReactComponent as EditIcon } from '../../images/icons/edit.svg';
 import {
   IProject,
   IProjectTask,
   MyFC,
   ProgectTaskStatus,
-} from '../types/types';
+} from '../../types/types';
 import { JsxElement } from 'typescript';
 
 interface ISingleProjectTask {

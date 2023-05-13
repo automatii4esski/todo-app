@@ -4,15 +4,15 @@ import { getDate } from '../utils/getDate';
 import MyButton from '../components/UI/button/MyButton';
 
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
-import SingleProjectTask from '../components/SingleProjectTask';
+import SingleProjectTask from '../components/SingleProject/SingleProjectTask';
 import { useParams } from 'react-router-dom';
 import { IProject, IProjectTask, ProgectTaskStatus } from '../types/types';
 import { useFetch } from '../hooks/useFetch';
 import { ProjectService } from '../API/ProjectService';
 import Loader from '../components/UI/loader/Loader';
 import MyTextarea from '../components/UI/textarea/MyTextarea';
-import SingleProjectDescription from '../components/SingleProjectDescription';
-import SingleProjectMicrotasks from '../components/SingleProjectMicrotasks';
+import SingleProjectDescription from '../components/SingleProject/SingleProjectDescription';
+import SingleProjectMicrotasks from '../components/SingleProject/SingleProjectMicrotasks';
 
 const plugData: IProject = {
   id: 0,

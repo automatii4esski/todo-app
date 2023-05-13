@@ -1,13 +1,13 @@
 import React from 'react';
-import RoundButton from './UI/button/RoundButton';
-import { ReactComponent as DeleteIcon } from '../images/icons/cross.svg';
-import { MyFC } from '../types/types';
+import RoundButton from '../UI/button/RoundButton';
+import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
+import { MyFC } from '../../types/types';
 
 interface ICreateProjectFormTask {
   onDelete: (id: number) => void;
 }
 
-const CreateProjectFormTask: MyFC<ICreateProjectFormTask> = ({
+const CreateProjectTaskForm: MyFC<ICreateProjectFormTask> = ({
   children,
   onDelete,
 }) => {
@@ -21,4 +21,4 @@ const CreateProjectFormTask: MyFC<ICreateProjectFormTask> = ({
   );
 };
 
-export default CreateProjectFormTask;
+export default CreateProjectTaskForm;

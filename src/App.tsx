@@ -1,5 +1,5 @@
-import Aside from './components/Aside';
-import Header from './components/Header';
+import Aside from './components/Aside/Aside';
+import Header from './components/Header/Header';
 import TasksPage from './pages/TasksPage';
 import './style/main.scss';
 import React from 'react';

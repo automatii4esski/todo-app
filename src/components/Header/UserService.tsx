@@ -1,12 +1,12 @@
-import Avatar from '../images/content/avatar.jpg';
+import Avatar from '../../images/content/avatar.jpg';
 import React, { useState, useRef, useEffect, ReactEventHandler } from 'react';
-import { ReactComponent as SearchIcon } from '../images/icons/search.svg';
-import { ReactComponent as CalendarIcon } from '../images/icons/calendar.svg';
-import MyInput from './UI/Input/MyInput';
-import { getAdditionClassName } from '../utils/getClassName';
-import { useInput } from '../hooks/useInput';
-import { MyFC } from '../types/types';
-import { getDate } from '../utils/getDate';
+import { ReactComponent as SearchIcon } from '../../images/icons/search.svg';
+import { ReactComponent as CalendarIcon } from '../../images/icons/calendar.svg';
+import MyInput from '../UI/Input/MyInput';
+import { getAdditionClassName } from '../../utils/getClassName';
+import { useInput } from '../../hooks/useInput';
+import { MyFC } from '../../types/types';
+import { getDate } from '../../utils/getDate';
 import { Link } from 'react-router-dom';
 
 const HeaderService: MyFC = () => {

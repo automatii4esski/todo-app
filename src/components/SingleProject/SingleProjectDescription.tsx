@@ -1,7 +1,7 @@
 import React, { useRef, useState, ChangeEvent } from 'react';
-import MyTextarea from './UI/textarea/MyTextarea';
-import { getDate } from '../utils/getDate';
-import { IAditionalDesc, MyFC } from '../types/types';
+import MyTextarea from '../UI/textarea/MyTextarea';
+import { getDate } from '../../utils/getDate';
+import { IAditionalDesc, MyFC } from '../../types/types';
 
 interface ISingleProjectDescription {
   desc: string;

@@ -1,11 +1,11 @@
 import React from 'react';
-import ProgressLine from './UI/progressLine/ProgressLine';
-import DateElement from './UI/date/DateElement';
-import MyButton from './UI/button/MyButton';
-import { getDate } from '../utils/getDate';
-import { MyFC, IProject } from '../types/types';
+import ProgressLine from '../UI/progressLine/ProgressLine';
+import DateElement from '../UI/date/DateElement';
+import MyButton from '../UI/button/MyButton';
+import { getDate } from '../../utils/getDate';
+import { MyFC, IProject } from '../../types/types';
 import { Link } from 'react-router-dom';
-import { cutString } from '../utils/cutString';
+import { cutString } from '../../utils/cutString';
 
 interface IProjectItem {
   project: IProject;

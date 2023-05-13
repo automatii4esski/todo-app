@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ITask, MyFC } from '../types/types';
-import DateElement from './UI/date/DateElement';
-import { ReactComponent as DoneIcon } from '../images/icons/done.svg';
-import { ReactComponent as DeleteIcon } from '../images/icons/cross.svg';
-import { ReactComponent as ArrowLeftIcon } from '../images/icons/arrow-left.svg';
-import { ReactComponent as EditIcon } from '../images/icons/edit.svg';
-import { cutString } from '../utils/cutString';
-import { getDate } from '../utils/getDate';
-import RoundButton from './UI/button/RoundButton';
+import { ITask, MyFC } from '../../types/types';
+import DateElement from '../UI/date/DateElement';
+import { ReactComponent as DoneIcon } from '../../images/icons/done.svg';
+import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
+import { ReactComponent as ArrowLeftIcon } from '../../images/icons/arrow-left.svg';
+import { ReactComponent as EditIcon } from '../../images/icons/edit.svg';
+import { cutString } from '../../utils/cutString';
+import { getDate } from '../../utils/getDate';
+import RoundButton from '../UI/button/RoundButton';
 
 interface ITaskComponent {
   limit: number;

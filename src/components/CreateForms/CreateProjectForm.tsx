@@ -1,12 +1,12 @@
 import React, { useState, ChangeEvent } from 'react';
-import { IProject, MyFC } from '../types/types';
-import MyInput from './UI/Input/MyInput';
-import MyTextarea from './UI/textarea/MyTextarea';
-import MyButton from './UI/button/MyButton';
-import RoundButton from './UI/button/RoundButton';
-import CreateProjectFormTask from './CreateProjectFormTask';
-import { useInput } from '../hooks/useInput';
-import { ProjectService } from '../API/ProjectService';
+import { IProject, MyFC } from '../../types/types';
+import MyInput from '../UI/Input/MyInput';
+import MyTextarea from '../UI/textarea/MyTextarea';
+import MyButton from '../UI/button/MyButton';
+import RoundButton from '../UI/button/RoundButton';
+import CreateProjectTaskForm from './CreateProjectTaskForm';
+import { useInput } from '../../hooks/useInput';
+import { ProjectService } from '../../API/ProjectService';
 
 const initData: IProject = {
   id: 0,
@@ -136,12 +136,12 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
               </div>
             ) : (
               data.tasks.map((task) => (
-                <CreateProjectFormTask
+                <CreateProjectTaskForm
                   onDelete={onDeleteTask(task.id)}
                   key={task.id}
                 >
                   {task.desc}
-                </CreateProjectFormTask>
+                </CreateProjectTaskForm>
               ))
             )}
           </div>
