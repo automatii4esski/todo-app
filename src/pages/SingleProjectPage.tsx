@@ -6,7 +6,7 @@ import MyButton from '../components/UI/button/MyButton';
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
 import SingleProjectTask from '../components/SingleProject/SingleProjectTask';
 import { useParams } from 'react-router-dom';
-import { IProject, IProjectTask, ProgectTaskStatus } from '../types/types';
+import { IProject, IProjectTask, ProgectTaskStatus } from '../types/common';
 import { useFetch } from '../hooks/useFetch';
 import { ProjectService } from '../API/ProjectService';
 import Loader from '../components/UI/loader/Loader';

@@ -1,5 +1,5 @@
 import React, { TextareaHTMLAttributes } from 'react';
-import { MyFC, RefObj } from '../../../types/types';
+import { MyFC, RefObj } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
 
 type MyInputProps = TextareaHTMLAttributes<any> & RefObj<HTMLTextAreaElement>;

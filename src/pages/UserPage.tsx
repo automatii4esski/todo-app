@@ -1,5 +1,5 @@
 import React from 'react';
-import { MyFC } from '../types/types';
+import { MyFC } from '../types/common';
 import Avatar from '../images/content/avatar.jpg';
 
 const UserPage: MyFC = () => {

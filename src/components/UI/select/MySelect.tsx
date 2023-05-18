@@ -1,6 +1,6 @@
 import React, { SelectHTMLAttributes } from 'react';
 import { getConcatClassName } from '../../../utils/getClassName';
-import { ISortOption, MyFC, RefObj } from '../../../types/types';
+import { ISortOption, MyFC, RefObj } from '../../../types/common';
 
 interface IMySelect {
   options: ISortOption[];

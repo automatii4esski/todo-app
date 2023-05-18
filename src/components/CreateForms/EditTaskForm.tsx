@@ -2,9 +2,10 @@ import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import MyButton from '../UI/button/MyButton';
-import { ITask, MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 import { getDate } from '../../utils/getDate';
 import { useInput } from '../../hooks/useInput';
+import { ITask } from '../../types/tasks';
 
 interface ICreateTaskForm {
   onSubmit: (task: ITask) => void;

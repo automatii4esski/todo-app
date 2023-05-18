@@ -5,7 +5,7 @@ import { ReactComponent as CalendarIcon } from '../../images/icons/calendar.svg'
 import MyInput from '../UI/Input/MyInput';
 import { getAdditionClassName } from '../../utils/getClassName';
 import { useInput } from '../../hooks/useInput';
-import { MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 import { getDate } from '../../utils/getDate';
 import { Link } from 'react-router-dom';
 

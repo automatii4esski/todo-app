@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
-import { MyFC, RefObj } from '../../../types/types';
+import { MyFC, RefObj } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
 
 type MyInputProps = InputHTMLAttributes<any> & RefObj<HTMLInputElement>;

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProject, IProjectTask, ITask } from '../types/types';
+import { IProject, IProjectTask } from '../types/common';
 
 export class ProjectService {
   static async getAll() {

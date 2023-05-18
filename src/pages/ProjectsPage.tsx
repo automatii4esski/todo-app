@@ -4,7 +4,7 @@ import DateElement from '../components/UI/date/DateElement';
 import { getDate } from '../utils/getDate';
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
 import ProjectItem from '../components/Projects/ProjectItem';
-import { IProject, MyFC } from '../types/types';
+import { IProject, MyFC } from '../types/common';
 import { useFetch } from '../hooks/useFetch';
 import { ProjectService } from '../API/ProjectService';
 import MyInput from '../components/UI/Input/MyInput';

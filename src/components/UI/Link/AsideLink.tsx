@@ -1,4 +1,4 @@
-import { MyFC, RefObj } from '../../../types/types';
+import { MyFC, RefObj } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
 import { LinkProps, Link } from 'react-router-dom';
 

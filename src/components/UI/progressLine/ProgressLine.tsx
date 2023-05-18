@@ -1,5 +1,5 @@
 import React, { HtmlHTMLAttributes } from 'react';
-import { MyFC } from '../../../types/types';
+import { MyFC } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
 
 type Color = 'yellow' | 'green';

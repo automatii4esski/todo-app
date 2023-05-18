@@ -1,4 +1,4 @@
-import { MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 import HeaderService from './UserService';
 
 const Header: MyFC = () => {

@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import { IProject, MyFC } from '../../types/types';
+import { IProject, MyFC } from '../../types/common';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import MyButton from '../UI/button/MyButton';

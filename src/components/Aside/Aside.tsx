@@ -6,7 +6,7 @@ import { ReactComponent as UserIcon } from '../../images/icons/user.svg';
 import { ReactComponent as GraphIcon } from '../../images/icons/graph.svg';
 import { ReactComponent as SettingsIcon } from '../../images/icons/settings.svg';
 import { ReactComponent as LogoutIcon } from '../../images/icons/logout.svg';
-import { MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 
 interface IAsideLinkProps {
   to: string;

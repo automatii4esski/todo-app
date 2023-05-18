@@ -8,7 +8,7 @@ import {
   IProjectTask,
   MyFC,
   ProgectTaskStatus,
-} from '../../types/types';
+} from '../../types/common';
 import { JsxElement } from 'typescript';
 
 interface ISingleProjectTask {

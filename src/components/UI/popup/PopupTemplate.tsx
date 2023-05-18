@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from 'react';
-import { MyFC } from '../../../types/types';
+import { MyFC } from '../../../types/common';
 import {
   getAdditionClassName,
   getConcatClassName,

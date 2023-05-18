@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { IProjectTask, ProgectTaskStatus } from '../types/types';
+import { IProjectTask, ProgectTaskStatus } from '../types/common';
 
 export const useTasks = function (
   tasks: IProjectTask[],

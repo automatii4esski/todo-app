@@ -1,7 +1,7 @@
 import React, { useState, useRef, MouseEvent } from 'react';
-import { IProject, ITask, MyFC, ProgectTaskStatus } from '../../types/types';
+import { IProject, MyFC, ProgectTaskStatus } from '../../types/common';
 import ProgressLine from '../UI/progressLine/ProgressLine';
-import { IProjectTask } from '../../types/types';
+import { IProjectTask } from '../../types/common';
 import { useTasks } from '../../hooks/useProjectTasks';
 import SingleProjectTask from './SingleProjectTask';
 import MyTextarea from '../UI/textarea/MyTextarea';

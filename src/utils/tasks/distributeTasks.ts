@@ -1,5 +1,5 @@
-import { ITask } from '../types/types';
-import { isOutdate } from './isOutdate';
+import { ITask } from '../../types/tasks';
+import { isOutdate } from '../isOutdate';
 
 export const distributeTasks = function (
   tasks: ITask[]

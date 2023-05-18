@@ -1,7 +1,7 @@
 import React from 'react';
 import RoundButton from '../UI/button/RoundButton';
 import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
-import { MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 
 interface ICreateProjectFormTask {
   onDelete: (id: number) => void;

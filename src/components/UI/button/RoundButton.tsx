@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { getConcatClassName } from '../../../utils/getClassName';
-import { MyFC, RefObj } from '../../../types/types';
+import { MyFC, RefObj } from '../../../types/common';
 
 type MyRoundButtonProps = ButtonHTMLAttributes<any> & RefObj<HTMLInputElement>;
 

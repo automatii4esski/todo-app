@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import TaskItem from './TaskItem';
-import { ISortOption, ITask, MyFC } from '../../types/types';
+import { ISortOption, MyFC } from '../../types/common';
 import { getAdditionClassName } from '../../utils/getClassName';
 import Loader from '../UI/loader/Loader';
 import PopupTemplate from '../UI/popup/PopupTemplate';
@@ -14,18 +14,18 @@ import MyButton from '../UI/button/MyButton';
 import MySelect from '../UI/select/MySelect';
 import MyInput from '../UI/Input/MyInput';
 import { useInput } from '../../hooks/useInput';
+import { ITasks, ITaskMethods, ITask } from '../../types/tasks';
 
 type HeaderVariant = 'yellow' | 'green' | 'red';
 
 interface ITaskColumn {
+  taskMethods: ITaskMethods;
+  tasksArrName: keyof ITasks;
   title: string;
   tasks: ITask[];
   isLoading: boolean;
   options: ISortOption[];
-  onEditClickHandler: (task: ITask, set: (task: ITask) => void) => void;
   limit: number;
-  onDoneTask: (task: ITask) => void;
-  onDeleteTask: (task: ITask) => void;
   onSortChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   query: {
     set: (value: any) => void;
@@ -33,9 +33,6 @@ interface ITaskColumn {
   };
   sort: string;
   small?: boolean;
-  done?: {
-    onReturnTask: (task: ITask) => void;
-  };
   main?: {
     createTaskHandler: () => void;
     isPopupActive: boolean;
@@ -47,6 +44,8 @@ type TaskColumnProps = ITaskColumn & HTMLAttributes<HTMLElement>;
 
 const TaskColumn: MyFC<TaskColumnProps> = ({
   small,
+  taskMethods,
+  tasksArrName,
   headerVariant,
   main,
   tasks,
@@ -55,12 +54,8 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
   query,
   limit,
   sort,
-  onEditClickHandler,
   title,
   isLoading,
-  onDoneTask,
-  onDeleteTask,
-  done,
 }) => {
   return (
     <div className={getAdditionClassName('task-column', small, '--small')}>
@@ -107,10 +102,8 @@ const TaskColumn: MyFC<TaskColumnProps> = ({
           <div className="task-column__tasks-wrapper">
             {tasks.map((task) => (
               <TaskItem
-                onDoneTask={onDoneTask}
-                onDeleteTask={onDeleteTask}
-                done={done}
-                onEditClickHandler={onEditClickHandler}
+                taskMethods={taskMethods}
+                tasksArrName={tasksArrName}
                 task={task}
                 limit={limit}
                 key={task.id}

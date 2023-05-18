@@ -2,24 +2,18 @@ import React, { useState, useRef, ChangeEvent } from 'react';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import MyButton from '../UI/button/MyButton';
-import { ITask, MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 import { getDate } from '../../utils/getDate';
 import { useInput } from '../../hooks/useInput';
+import { ITask } from '../../types/tasks';
+import { initTaskValue } from '../../initValues/tasks';
 
 interface ICreateTaskForm {
   onSubmit: (task: ITask) => void;
 }
 
-const initData: ITask = {
-  id: 0,
-  date: Date.now(),
-  desc: '',
-  status: 'active',
-  title: '',
-};
-
 const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
-  const [data, setData] = useState<ITask>(initData);
+  const [data, setData] = useState<ITask>(initTaskValue);
 
   return (
     <div className="create">
@@ -32,7 +26,7 @@ const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
             id: Date.now(),
           };
           onSubmit(finalData);
-          setData(initData);
+          setData(initTaskValue);
         }}
         className="create__form"
       >

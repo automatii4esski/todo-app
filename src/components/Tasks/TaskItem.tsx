@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ITask, MyFC } from '../../types/types';
+import { MyFC } from '../../types/common';
 import DateElement from '../UI/date/DateElement';
 import { ReactComponent as DoneIcon } from '../../images/icons/done.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
@@ -8,28 +8,19 @@ import { ReactComponent as EditIcon } from '../../images/icons/edit.svg';
 import { cutString } from '../../utils/cutString';
 import { getDate } from '../../utils/getDate';
 import RoundButton from '../UI/button/RoundButton';
+import { ITask, ITaskMethods, ITasks } from '../../types/tasks';
+import { getWrappedMethods } from '../../utils/tasks/taskMethods';
 
 interface ITaskComponent {
   limit: number;
   task: ITask;
-  onDoneTask: (task: ITask) => void;
-  onDeleteTask: (task: ITask) => void;
-  onEditClickHandler: (task: ITask, set: (task: ITask) => void) => void;
-  done?: {
-    onReturnTask: (task: ITask) => void;
-  };
+  tasksArrName: keyof ITasks;
+  taskMethods: ITaskMethods;
 }
 
 type TaskProps = ITaskComponent;
 
-const Task: MyFC<TaskProps> = ({
-  limit,
-  task,
-  onDoneTask,
-  onEditClickHandler,
-  onDeleteTask,
-  done,
-}) => {
+const Task: MyFC<TaskProps> = ({ limit, task, taskMethods, tasksArrName }) => {
   const [desc, setDesc] = useState({
     textToShow: '',
     sliceString: '',
@@ -38,6 +29,29 @@ const Task: MyFC<TaskProps> = ({
   });
 
   const [taskData, setTaskData] = useState<ITask>(task);
+  const wrappedMethods = getWrappedMethods(
+    taskMethods,
+    tasksArrName,
+    task,
+    setTaskData
+  );
+  const buttonToRender =
+    tasksArrName === 'done' ? (
+      <RoundButton
+        onClick={wrappedMethods.onTaskReturnClick}
+        className="task-item__btn task-item__return-btn"
+      >
+        <ArrowLeftIcon />
+      </RoundButton>
+    ) : (
+      <RoundButton
+        onClick={wrappedMethods.onTaskDoneClick}
+        className="task-item__btn task-item__done-btn"
+      >
+        <DoneIcon />
+      </RoundButton>
+    );
+
   useEffect(() => {
     const taskDesc = cutString(taskData.desc, limit);
     setDesc({
@@ -53,9 +67,7 @@ const Task: MyFC<TaskProps> = ({
       <div className="task-item__header">
         <h4 className="task-item__title">{taskData.title}</h4>
         <button
-          onClick={() => {
-            onEditClickHandler(taskData, setTaskData);
-          }}
+          onClick={wrappedMethods.onTaskEditClick}
           className="task-item__service"
         >
           <EditIcon />
@@ -90,24 +102,9 @@ const Task: MyFC<TaskProps> = ({
       <div className="task-item__box">
         <DateElement>{getDate(taskData.date)}</DateElement>
         <div className="task-item__actions">
-          {done ? (
-            <RoundButton
-              onClick={() => done.onReturnTask(taskData)}
-              className="task-item__btn task-item__return-btn"
-            >
-              <ArrowLeftIcon />
-            </RoundButton>
-          ) : (
-            <RoundButton
-              onClick={() => onDoneTask(taskData)}
-              className="task-item__btn task-item__done-btn"
-            >
-              <DoneIcon />
-            </RoundButton>
-          )}
-
+          {buttonToRender}
           <RoundButton
-            onClick={() => onDeleteTask(taskData)}
+            onClick={wrappedMethods.onTaskDeleteClick}
             className="task-item__btn task-item__delete-btn"
           >
             <DeleteIcon />
