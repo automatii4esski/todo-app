@@ -23,7 +23,7 @@ export const useSortedTasks = function (
 };
 
 export const useSearchedTasks = function (tasks: ITask[], query: string) {
-  const searchedSortedTasks = useMemo(() => {
+  const searchedTasks = useMemo(() => {
     return tasks.filter(
       (task) =>
         task.title.toLowerCase().includes(query) ||
@@ -31,7 +31,7 @@ export const useSearchedTasks = function (tasks: ITask[], query: string) {
     );
   }, [tasks, query]);
 
-  return searchedSortedTasks;
+  return searchedTasks;
 };
 
 export const useSearchedAndSortedTasks = function (

@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ITaskSearchQuery, ITaskSort, ITasks } from '../../types/tasks';
+import { TaskService } from '../../API/TaskService';
+import { distributeTasks } from '../../utils/tasks/distributeTasks';
+import { useFetch } from '../useFetch';
 
 export const useSort = function (): [
   sort: ITaskSort,
@@ -37,4 +40,25 @@ export const useTasks = function (): [
   });
 
   return [tasks, setTasks];
+};
+
+export const useFetchTasks = function (
+  setTasks: (tasks: ITasks) => void
+): [isLoading: boolean, error: Error | unknown] {
+  const [fetchTasks, isTasksLoading, tasksError] = useFetch(async () => {
+    const response = await TaskService.getAll();
+    const [outdated, inProgress, done] = distributeTasks(response.data);
+
+    setTasks({
+      outdated: outdated,
+      inProgress: inProgress,
+      done: done,
+    });
+  });
+
+  useEffect(() => {
+    fetchTasks();
+  }, []);
+
+  return [isTasksLoading, tasksError];
 };

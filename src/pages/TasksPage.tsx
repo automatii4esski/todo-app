@@ -9,21 +9,21 @@ import {
   SetTasksHelper,
 } from '../types/tasks';
 import TaskColumn from '../components/Tasks/TaskColumn';
-import { getConcatClassName } from '../utils/getClassName';
 import { TaskService } from '../API/TaskService';
-import { useFetch } from '../hooks/useFetch';
-import {
-  useSortedTasks,
-  useSearchedAndSortedTasks,
-} from '../hooks/tasks/useFilterTasks';
+import { useSearchedAndSortedTasks } from '../hooks/tasks/useFilterTasks';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
 import CreateTaskForm from '../components/CreateForms/CreateTaskForm';
 import { isOutdate } from '../utils/isOutdate';
-import { distributeTasks } from '../utils/tasks/distributeTasks';
 import EditTaskForm from '../components/CreateForms/EditTaskForm';
 import { initTaskEditState } from '../initValues/tasks';
 import { getMethods } from '../utils/tasks/taskMethods';
-import { useQuery, useSort, useTasks } from '../hooks/tasks/useData';
+import {
+  useFetchTasks,
+  useQuery,
+  useSort,
+  useTasks,
+} from '../hooks/tasks/useData';
+import { getFormMethods } from '../utils/tasks/formMethods';
 
 const sortOptions: ITaskSortOption[] = [
   {
@@ -61,16 +61,7 @@ const TasksPage: MyFC = () => {
     done: useSearchedAndSortedTasks(tasks.done, sort.done, query.done),
   };
 
-  const [fetchTasks, isTasksLoading, tasksError] = useFetch(async () => {
-    const response = await TaskService.getAll();
-    const [outdated, inProgress, done] = distributeTasks(response.data);
-
-    setTasks({
-      outdated: outdated,
-      inProgress: inProgress,
-      done: done,
-    });
-  });
+  const [isTasksLoading, tasksError] = useFetchTasks(setTasks);
 
   const setTasksHelper: SetTasksHelper = function (...inputTasks) {
     const newTasks = {
@@ -97,66 +88,17 @@ const TasksPage: MyFC = () => {
     setTaskEditState
   );
 
-  const onTaskReturnClick = function () {
-    return (taskToInteract: ITask) => {
-      const taskName = isOutdate(taskToInteract.date)
-        ? 'outdated'
-        : 'inProgress';
-      const newTasks = [taskToInteract, ...tasks[taskName]];
-      const newCurTasks = tasks.done.filter(
-        (task) => task.id !== taskToInteract.id
-      );
+  const formMethods = getFormMethods(
+    tasks,
+    tasksSortedAndSearched,
+    setTasksHelper,
+    setIsEditPopupActive,
+    setIsCreatePopupActive,
+    setTaskEditState,
+    taskEditState
+  );
 
-      setTasksHelper([taskName, newTasks], ['done', newCurTasks]);
-
-      taskToInteract.status = 'active';
-      TaskService.put(taskToInteract);
-    };
-  };
-
-  const onSubmitCreateForm = function (task: ITask) {
-    const taskName = isOutdate(task.date) ? 'outdated' : 'inProgress';
-    const newTasks = [task, ...tasks[taskName]];
-
-    setTasksHelper([taskName, newTasks]);
-    setIsCreatePopupActive(false);
-    TaskService.post(task);
-  };
-
-  const onSubmitEditForm = function (taskToInteract: ITask) {
-    setIsEditPopupActive(false);
-    taskEditState!.set(taskToInteract);
-    setTaskEditState(initTaskEditState);
-    TaskService.put(taskToInteract);
-
-    if (taskToInteract.status === 'done') return;
-
-    const isNewTaskOutdate = isOutdate(taskToInteract.date);
-
-    if (
-      (isNewTaskOutdate && taskEditState!.taskName === 'outdated') ||
-      (!isNewTaskOutdate && taskEditState!.taskName === 'inProgress')
-    )
-      return;
-
-    const newCurTasks = tasksSortedAndSearched[taskEditState!.taskName].filter(
-      (task) => task.id !== taskToInteract.id
-    );
-    const newTaskName = isNewTaskOutdate ? 'outdated' : 'inProgress';
-
-    const newAnotherTasks = [taskToInteract, ...tasks[newTaskName]];
-
-    setTasksHelper(
-      [taskEditState!.taskName, newCurTasks],
-      [newTaskName, newAnotherTasks]
-    );
-  };
-
-  useEffect(() => {
-    fetchTasks();
-  }, []);
-
-  const createTaskHandler = function () {
+  const onCreateTaskClick = function () {
     setIsCreatePopupActive(true);
   };
 
@@ -214,7 +156,7 @@ const TasksPage: MyFC = () => {
         isLoading={isTasksLoading}
         title="In Progress"
         main={{
-          createTaskHandler,
+          createTaskHandler: onCreateTaskClick,
           isPopupActive: isCreatePopupActive,
         }}
         headerVariant="yellow"
@@ -243,9 +185,6 @@ const TasksPage: MyFC = () => {
         }}
         options={sortOptions}
         tasks={tasksSortedAndSearched.done}
-        done={{
-          onReturnTask: onTaskReturnClick(),
-        }}
         title="Done"
         small
         headerVariant="green"
@@ -257,7 +196,7 @@ const TasksPage: MyFC = () => {
         className="task__popup-wrapper"
         active={isCreatePopupActive}
       >
-        {<CreateTaskForm onSubmit={onSubmitCreateForm} />}
+        {<CreateTaskForm onSubmit={formMethods.onSubmitCreateForm} />}
       </PopupTemplate>
       <PopupTemplate
         onHideHandler={() => {
@@ -269,7 +208,7 @@ const TasksPage: MyFC = () => {
         {
           <EditTaskForm
             task={taskEditState?.value}
-            onSubmit={onSubmitEditForm}
+            onSubmit={formMethods.onSubmitEditForm}
           />
         }
       </PopupTemplate>

@@ -32,7 +32,7 @@ const Task: MyFC<TaskProps> = ({ limit, task, taskMethods, tasksArrName }) => {
   const wrappedMethods = getWrappedMethods(
     taskMethods,
     tasksArrName,
-    task,
+    taskData,
     setTaskData
   );
   const buttonToRender =
