@@ -3,10 +3,9 @@ import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import MyButton from '../UI/button/MyButton';
 import { MyFC } from '../../types/common';
-import { getDate } from '../../utils/getDate';
-import { useInput } from '../../hooks/useInput';
 import { ITask } from '../../types/tasks';
 import { initTaskValue } from '../../initValues/tasks';
+import { getMethods } from '../../utils/tasks/createFormMethods';
 
 interface ICreateTaskForm {
   onSubmit: (task: ITask) => void;
@@ -15,30 +14,28 @@ interface ICreateTaskForm {
 const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
   const [data, setData] = useState<ITask>(initTaskValue);
 
+  const formMethods = getMethods(data, setData);
+
+  const onFormSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const finalData = {
+      ...data,
+      id: Date.now(),
+    };
+    onSubmit(finalData);
+    setData(initTaskValue);
+  };
+
+  const dateValue = new Date(data.date).toISOString().substring(0, 10);
+
   return (
     <div className="create">
       <h4 className="create__title">Create Task</h4>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          const finalData = {
-            ...data,
-            id: Date.now(),
-          };
-          onSubmit(finalData);
-          setData(initTaskValue);
-        }}
-        className="create__form"
-      >
+      <form onSubmit={onFormSubmit} className="create__form">
         <MyInput
           required
           value={data.title}
-          onChange={(e) => {
-            setData({
-              ...data,
-              title: e.target.value,
-            });
-          }}
+          onChange={formMethods.onTitleChange}
           className="create__item"
           type="text"
           placeholder="Title"
@@ -46,12 +43,7 @@ const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
         <MyTextarea
           className="create__item create__textarea"
           value={data.desc}
-          onChange={(e) => {
-            setData({
-              ...data,
-              desc: e.target.value,
-            });
-          }}
+          onChange={formMethods.onDescChange}
           placeholder="Description"
         />
         <label className="create__item create__label">
@@ -60,15 +52,8 @@ const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
             min="1970-04-01"
             max="2030-04-30"
             required
-            onChange={(e: ChangeEvent<HTMLInputElement>) => {
-              if (e.target.value) {
-                setData({
-                  ...data,
-                  date: new Date(e.target.value).getTime(),
-                });
-              }
-            }}
-            value={new Date(data.date).toISOString().substring(0, 10)}
+            onChange={formMethods.onDateChange}
+            value={dateValue}
             type="date"
           />
         </label>

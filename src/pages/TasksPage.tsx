@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import { MyFC } from '../types/common';
-import {
-  ITaskEditState,
-  ITaskSortOption,
-  ITaskMethods,
-  SetTasksHelper,
-} from '../types/tasks';
+import { ITaskEditState, ITaskMethods, SetTasksHelper } from '../types/tasks';
 import TaskColumn from '../components/Tasks/TaskColumn';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
 import CreateTaskForm from '../components/CreateForms/CreateTaskForm';
@@ -19,21 +14,7 @@ import {
 } from '../hooks/tasks/useTasksData';
 import { useQuery, useSort } from '../hooks/tasks/useFilterData';
 import { getFormMethods } from '../utils/tasks/formMethods';
-
-const sortOptions: ITaskSortOption[] = [
-  {
-    value: 'date',
-    text: 'By date',
-  },
-  {
-    value: 'title',
-    text: 'By title',
-  },
-  {
-    value: 'desc',
-    text: 'By desc',
-  },
-];
+import { sortOptions } from '../values/tasks';
 
 const TasksPage: MyFC = () => {
   const sort = useSort();

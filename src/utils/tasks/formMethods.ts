@@ -109,6 +109,6 @@ export const getFormMethods = function (
       setIsCreatePopupActive
     ),
     onHideCreateForm: onHideCreateForm(setIsCreatePopupActive),
-    onHideEditForm: onHideCreateForm(setIsEditPopupActive),
+    onHideEditForm: onHideEditForm(setIsEditPopupActive),
   };
 };
