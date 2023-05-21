@@ -70,6 +70,21 @@ const onSubmitEditForm = function (
   };
 };
 
+const onHideCreateForm = function (
+  setIsCreatePopupActive: (value: boolean) => void
+) {
+  return () => {
+    setIsCreatePopupActive(false);
+  };
+};
+const onHideEditForm = function (
+  setIsEditPopupActive: (value: boolean) => void
+) {
+  return () => {
+    setIsEditPopupActive(false);
+  };
+};
+
 export const getFormMethods = function (
   tasks: ITasks,
   tasksSortedAndSearched: ITasks,
@@ -93,5 +108,7 @@ export const getFormMethods = function (
       setTasksHelper,
       setIsCreatePopupActive
     ),
+    onHideCreateForm: onHideCreateForm(setIsCreatePopupActive),
+    onHideEditForm: onHideCreateForm(setIsEditPopupActive),
   };
 };

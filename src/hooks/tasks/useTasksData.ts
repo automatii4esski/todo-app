@@ -1,33 +1,9 @@
 import { useState, useEffect } from 'react';
-import { ITaskSearchQuery, ITaskSort, ITasks } from '../../types/tasks';
+import { ITaskQueryObj, ITaskSortObj, ITasks } from '../../types/tasks';
 import { TaskService } from '../../API/TaskService';
 import { distributeTasks } from '../../utils/tasks/distributeTasks';
 import { useFetch } from '../useFetch';
-
-export const useSort = function (): [
-  sort: ITaskSort,
-  setSort: (sort: ITaskSort) => void
-] {
-  const [sort, setSort] = useState<ITaskSort>({
-    outdated: '',
-    inProgress: '',
-    done: '',
-  });
-  return [sort, setSort];
-};
-
-export const useQuery = function (): [
-  query: ITaskSearchQuery,
-  setQuery: (query: ITaskSearchQuery) => void
-] {
-  const [query, setQuery] = useState<ITaskSearchQuery>({
-    outdated: '',
-    inProgress: '',
-    done: '',
-  });
-
-  return [query, setQuery];
-};
+import { useSearchedAndSortedTasks } from './useFilterTasks';
 
 export const useTasks = function (): [
   tasks: ITasks,
@@ -61,4 +37,30 @@ export const useFetchTasks = function (
   }, []);
 
   return [isTasksLoading, tasksError];
+};
+
+export const useFilteredTasks = function (
+  tasks: ITasks,
+  sort: ITaskSortObj,
+  query: ITaskQueryObj
+) {
+  const filteredTasks: ITasks = {
+    outdated: useSearchedAndSortedTasks(
+      tasks.outdated,
+      sort.outdated.value,
+      query.outdated.value
+    ),
+    inProgress: useSearchedAndSortedTasks(
+      tasks.inProgress,
+      sort.inProgress.value,
+      query.inProgress.value
+    ),
+    done: useSearchedAndSortedTasks(
+      tasks.done,
+      sort.done.value,
+      query.done.value
+    ),
+  };
+
+  return filteredTasks;
 };
