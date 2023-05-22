@@ -1,7 +1,8 @@
 import React, { useRef, useState, ChangeEvent } from 'react';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import { getDate } from '../../utils/getDate';
-import { IAditionalDesc, MyFC } from '../../types/common';
+import { MyFC } from '../../types/common';
+import { IAditionalDesc } from '../../types/projects';
 
 interface ISingleProjectDescription {
   desc: string;

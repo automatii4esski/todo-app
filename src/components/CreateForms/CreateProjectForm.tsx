@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
-import { IProject, MyFC } from '../../types/common';
+import { MyFC } from '../../types/common';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import MyButton from '../UI/button/MyButton';
@@ -7,6 +7,7 @@ import RoundButton from '../UI/button/RoundButton';
 import CreateProjectTaskForm from './CreateProjectTaskForm';
 import { useInput } from '../../hooks/useInput';
 import { ProjectService } from '../../API/ProjectService';
+import { IProject } from '../../types/projects';
 
 const initData: IProject = {
   id: 0,

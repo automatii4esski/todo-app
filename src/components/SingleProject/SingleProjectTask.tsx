@@ -3,13 +3,9 @@ import { ReactComponent as DoneIcon } from '../../images/icons/done.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
 import { ReactComponent as ArrowLeftIcon } from '../../images/icons/arrow-left.svg';
 import { ReactComponent as EditIcon } from '../../images/icons/edit.svg';
-import {
-  IProject,
-  IProjectTask,
-  MyFC,
-  ProgectTaskStatus,
-} from '../../types/common';
+import { MyFC } from '../../types/common';
 import { JsxElement } from 'typescript';
+import { IProjectTask, ProgectTaskStatus } from '../../types/projects';
 
 interface ISingleProjectTask {
   task: IProjectTask;

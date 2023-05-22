@@ -3,13 +3,10 @@ import ProgressLine from '../UI/progressLine/ProgressLine';
 import DateElement from '../UI/date/DateElement';
 import MyButton from '../UI/button/MyButton';
 import { getDate } from '../../utils/getDate';
-import { MyFC, IProject } from '../../types/common';
+import { MyFC } from '../../types/common';
 import { Link } from 'react-router-dom';
 import { cutString } from '../../utils/cutString';
-
-interface IProjectItem {
-  project: IProject;
-}
+import { IProjectItem } from '../../types/projects';
 
 const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
   return (
@@ -21,6 +18,7 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
           {cutString(project.desc, 100).stringSlice}
         </p>
         <ProgressLine
+          className="project-item__progress"
           width={(project.tasksDone / project.tasksTotal) * 100}
           count={`${project.tasksDone}/${project.tasksTotal}`}
         />

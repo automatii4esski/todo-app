@@ -13,11 +13,7 @@ const HeaderService: MyFC = () => {
   const [isSearchActive, setIsSearchActive] = useState<boolean>(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const [searchValue, onSearchChange] = useInput();
-  const calendarDate = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    calendarDate.current!.textContent = getDate(Date.now());
-  }, []);
+  const dateValue = getDate(new Date());
 
   const onSearchIconClick = function () {
     setIsSearchActive(true);
@@ -51,7 +47,7 @@ const HeaderService: MyFC = () => {
       </form>
       <div className="header-service__item header-service__calendar">
         <CalendarIcon className="header-service__calendar-icon" />
-        <div ref={calendarDate} className="header-service__calendar-date"></div>
+        <div className="header-service__calendar-date">{dateValue}</div>
       </div>
       <Link className="header-service__user" to="/user">
         <img src={Avatar} alt="avatar" />

@@ -1,11 +1,15 @@
 import React, { useState, useRef, MouseEvent } from 'react';
-import { IProject, MyFC, ProgectTaskStatus } from '../../types/common';
+import { MyFC } from '../../types/common';
 import ProgressLine from '../UI/progressLine/ProgressLine';
-import { IProjectTask } from '../../types/common';
-import { useTasks } from '../../hooks/useProjectTasks';
+import { useTasks } from '../../hooks/singleProject/useProjectTasks';
 import SingleProjectTask from './SingleProjectTask';
 import MyTextarea from '../UI/textarea/MyTextarea';
 import { ProjectService } from '../../API/ProjectService';
+import {
+  IProject,
+  IProjectTask,
+  ProgectTaskStatus,
+} from '../../types/projects';
 
 interface ISingleProjectMicrotasks {
   data: IProject;
