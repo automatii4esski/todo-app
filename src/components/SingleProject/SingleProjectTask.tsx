@@ -5,27 +5,27 @@ import { ReactComponent as ArrowLeftIcon } from '../../images/icons/arrow-left.s
 import { ReactComponent as EditIcon } from '../../images/icons/edit.svg';
 import { MyFC } from '../../types/common';
 import { JsxElement } from 'typescript';
-import { IProjectTask, ProgectTaskStatus } from '../../types/projects';
+import {
+  IProjectTask,
+  ProgectTaskStatus,
+  ProjectWrappedTaskMethods,
+} from '../../types/projects';
 
 interface ISingleProjectTask {
   task: IProjectTask;
-  onEditClick: () => void;
-  onTaskDoneClick: () => void;
-  onTaskReturnClick: () => void;
-  onTaskDeleteClick: () => void;
+  getWrappedTaskMethods: (task: IProjectTask) => ProjectWrappedTaskMethods;
 }
 
 const SingleProjectTask: MyFC<ISingleProjectTask> = ({
   task,
-  onEditClick,
-  onTaskReturnClick,
-  onTaskDoneClick,
-  onTaskDeleteClick,
+  getWrappedTaskMethods,
 }) => {
+  const methods = getWrappedTaskMethods(task);
+
   const buttonToRender: Record<ProgectTaskStatus, any> = {
     active: (
       <button
-        onClick={onTaskDoneClick}
+        onClick={methods.onTaskDoneClick}
         className="singleproject-microtasks__item-btn singleproject-microtasks__item-done"
       >
         <DoneIcon className="singleproject-microtasks__item-icon" />
@@ -33,7 +33,7 @@ const SingleProjectTask: MyFC<ISingleProjectTask> = ({
     ),
     done: (
       <button
-        onClick={onTaskReturnClick}
+        onClick={methods.onTaskReturnClick}
         className="singleproject-microtasks__item-btn singleproject-microtasks__item-return"
       >
         <ArrowLeftIcon className="singleproject-microtasks__item-icon" />
@@ -51,7 +51,7 @@ const SingleProjectTask: MyFC<ISingleProjectTask> = ({
           className={`singleproject-microtasks__item-bottom singleproject-microtasks__item-bottom--${task.status}`}
         >
           <button
-            onClick={onEditClick}
+            onClick={methods.onTaskEditClick}
             className="singleproject-microtasks__item-edit"
           >
             Edit
@@ -64,7 +64,7 @@ const SingleProjectTask: MyFC<ISingleProjectTask> = ({
         {buttonToRender[task.status]}
 
         <button
-          onClick={onTaskDeleteClick}
+          onClick={methods.onTaskDeleteClick}
           className="singleproject-microtasks__item-btn singleproject-microtasks__item-delete"
         >
           <DeleteIcon className="singleproject-microtasks__item-icon" />

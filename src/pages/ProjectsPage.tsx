@@ -1,9 +1,7 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState } from 'react';
 import MyButton from '../components/UI/button/MyButton';
 import ProjectItem from '../components/Projects/ProjectItem';
 import { MyFC } from '../types/common';
-import { useFetch } from '../hooks/useFetch';
-import { ProjectService } from '../API/ProjectService';
 import MyInput from '../components/UI/Input/MyInput';
 import MySelect from '../components/UI/select/MySelect';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';

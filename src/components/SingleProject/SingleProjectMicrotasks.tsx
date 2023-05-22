@@ -1,4 +1,4 @@
-import React, { useState, useRef, MouseEvent } from 'react';
+import React, { useState, useRef, MouseEvent, ChangeEvent } from 'react';
 import { MyFC } from '../../types/common';
 import ProgressLine from '../UI/progressLine/ProgressLine';
 import { useTasks } from '../../hooks/singleProject/useProjectTasks';
@@ -8,42 +8,39 @@ import { ProjectService } from '../../API/ProjectService';
 import {
   IProject,
   IProjectTask,
+  IProjectTaskFormMethods,
+  IProjectTaskMethods,
   ProgectTaskStatus,
 } from '../../types/projects';
+import {
+  initBtnClassesValue,
+  initFilterClassesValue,
+  initProjectTaskValue,
+} from '../../initValues/singleProject';
+import { taskMethodsHandler } from '../../utils/singleProject/taskMethods';
 
 interface ISingleProjectMicrotasks {
   data: IProject;
-  onCreateTask: (task: IProjectTask) => void;
-  onTaskDeleteClick: (task: IProjectTask) => () => void;
-  onEditTaskSubmit: (task: IProjectTask) => void;
-  onTaskDoneOrReturnClick: (
-    task: IProjectTask,
-    status: ProgectTaskStatus
-  ) => () => void;
+  taskMethods: IProjectTaskMethods;
+  taskFormMethods: IProjectTaskFormMethods;
 }
 
 const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
   data,
-  onCreateTask,
-  onEditTaskSubmit,
-  onTaskDoneOrReturnClick,
-  onTaskDeleteClick,
+  taskMethods,
+  taskFormMethods,
 }) => {
   const [filter, setFilter] = useState<ProgectTaskStatus | ''>('');
-  const [filterClasses, setFilterClasses] = useState({
-    done: '',
-    active: '',
-    all: '--active',
-  });
-  const [btnClasses, setBtnClasses] = useState({
-    add: '',
-    edit: '--disabled',
-  });
-  const [taskToEdit, setTaskToEdit] = useState<IProjectTask>({
-    id: 0,
-    desc: '',
-    status: 'active',
-  });
+  const [filterClasses, setFilterClasses] = useState(initFilterClassesValue);
+  const [btnClasses, setBtnClasses] = useState(initBtnClassesValue);
+  const [taskToEdit, setTaskToEdit] =
+    useState<IProjectTask>(initProjectTaskValue);
+
+  const [descInputValue, setDescInputValue] = useState<string>('');
+
+  const onDescInputChange = function (e: ChangeEvent<HTMLTextAreaElement>) {
+    setDescInputValue(e.target.value);
+  };
 
   const onCreateSubmit = function (e: MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -52,14 +49,14 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
       ...createState,
       class: '',
     });
-    if (!createInputRef.current!.value) return;
+    if (!descInputValue) return;
     const newTask: IProjectTask = {
-      desc: createInputRef.current!.value,
+      desc: descInputValue,
       status: 'active',
       id: Date.now(),
     };
-    onCreateTask(newTask);
-    createInputRef.current!.value = '';
+    taskFormMethods.onSubmitCreateTask(newTask);
+    setDescInputValue('');
   };
 
   const onEditSubmit = function (e: MouseEvent<HTMLButtonElement>) {
@@ -68,20 +65,20 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
       ...createState,
       class: '',
     });
-    if (!createInputRef.current!.value) return;
+    if (!descInputValue) return;
 
     const newTask = {
       ...taskToEdit,
-      desc: createInputRef.current!.value,
+      desc: descInputValue,
     };
-    createInputRef.current!.value = '';
-    onEditTaskSubmit(newTask);
+    setDescInputValue('');
+
+    taskFormMethods.onSubmitEditTask(newTask);
   };
 
   const [createState, setCreateState] = useState({
     class: '',
   });
-  const createInputRef = useRef<HTMLTextAreaElement>(null);
 
   const setFilterHelper = function (name: keyof typeof filterClasses) {
     return () => {
@@ -96,19 +93,13 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
     };
   };
 
-  const onEditClick = function (taskToInteract: IProjectTask) {
-    return () => {
-      createInputRef.current!.value = taskToInteract.desc;
-      setBtnClasses({
-        add: '--disabled',
-        edit: '',
-      });
-      setTaskToEdit(taskToInteract);
-      setCreateState({
-        class: '--active',
-      });
-    };
-  };
+  const getWrappedTaskMethods = taskMethodsHandler(
+    taskMethods,
+    setDescInputValue,
+    setBtnClasses,
+    setTaskToEdit,
+    setCreateState
+  );
 
   const filteredTasks = useTasks(data.tasks, filter);
 
@@ -155,7 +146,8 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
               className="singleproject-microtasks__create-form"
             >
               <MyTextarea
-                reference={createInputRef}
+                value={descInputValue}
+                onChange={onDescInputChange}
                 className="singleproject-microtasks__create-input"
                 placeholder="Description"
               />
@@ -176,7 +168,7 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
                 </button>
                 <button
                   onClick={() => {
-                    createInputRef.current!.value = '';
+                    setDescInputValue('');
 
                     setCreateState({
                       ...createState,
@@ -195,10 +187,7 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
           {filteredTasks.length !== 0 ? (
             filteredTasks.map((task) => (
               <SingleProjectTask
-                onTaskDoneClick={onTaskDoneOrReturnClick(task, 'done')}
-                onTaskDeleteClick={onTaskDeleteClick(task)}
-                onTaskReturnClick={onTaskDoneOrReturnClick(task, 'active')}
-                onEditClick={onEditClick(task)}
+                getWrappedTaskMethods={getWrappedTaskMethods}
                 key={task.id}
                 task={task}
               />
