@@ -1,54 +1,119 @@
-import { ProjectService } from '../../API/ProjectService';
+import { MouseEvent, ChangeEvent } from 'react';
 import {
-  IProject,
-  IProjectTask,
+  ICreateState,
   IProjectTaskFormMethods,
-} from '../../types/projects';
+} from '../../types/singleProject';
+import { IProjectTask } from '../../types/project';
 
-const onSubmitEditTask = function (
-  data: IProject,
-  setData: (data: IProject) => void,
-  id: string | number
+const onCreateSubmit = function (
+  taskFormCallbackMethods: IProjectTaskFormMethods,
+  setCreateState: (state: ICreateState) => void,
+  setDescInputValue: (desc: string) => void,
+  descInputValue: string
 ) {
-  return (editedTask: IProjectTask) => {
-    const newTasks = data.tasks.map((task) => {
-      if (editedTask.id === task.id) {
-        return editedTask;
-      }
-      return task;
+  return (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    setCreateState({
+      class: '',
     });
-    const newData = {
-      ...data,
-      tasks: newTasks,
+    if (!descInputValue) return;
+    const newTask: IProjectTask = {
+      desc: descInputValue,
+      status: 'active',
+      id: Date.now(),
     };
-    setData(newData);
-    ProjectService.patchTask(id as string, { tasks: newTasks });
+    taskFormCallbackMethods.onSubmitCreateTask(newTask);
+    setDescInputValue('');
   };
 };
 
-const onSubmitCreateTask = function (
-  data: IProject,
-  setData: (data: IProject) => void,
-  id: string | number
+const onEditSubmit = function (
+  taskFormCallbackMethods: IProjectTaskFormMethods,
+  setCreateState: (state: ICreateState) => void,
+  setDescInputValue: (desc: string) => void,
+  descInputValue: string,
+  taskToEdit: IProjectTask
 ) {
-  return (task: IProjectTask) => {
-    const newTasks = [task, ...data.tasks];
-    const newData: Partial<IProject> = {
-      tasksTotal: data.tasksTotal + 1,
-      tasks: newTasks,
+  return (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setCreateState({
+      class: '',
+    });
+    if (!descInputValue) return;
+
+    const newTask = {
+      ...taskToEdit,
+      desc: descInputValue,
     };
-    ProjectService.patchTask(id as string, newData);
-    setData({ ...data, ...newData });
+    setDescInputValue('');
+
+    taskFormCallbackMethods.onSubmitEditTask(newTask);
+  };
+};
+
+const onDescInputChange = function (setDescInputValue: (desc: string) => void) {
+  return (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setDescInputValue(e.target.value);
+  };
+};
+
+const onOutCreateFormClick = function (
+  setCreateState: (state: ICreateState) => void
+) {
+  return () => {
+    setCreateState({
+      class: '',
+    });
+  };
+};
+
+const onCreateFormClick = function () {
+  return (e: MouseEvent<HTMLFormElement>) => {
+    e.stopPropagation();
+  };
+};
+
+const onCloseCreateFormClick = function (
+  setCreateState: (state: ICreateState) => void,
+  setDescInputValue: (desc: string) => void
+) {
+  return () => {
+    setDescInputValue('');
+
+    setCreateState({
+      class: '',
+    });
   };
 };
 
 export const getTaskFormMethods = function (
-  data: IProject,
-  setData: (data: IProject) => void,
-  id: string | number
-): IProjectTaskFormMethods {
+  taskFormCallbackMethods: IProjectTaskFormMethods,
+  setCreateState: (state: ICreateState) => void,
+  setDescInputValue: (desc: string) => void,
+  descInputValue: string,
+  taskToEdit: IProjectTask
+) {
   return {
-    onSubmitEditTask: onSubmitEditTask(data, setData, id),
-    onSubmitCreateTask: onSubmitCreateTask(data, setData, id),
+    onDescInputChange: onDescInputChange(setDescInputValue),
+    onOutCreateFormClick: onOutCreateFormClick(setCreateState),
+    onCreateFormClick: onCreateFormClick(),
+    onCloseCreateFormClick: onCloseCreateFormClick(
+      setCreateState,
+      setDescInputValue
+    ),
+    onCreateSubmit: onCreateSubmit(
+      taskFormCallbackMethods,
+      setCreateState,
+      setDescInputValue,
+      descInputValue
+    ),
+    onEditSubmit: onEditSubmit(
+      taskFormCallbackMethods,
+      setCreateState,
+      setDescInputValue,
+      descInputValue,
+      taskToEdit
+    ),
   };
 };

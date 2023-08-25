@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IProject } from '../types/projects';
+import { IProject } from '../types/project';
 
 export class ProjectService {
   static async getAll() {
@@ -23,6 +23,14 @@ export class ProjectService {
       `http://localhost:3001/projects/${projectId}`,
       newData
     );
+    return response;
+  }
+
+  static async deleteProject(projectId: number) {
+    const response = await axios.delete(
+      `http://localhost:3001/projects/${projectId}`
+    );
+
     return response;
   }
 

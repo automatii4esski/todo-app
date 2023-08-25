@@ -1,4 +1,3 @@
-import React from 'react';
 import AsideLink from '../UI/link/AsideLink';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../images/icons/logo.svg';

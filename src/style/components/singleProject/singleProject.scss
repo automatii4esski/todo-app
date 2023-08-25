@@ -120,7 +120,8 @@
   margin: 0 10px;
 }
 
-.singleproject__actions-complete {
+.singleproject__actions-complete,
+.singleproject__popup-approve {
   border-color: $green-color;
   background: $green-color;
 
@@ -485,4 +486,20 @@
   justify-content: center;
   align-items: center;
   font-size: 20px;
+}
+
+.singleproject__popup-title {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+
+.singleproject__popup-btns {
+  display: flex;
+  justify-content: center;
+}
+
+.singleproject__popup-btn {
+  margin: 0 5px;
 }

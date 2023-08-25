@@ -1,18 +1,8 @@
-import React, { HtmlHTMLAttributes } from 'react';
 import { MyFC } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
+import { MyProgressLineType } from '../../../types/UI';
 
-type Color = 'yellow' | 'green';
-
-interface IProgressLine {
-  count: string;
-  width: number;
-  color?: Color;
-}
-
-type ProgressLineProps = HtmlHTMLAttributes<any> & IProgressLine;
-
-const ProgressLine: MyFC<ProgressLineProps> = ({
+const ProgressLine: MyFC<MyProgressLineType> = ({
   className,
   width,
   count,

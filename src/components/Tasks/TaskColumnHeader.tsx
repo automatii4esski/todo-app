@@ -1,17 +1,11 @@
-import React, { ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import MyInput from '../UI/Input/MyInput';
 import MySelect from '../UI/select/MySelect';
-import MyButton from '../UI/button/MyButton';
-import {
-  HeaderVariant,
-  ITaskColumnHeader,
-  ITaskQueryObj,
-  ITaskSortObj,
-  ITaskSortOption,
-  ITasks,
-} from '../../types/tasks';
-import { ISortOption, MyFC } from '../../types/common';
+import MyButtonType from '../UI/button/MyButton';
+import { ITaskColumnHeader, ITaskSortOption } from '../../types/tasks';
+import { MyFC } from '../../types/common';
 import { getAdditionClassName } from '../../utils/getClassName';
+import MyButton from '../UI/button/MyButton';
 
 const TaskColumnHeader: MyFC<ITaskColumnHeader> = ({
   tasksArrName,

@@ -1,4 +1,4 @@
-import { IProjectSortOption } from '../../types/projects';
+import { IProjectSortOption } from '../../types/project';
 import { ChangeEvent } from 'react';
 
 const onChangeSort = function (

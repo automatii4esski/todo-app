@@ -1,19 +1,8 @@
-import React, { SelectHTMLAttributes } from 'react';
 import { getConcatClassName } from '../../../utils/getClassName';
-import { ISortOption, MyFC, RefObj } from '../../../types/common';
+import { MyFC } from '../../../types/common';
+import { MySelectType } from '../../../types/UI';
 
-interface IMySelect {
-  options: ISortOption[];
-  sort: string;
-  onChange: (...args: any) => any;
-  defaultText?: string;
-}
-
-type MySelectProps = SelectHTMLAttributes<any> &
-  RefObj<HTMLInputElement> &
-  IMySelect;
-
-const MySelect: MyFC<MySelectProps> = ({
+const MySelect: MyFC<MySelectType> = ({
   className,
   options,
   sort,

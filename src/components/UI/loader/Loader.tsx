@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { MyFC } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
 

@@ -1,34 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MyFC } from '../../types/common';
 import DateElement from '../UI/date/DateElement';
 import { ReactComponent as DoneIcon } from '../../images/icons/done.svg';
 import { ReactComponent as DeleteIcon } from '../../images/icons/cross.svg';
 import { ReactComponent as ArrowLeftIcon } from '../../images/icons/arrow-left.svg';
 import { ReactComponent as EditIcon } from '../../images/icons/edit.svg';
-import { cutString } from '../../utils/cutString';
 import { getDate } from '../../utils/getDate';
 import RoundButton from '../UI/button/RoundButton';
-import { ITask, ITaskMethods, ITasks } from '../../types/tasks';
+import { ITask, ITaskItem } from '../../types/tasks';
 import { getWrappedMethods } from '../../utils/tasks/taskMethods';
+import { useTaskDesc } from '../../hooks/tasks/useTaskDesc';
 
-interface ITaskComponent {
-  limit: number;
-  task: ITask;
-  tasksArrName: keyof ITasks;
-  taskMethods: ITaskMethods;
-}
-
-type TaskProps = ITaskComponent;
-
-const Task: MyFC<TaskProps> = ({ limit, task, taskMethods, tasksArrName }) => {
-  const [desc, setDesc] = useState({
-    textToShow: '',
-    sliceString: '',
-    isShow: false,
-    subText: 'Show',
-  });
-
+const Task: MyFC<ITaskItem> = ({ limit, task, taskMethods, tasksArrName }) => {
   const [taskData, setTaskData] = useState<ITask>(task);
+  const [desc, setDesc] = useTaskDesc(taskData, limit);
+
   const wrappedMethods = getWrappedMethods(
     taskMethods,
     tasksArrName,
@@ -52,15 +38,21 @@ const Task: MyFC<TaskProps> = ({ limit, task, taskMethods, tasksArrName }) => {
       </RoundButton>
     );
 
-  useEffect(() => {
-    const taskDesc = cutString(taskData.desc, limit);
-    setDesc({
-      textToShow: taskDesc.stringSlice,
-      sliceString: taskDesc.stringSlice,
-      isShow: taskDesc.isCutted,
-      subText: 'Show',
-    });
-  }, [taskData]);
+  const onShowDescClick = function () {
+    if (desc.subText === 'Show') {
+      setDesc({
+        ...desc,
+        textToShow: taskData.desc,
+        subText: 'Hide',
+      });
+    } else {
+      setDesc({
+        ...desc,
+        textToShow: desc.sliceString,
+        subText: 'Show',
+      });
+    }
+  };
 
   return (
     <div className="task-item">
@@ -76,24 +68,7 @@ const Task: MyFC<TaskProps> = ({ limit, task, taskMethods, tasksArrName }) => {
       <p className="task-item__desc">
         {desc.textToShow}
         {desc.isShow && (
-          <span
-            className="task-item__sub-desc"
-            onClick={() => {
-              if (desc.subText === 'Show') {
-                setDesc({
-                  ...desc,
-                  textToShow: taskData.desc,
-                  subText: 'Hide',
-                });
-              } else {
-                setDesc({
-                  ...desc,
-                  textToShow: desc.sliceString,
-                  subText: 'Show',
-                });
-              }
-            }}
-          >
+          <span className="task-item__sub-desc" onClick={onShowDescClick}>
             {desc.subText}
           </span>
         )}

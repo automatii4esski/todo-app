@@ -1,4 +1,4 @@
-import { IProject, IProjectTask } from '../types/projects';
+import { IProject, IProjectTask } from '../types/project';
 
 export const initProjectValue: IProject = {
   id: 0,

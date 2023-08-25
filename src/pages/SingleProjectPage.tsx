@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
 import DateElement from '../components/UI/date/DateElement';
 import { getDate } from '../utils/getDate';
-import MyButton from '../components/UI/button/MyButton';
+import MyButtonType from '../components/UI/button/MyButton';
 
 import ProgressLine from '../components/UI/progressLine/ProgressLine';
 import SingleProjectTask from '../components/SingleProject/SingleProjectTask';
@@ -12,14 +12,22 @@ import Loader from '../components/UI/loader/Loader';
 import MyTextarea from '../components/UI/textarea/MyTextarea';
 import SingleProjectDescription from '../components/SingleProject/SingleProjectDescription';
 import SingleProjectMicrotasks from '../components/SingleProject/SingleProjectMicrotasks';
-import { IProject, IProjectTask, ProgectTaskStatus } from '../types/projects';
+import { IProject, IProjectTask, ProgectTaskStatus } from '../types/project';
 import { initProjectValue } from '../initValues/singleProject';
 import { useFetchProject } from '../hooks/singleProject/useFetchProject';
 import { getTaskMethods } from '../utils/singleProject/taskMethods';
-import { getTaskFormMethods } from '../utils/singleProject/taskFormMethods';
+import { getTaskFormCallbackMethods } from '../utils/singleProject/taskFormCallbackMethods';
+import MyButton from '../components/UI/button/MyButton';
+import PopupTemplate from '../components/UI/popup/PopupTemplate';
+import SingleProjectApprovePopupContent from '../components/SingleProject/SingleProjectApprovePopupContent';
+import { ISingleProjectApprovePopupContent } from '../types/singleProject';
 
 const SingleProjectPage = () => {
   const [data, setData] = useState<IProject>(initProjectValue);
+  const [popupStatus, setPopupStatus] = useState<{
+    status: boolean;
+    type: ISingleProjectApprovePopupContent['type'];
+  }>({ status: false, type: 'complete' });
   const { id } = useParams();
   const [isLoading, error] = useFetchProject(setData, id as string);
 
@@ -32,7 +40,11 @@ const SingleProjectPage = () => {
   }
 
   const taskMethods = getTaskMethods(data, setData, id as string);
-  const taskFormMethods = getTaskFormMethods(data, setData, id as string);
+  const taskFormCallbackMethods = getTaskFormCallbackMethods(
+    data,
+    setData,
+    id as string
+  );
 
   const onSubmitAdditionalDesc = function (newDesc: string) {
     const newData = {
@@ -47,6 +59,18 @@ const SingleProjectPage = () => {
     };
     setData(newData);
     ProjectService.putById(newData);
+  };
+
+  const onCompleteClick = function () {
+    setPopupStatus({ status: true, type: 'complete' });
+  };
+
+  const onDeleteClick = function () {
+    setPopupStatus({ status: true, type: 'delete' });
+  };
+
+  const onHidePopup = function () {
+    setPopupStatus({ status: false, type: 'delete' });
   };
 
   return (
@@ -65,10 +89,16 @@ const SingleProjectPage = () => {
               <DateElement>{getDate(Date.now())}</DateElement>
             </div>
             <div className="singleproject__actions">
-              <MyButton className="singleproject__actions-btn singleproject__actions-complete">
+              <MyButton
+                onClick={onCompleteClick}
+                className="singleproject__actions-btn singleproject__actions-complete"
+              >
                 Complete
               </MyButton>
-              <MyButton className="singleproject__actions-btn singleproject__actions-delete">
+              <MyButton
+                onClick={onDeleteClick}
+                className="singleproject__actions-btn singleproject__actions-delete"
+              >
                 Delete
               </MyButton>
             </div>
@@ -76,10 +106,17 @@ const SingleProjectPage = () => {
         </div>
         <SingleProjectMicrotasks
           taskMethods={taskMethods}
-          taskFormMethods={taskFormMethods}
+          taskFormCallbackMethods={taskFormCallbackMethods}
           data={data}
         />
       </div>
+      <PopupTemplate onHideHandler={onHidePopup} active={popupStatus.status}>
+        <SingleProjectApprovePopupContent
+          type={popupStatus.type}
+          projectID={+id!}
+          onDeclineClick={onHidePopup}
+        />
+      </PopupTemplate>
     </div>
   );
 };

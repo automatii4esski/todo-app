@@ -1,87 +1,39 @@
-import React, { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { MyFC } from '../../types/common';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
-import MyButton from '../UI/button/MyButton';
-import RoundButton from '../UI/button/RoundButton';
+import MyButtonType from '../UI/button/MyButton';
 import CreateProjectTaskForm from './CreateProjectTaskForm';
-import { useInput } from '../../hooks/useInput';
-import { ProjectService } from '../../API/ProjectService';
-import { IProject } from '../../types/projects';
+import { ICreateProjectForm, IProject } from '../../types/project';
+import { initProjectValue } from '../../initValues/singleProject';
+import { getCreateProjectFormMethods } from '../../utils/projects/createFormMethods';
+import MyButton from '../UI/button/MyButton';
 
-const initData: IProject = {
-  id: 0,
-  deadline: Date.now(),
-  desc: '',
-  title: '',
-  tasks: [],
-  additionalDescs: [],
-  tasksTotal: 0,
-  tasksDone: 0,
-};
-
-interface ICreateProjectForm {
-  addProject: (project: IProject) => void;
-}
-
-const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
-  const [data, setData] = useState<IProject>(initData);
+const CreateProjectForm: MyFC<ICreateProjectForm> = ({ onCreateProject }) => {
+  const [data, setData] = useState<IProject>(initProjectValue);
   const [taskValue, setTaskValue] = useState<string>('');
-  const onAddTaskClick = function () {
-    if (!taskValue) return;
-    setData({
-      ...data,
-      tasksTotal: ++data.tasksTotal,
-      tasks: [
-        {
-          id: Date.now(),
-          desc: taskValue,
-          status: 'active',
-        },
-        ...data.tasks,
-      ],
-    });
-    setTaskValue('');
-  };
 
-  const onDeleteTask = function (id: number) {
-    return () => {
-      setData({
-        ...data,
-        tasksTotal: --data.tasksTotal,
-        tasks: data.tasks.filter((task) => task.id !== id),
-      });
-    };
-  };
-
-  const onFormSubmit = function (e: ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const finalData = {
-      ...data,
-      id: Date.now(),
-    };
-    ProjectService.post(finalData);
-    addProject(finalData);
-    setData(initData);
-  };
+  const dateValue = new Date(data.deadline).toISOString().substring(0, 10);
+  const createProjectFormMethods = getCreateProjectFormMethods(
+    data,
+    setData,
+    taskValue,
+    setTaskValue,
+    onCreateProject
+  );
 
   return (
     <div className="create create-project">
       <h4 className="create__title">Create Project</h4>
       <form
-        onSubmit={onFormSubmit}
+        onSubmit={createProjectFormMethods.onFormSubmit}
         className="create__form create-project__from"
       >
         <div className="create-project__data">
           <MyInput
             required
             value={data.title}
-            onChange={(e) => {
-              setData({
-                ...data,
-                title: e.target.value,
-              });
-            }}
+            onChange={createProjectFormMethods.onTitleChange}
             className="create__item"
             type="text"
             placeholder="Title"
@@ -89,12 +41,7 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
           <MyTextarea
             className="create__item create__textarea"
             value={data.desc}
-            onChange={(e) => {
-              setData({
-                ...data,
-                desc: e.target.value,
-              });
-            }}
+            onChange={createProjectFormMethods.onDescChange}
             placeholder="Description"
           />
           <label className="create__item create__label">
@@ -103,15 +50,8 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
               min="1970-04-01"
               max="2030-04-30"
               required
-              onChange={(e: ChangeEvent<HTMLInputElement>) => {
-                if (e.target.value) {
-                  setData({
-                    ...data,
-                    deadline: new Date(e.target.value).getTime(),
-                  });
-                }
-              }}
-              value={new Date(data.deadline).toISOString().substring(0, 10)}
+              onChange={createProjectFormMethods.onDateChange}
+              value={dateValue}
               type="date"
             />
           </label>
@@ -121,12 +61,13 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
             <MyInput
               value={taskValue}
               type="text"
-              onChange={(e) => {
-                setTaskValue(e.target.value);
-              }}
+              onChange={createProjectFormMethods.onChangeTaskDesc}
               placeholder="Task"
             />
-            <div onClick={onAddTaskClick} className="create-project__tasks-add">
+            <div
+              onClick={createProjectFormMethods.onAddTaskClick}
+              className="create-project__tasks-add"
+            >
               <span className="create-project__tasks-span"> +</span>
             </div>
           </div>
@@ -138,7 +79,8 @@ const CreateProjectForm: MyFC<ICreateProjectForm> = ({ addProject }) => {
             ) : (
               data.tasks.map((task) => (
                 <CreateProjectTaskForm
-                  onDelete={onDeleteTask(task.id)}
+                  onDelete={createProjectFormMethods.onDeleteTask}
+                  id={task.id}
                   key={task.id}
                 >
                   {task.desc}

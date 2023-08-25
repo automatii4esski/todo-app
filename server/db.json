@@ -1,96 +1,5 @@
 {
-  "projects": [
-    {
-      "id": 1683559422450,
-      "deadline": 1683559411257,
-      "desc": "",
-      "title": "fadfSKDJKd",
-      "tasks": [
-        {
-          "desc": "as",
-          "status": "active",
-          "id": 1684731654035
-        }
-      ],
-      "additionalDescs": [
-        {
-          "date": 1683642112559,
-          "text": "HKSGDKLSDGJKHSDJ"
-        },
-        {
-          "date": 1683642448360,
-          "text": "asdasd"
-        },
-        {
-          "date": 1683642450432,
-          "text": "asdasdasd"
-        },
-        {
-          "date": 1683642452466,
-          "text": "aaaaa"
-        },
-        {
-          "date": 1683642454610,
-          "text": "ssss"
-        },
-        {
-          "date": 1683642456840,
-          "text": "asdasdasd"
-        },
-        {
-          "date": 1683642458741,
-          "text": "asdasdasd"
-        },
-        {
-          "date": 1683642460575,
-          "text": "asdasdasdas"
-        },
-        {
-          "date": 1683642462367,
-          "text": "asdasdasdasd"
-        },
-        {
-          "date": 1683642464386,
-          "text": "asdasdasdasd"
-        },
-        {
-          "date": 1683642466224,
-          "text": "asdasdasdasdas"
-        },
-        {
-          "date": 1683643171635,
-          "text": "asdasdasdsazzzz"
-        },
-        {
-          "date": 1683765727960,
-          "text": "xxx"
-        }
-      ],
-      "tasksTotal": 1,
-      "tasksDone": 2
-    },
-    {
-      "id": 1683766801074,
-      "deadline": 1683766403758,
-      "desc": "asldk plkasjd kasjdklasjd aksdjasl;djalskd lkasjdlkajdlkas dlkasjdlkasdjasl; al;ksjdlaksdjalskdj ajksdk;lasjdlkasjd akljsdlaskjdlkasdj ajsdlkasjdlaskjdlas a;lsjdlaksdjlas kd alsjdlkasjdlkas",
-      "title": "sss",
-      "tasks": [
-        {
-          "id": 1683766797326,
-          "desc": "asdasd",
-          "status": "active"
-        },
-        {
-          "id": 1683766796113,
-          "desc": "asdasd",
-          "status": "active"
-        }
-      ],
-      "additionalDescs": [],
-      "tasksTotal": 2,
-      "tasksDone": 0
-    }
-  ],
+  "projects": [],
   "tasks": [
     {
       "id": 1683211335721,
@@ -190,5 +99,9 @@
       "status": "active",
       "title": "zxasdasdasdsa"
     }
-  ]
+  ],
+  "totalDone": {
+    "projects": 1,
+    "tasks": 0
+  }
 }

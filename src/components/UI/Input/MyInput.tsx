@@ -1,10 +1,8 @@
-import React, { InputHTMLAttributes } from 'react';
-import { MyFC, RefObj } from '../../../types/common';
+import { MyFC } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
+import { MyInputType } from '../../../types/UI';
 
-type MyInputProps = InputHTMLAttributes<any> & RefObj<HTMLInputElement>;
-
-const MyInput: MyFC<MyInputProps> = ({ className, reference, ...props }) => {
+const MyInput: MyFC<MyInputType> = ({ className, reference, ...props }) => {
   return (
     <input
       ref={reference}

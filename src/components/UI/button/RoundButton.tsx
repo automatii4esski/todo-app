@@ -1,14 +1,8 @@
-import React, { ButtonHTMLAttributes } from 'react';
 import { getConcatClassName } from '../../../utils/getClassName';
-import { MyFC, RefObj } from '../../../types/common';
+import { MyFC } from '../../../types/common';
+import { MyButtonType } from '../../../types/UI';
 
-type MyRoundButtonProps = ButtonHTMLAttributes<any> & RefObj<HTMLInputElement>;
-
-const RoundButton: MyFC<MyRoundButtonProps> = ({
-  className,
-  children,
-  ...props
-}) => {
+const RoundButton: MyFC<MyButtonType> = ({ className, children, ...props }) => {
   return (
     <button
       {...props}

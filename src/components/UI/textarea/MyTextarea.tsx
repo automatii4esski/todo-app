@@ -1,10 +1,12 @@
-import React, { TextareaHTMLAttributes } from 'react';
-import { MyFC, RefObj } from '../../../types/common';
+import { MyFC } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
+import { MyTextAreaType } from '../../../types/UI';
 
-type MyInputProps = TextareaHTMLAttributes<any> & RefObj<HTMLTextAreaElement>;
-
-const MyTextarea: MyFC<MyInputProps> = ({ reference, className, ...props }) => {
+const MyTextarea: MyFC<MyTextAreaType> = ({
+  reference,
+  className,
+  ...props
+}) => {
   return (
     <textarea
       ref={reference}

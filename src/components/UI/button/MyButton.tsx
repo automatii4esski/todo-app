@@ -1,10 +1,8 @@
-import React, { ButtonHTMLAttributes } from 'react';
-import { MyFC, RefObj } from '../../../types/common';
+import { MyButtonType } from '../../../types/UI';
+import { MyFC } from '../../../types/common';
 import { getConcatClassName } from '../../../utils/getClassName';
 
-type MyButtonProps = ButtonHTMLAttributes<any> & RefObj<HTMLButtonElement>;
-
-const MyButton: MyFC<MyButtonProps> = ({
+const MyButton: MyFC<MyButtonType> = ({
   reference,
   className,
   children,

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, HTMLAttributes, memo } from 'react';
+import { HTMLAttributes, memo } from 'react';
 import TaskItem from './TaskItem';
 import { MyFC } from '../../types/common';
 import { getAdditionClassName } from '../../utils/getClassName';

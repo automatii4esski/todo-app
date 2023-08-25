@@ -1,15 +1,12 @@
-import React, { useState, useRef, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
-import MyButton from '../UI/button/MyButton';
+import MyButtonType from '../UI/button/MyButton';
 import { MyFC } from '../../types/common';
-import { ITask } from '../../types/tasks';
+import { ICreateTaskForm, ITask } from '../../types/tasks';
 import { initTaskValue } from '../../initValues/tasks';
 import { getMethods } from '../../utils/tasks/createFormMethods';
-
-interface ICreateTaskForm {
-  onSubmit: (task: ITask) => void;
-}
+import MyButton from '../UI/button/MyButton';
 
 const CreateTaskForm: MyFC<ICreateTaskForm> = ({ onSubmit }) => {
   const [data, setData] = useState<ITask>(initTaskValue);

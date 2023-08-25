@@ -1,4 +1,4 @@
-import { IProjectSortOption } from '../types/projects';
+import { IProjectSortOption } from '../types/project';
 
 export const sortOptions: IProjectSortOption[] = [
   {

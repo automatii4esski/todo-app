@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { IProject, IProjectSortOption } from '../../types/projects';
+import { IProject, IProjectSortOption } from '../../types/project';
 
 export const useSearchedProjects = function (
   projects: IProject[],

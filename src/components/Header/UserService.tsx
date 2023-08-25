@@ -1,5 +1,5 @@
 import Avatar from '../../images/content/avatar.jpg';
-import React, { useState, useRef, useEffect, ReactEventHandler } from 'react';
+import { useState, useRef } from 'react';
 import { ReactComponent as SearchIcon } from '../../images/icons/search.svg';
 import { ReactComponent as CalendarIcon } from '../../images/icons/calendar.svg';
 import MyInput from '../UI/Input/MyInput';

@@ -93,3 +93,26 @@ export interface ITaskColumn extends Omit<ITaskColumnHeader, 'tasksCount'> {
   stringLimit: number;
   small?: boolean;
 }
+
+export interface ICreateTaskForm {
+  onSubmit: (task: ITask) => void;
+}
+
+export interface IEditTaskForm {
+  onSubmit: (task: ITask) => void;
+  task: ITask | undefined;
+}
+
+export interface ITaskItem {
+  limit: number;
+  task: ITask;
+  tasksArrName: keyof ITasks;
+  taskMethods: ITaskMethods;
+}
+
+export interface ITaskDesc {
+  textToShow: string;
+  sliceString: string;
+  isShow: boolean;
+  subText: 'Show' | 'Hide';
+}

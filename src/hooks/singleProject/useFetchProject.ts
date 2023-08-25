@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { ProjectService } from '../../API/ProjectService';
-import { IProject } from '../../types/projects';
+import { IProject } from '../../types/project';
 import { useFetch } from '../useFetch';
 
 export const useFetchProject = function (

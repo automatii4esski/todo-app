@@ -2,12 +2,10 @@ import { ProjectService } from '../../API/ProjectService';
 import {
   IBtnClasses,
   ICreateState,
-  IProject,
-  IProjectTask,
   IProjectTaskMethods,
-  ProgectTaskStatus,
   ProjectWrappedTaskMethods,
-} from '../../types/projects';
+} from '../../types/singleProject';
+import { IProject, IProjectTask, ProgectTaskStatus } from '../../types/project';
 
 const onTaskDoneOrReturnClick = function (
   data: IProject,
