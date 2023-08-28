@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, ChangeEvent } from 'react';
+import React, { useState, useEffect, useContext, ChangeEvent } from 'react';
 import DateElement from '../components/UI/date/DateElement';
 import { getDate } from '../utils/getDate';
 import MyButtonType from '../components/UI/button/MyButton';
@@ -21,6 +21,11 @@ import MyButton from '../components/UI/button/MyButton';
 import PopupTemplate from '../components/UI/popup/PopupTemplate';
 import SingleProjectApprovePopupContent from '../components/SingleProject/SingleProjectApprovePopupContent';
 import { ISingleProjectApprovePopupContent } from '../types/singleProject';
+import {
+  projectsContext,
+  setIsAllowedToLoad,
+  setProjects,
+} from '../context/projectsContext/ProjectsContext';
 
 const SingleProjectPage = () => {
   const [data, setData] = useState<IProject>(initProjectValue);
@@ -30,6 +35,13 @@ const SingleProjectPage = () => {
   }>({ status: false, type: 'complete' });
   const { id } = useParams();
   const [isLoading, error] = useFetchProject(setData, id as string);
+  const { dispatch, value } = useContext(projectsContext)!;
+
+  useEffect(() => {
+    return () => {
+      dispatch(setIsAllowedToLoad(true));
+    };
+  }, []);
 
   if (isLoading) {
     return (
@@ -77,7 +89,11 @@ const SingleProjectPage = () => {
     <div className="singleproject">
       <div className="singleproject__content">
         <div className="singleproject__info">
-          <h2 className="singleproject__title">{data.title}</h2>
+          <h2
+            className={`singleproject__title singleproject__title--${data.color}`}
+          >
+            {data.title}
+          </h2>
           <SingleProjectDescription
             desc={data.desc}
             additionalDescs={data.additionalDescs}

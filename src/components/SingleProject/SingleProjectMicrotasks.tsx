@@ -70,7 +70,9 @@ const SingleProjectMicrotasks: MyFC<ISingleProjectMicrotasks> = ({
         filterMethods={filterMethods}
         filterClasses={filterClasses}
       />
-      <div className="singleproject-microtasks__content-wrapper">
+      <div
+        className={`singleproject-microtasks__content-wrapper singleproject-microtasks__content-wrapper--${data.color}`}
+      >
         <div className="singleproject-microtasks__content">
           <SingleProjectMicrotasksCreateForm
             formMethods={taskFormMethods}

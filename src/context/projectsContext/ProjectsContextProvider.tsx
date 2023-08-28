@@ -30,7 +30,7 @@ const ProjectsContextProvider: MyFC<IContextProvider<IProjectsContext>> = ({
     if (state.isAllowedToLoad) {
       fetchProjects();
     }
-  }, []);
+  }, [state.isAllowedToLoad, fetchProjects]);
 
   return (
     <projectsContext.Provider value={reducer}>

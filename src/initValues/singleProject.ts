@@ -9,6 +9,7 @@ export const initProjectValue: IProject = {
   additionalDescs: [],
   tasksTotal: 0,
   tasksDone: 0,
+  color: 'black',
 };
 
 export const initProjectTaskValue: IProjectTask = {

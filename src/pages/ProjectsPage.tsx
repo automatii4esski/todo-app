@@ -15,6 +15,7 @@ import MyButton from '../components/UI/button/MyButton';
 import {
   addProject,
   projectsContext,
+  setProjects,
 } from '../context/projectsContext/ProjectsContext';
 
 const ProjectsPage: MyFC = () => {

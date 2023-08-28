@@ -13,13 +13,62 @@
 
   &::before {
     content: '';
-    width: 50px;
-    height: 3px;
+    width: 75px;
+    height: 4px;
     position: absolute;
-    background: $secondary;
     left: 50%;
-    bottom: 0;
+    bottom: -3px;
     transform: translateX(-50%);
+  }
+
+  &::after {
+    content: '';
+    width: 200px;
+    height: 4px;
+    position: absolute;
+    left: 50%;
+    bottom: 6px;
+    transform: translateX(-50%);
+  }
+
+  &--black::before,
+  &--black::after {
+    background: linear-gradient(0.25turn, #fff, black, #fff);
+  }
+
+  &--gray::before,
+  &--gray::after {
+    background: linear-gradient(0.25turn, #fff, gray, #fff);
+  }
+
+  &--aqua::before,
+  &--aqua::after {
+    background: linear-gradient(0.25turn, #fff, aqua, #fff);
+  }
+
+  &--green::before,
+  &--green::after {
+    background: linear-gradient(0.25turn, #fff, green, #fff);
+  }
+
+  &--orange::before,
+  &--orange::after {
+    background: linear-gradient(0.25turn, #fff, orange, #fff);
+  }
+
+  &--red::before,
+  &--red::after {
+    background: linear-gradient(0.25turn, #fff, red, #fff);
+  }
+
+  &--blue::before,
+  &--blue::after {
+    background: linear-gradient(0.25turn, #fff, blue, #fff);
+  }
+
+  &--purple::before,
+  &--purple::after {
+    background: linear-gradient(0.25turn, #fff, purple, #fff);
   }
 }
 
@@ -208,9 +257,40 @@
   border: 2px solid $secondary;
   border-radius: 10px;
   position: relative;
-  background: $secondary;
   display: flex;
   flex-direction: column;
+
+  &--black {
+    background: $secondary;
+  }
+
+  &--gray {
+    background: linear-gradient($secondary, gray, $secondary);
+  }
+
+  &--orange {
+    background: linear-gradient($secondary, orange, $secondary);
+  }
+
+  &--aqua {
+    background: linear-gradient($secondary, aqua, $secondary);
+  }
+
+  &--green {
+    background: linear-gradient($secondary, green, $secondary);
+  }
+
+  &--red {
+    background: linear-gradient($secondary, red, $secondary);
+  }
+
+  &--blue {
+    background: linear-gradient($secondary, blue, $secondary);
+  }
+
+  &--purple {
+    background: linear-gradient($secondary, purple, $secondary);
+  }
 }
 
 .singleproject-microtasks__item {

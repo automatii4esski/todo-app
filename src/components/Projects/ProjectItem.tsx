@@ -15,7 +15,7 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
   const progressLineWidth = (project.tasksDone / project.tasksTotal) * 100;
   const progressLineCount = `${project.tasksDone}/${project.tasksTotal}`;
   return (
-    <div className="project-item">
+    <div className={`project-item project-item--${project.color}`}>
       <h3 className="project-item__title">{project.title}</h3>
       <div className="project-item__content">
         <p className="project-item__desc">
@@ -30,12 +30,14 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
         <div className="project-item__bottom">
           <div className="project-item__deadline">
             Deadline:
-            <DateElement className="project-item__deadline-date">
+            <DateElement
+              className={`project-item__deadline-date project-item__deadline-date--${project.color}`}
+            >
               {date}
             </DateElement>
           </div>
           <Link to={`/projects/${project.id}`}>
-            <MyButton>Open</MyButton>
+            <MyButton className={`button--${project.color}`}>Open</MyButton>
           </Link>
         </div>
       </div>

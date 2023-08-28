@@ -19,6 +19,13 @@ body {
   background-color: transparent;
 }
 
+button,
+input[type='radio'],
+input[type='date'],
+select {
+  cursor: pointer;
+}
+
 .wrapper {
   display: flex;
   height: 100vh;

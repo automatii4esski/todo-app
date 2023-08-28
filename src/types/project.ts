@@ -1,8 +1,11 @@
 import { ISortOption } from './common';
+import { projectColors } from '../values/colors';
 
 export interface IProjectItem {
   project: IProject;
 }
+
+export type ProjectColors = (typeof projectColors)[number];
 
 export type ProgectTaskStatus = 'done' | 'active';
 
@@ -31,6 +34,7 @@ export interface IProject {
   tasksDone: number;
   tasksTotal: number;
   tasks: IProjectTask[];
+  color: ProjectColors;
 }
 
 export interface ICreateProjectForm {

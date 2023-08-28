@@ -6,6 +6,7 @@ import {
   TextareaHTMLAttributes,
 } from 'react';
 import { ISortOption, RefObj } from './common';
+import { ProjectColors } from './project';
 
 export type MyButtonType = ButtonHTMLAttributes<any> &
   RefObj<HTMLButtonElement>;
@@ -41,3 +42,7 @@ export type MySelectType = SelectHTMLAttributes<any> &
 
 export type MyTextAreaType = TextareaHTMLAttributes<any> &
   RefObj<HTMLTextAreaElement>;
+
+export interface IColorsRadio {
+  defaultValue: ProjectColors;
+}
