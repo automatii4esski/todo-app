@@ -1,69 +1,60 @@
-import { IAdditionalDescClass } from '../../types/singleProject';
-import { FormEvent } from 'react';
-const onCloseAdditionalDesc = function (
-  setAdditionalDescClass: (descClass: IAdditionalDescClass) => void,
-  additioanalDescInputRef: React.RefObject<HTMLTextAreaElement>
+import { ICommentClass } from '../../types/singleProject';
+import { FormEvent, ChangeEvent } from 'react';
+const onCloseComment = function (
+  setIsShowButton: (isShow: boolean) => void,
+  setComment: (value: string) => void
 ) {
   return () => {
-    setAdditionalDescClass({
-      button: '',
-      input: 'disabled',
-    });
+    setIsShowButton(true);
 
-    additioanalDescInputRef.current!.value = '';
+    setComment('');
   };
 };
 
 const onSubmitForm = function (
-  setAdditionalDescClass: (descClass: IAdditionalDescClass) => void,
-  additioanalDescInputRef: React.RefObject<HTMLTextAreaElement>,
-  onSubmitAdditionalDesc: (desc: string) => void
+  setIsShowButton: (isShow: boolean) => void,
+  onSubmitComment: (comment: string) => void,
+  comment: string,
+  setComment: (value: string) => void
 ) {
   return (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setAdditionalDescClass({
-      button: '',
-      input: 'disabled',
-    });
+    setIsShowButton(true);
 
-    if (!additioanalDescInputRef.current!.value) return;
+    if (!comment) return;
 
-    onSubmitAdditionalDesc(additioanalDescInputRef.current!.value);
-    additioanalDescInputRef.current!.value = '';
+    onSubmitComment(comment);
+    setComment('');
   };
 };
 
-const addAdditionalDesc = function (
-  setAdditionalDescClass: (descClass: IAdditionalDescClass) => void,
-  additioanalDescInputRef: React.RefObject<HTMLTextAreaElement>
-) {
+const addComment = function (setIsShowButton: (isShow: boolean) => void) {
   return () => {
-    setAdditionalDescClass({
-      button: 'disabled',
-      input: '',
-    });
-    additioanalDescInputRef.current!.focus();
+    setIsShowButton(false);
   };
 };
 
-export const getCreateDescFormMethods = function (
-  setAdditionalDescClass: (descClass: IAdditionalDescClass) => void,
-  additioanalDescInputRef: React.RefObject<HTMLTextAreaElement>,
-  onSubmitAdditionalDesc: (desc: string) => void
+const ocTextAreaChange = function (setComment: (value: string) => void) {
+  return (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
+  };
+};
+
+export const getCreateCommentFormMethods = function (
+  setIsShowButton: (isShow: boolean) => void,
+  onSubmitComment: (comment: string) => void,
+  commentValue: string,
+  setCommentValue: (value: string) => void
 ) {
   return {
-    onCloseAdditionalDesc: onCloseAdditionalDesc(
-      setAdditionalDescClass,
-      additioanalDescInputRef
-    ),
+    onCloseComment: onCloseComment(setIsShowButton, setCommentValue),
     onSubmitForm: onSubmitForm(
-      setAdditionalDescClass,
-      additioanalDescInputRef,
-      onSubmitAdditionalDesc
+      setIsShowButton,
+      onSubmitComment,
+      commentValue,
+      setCommentValue
     ),
-    addAdditionalDesc: addAdditionalDesc(
-      setAdditionalDescClass,
-      additioanalDescInputRef
-    ),
+    addComment: addComment(setIsShowButton),
+    ocTextAreaChange: ocTextAreaChange(setCommentValue),
   };
 };

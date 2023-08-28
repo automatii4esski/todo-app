@@ -85,11 +85,21 @@
   flex: 1 1 70%;
 }
 
-.singleproject__description {
-  padding: 20px 0;
-  margin-bottom: 20px;
-  border-top: 2px solid $ui;
+.singleproject__comment {
+  padding: 10px 0;
+  margin-bottom: 10px;
   overflow: auto;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: $ui;
+    top: 0;
+    left: 0;
+  }
 }
 
 .singleproject__sub-title {
@@ -116,27 +126,38 @@
   margin-bottom: 20px;
 }
 
-.singleproject__description-box {
+.singleproject__comment-box {
   display: flex;
   justify-content: center;
+  border-top: 2px solid $ui;
+  border-bottom: 2px solid $ui;
+  padding: 10px 0;
+  margin-bottom: 20px;
 }
 
-.singleproject__description-add {
+.singleproject__comment-add {
   background: transparent;
   border: none;
   color: $font-secondary;
   cursor: pointer;
-  font-size: 44px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
   font-weight: 400;
-  line-height: 44px;
   transition: color 0.2s;
-
   &:hover {
     color: $font-primary;
   }
 }
 
-.singleproject__description-date {
+.singleproject__comment-plus {
+  font-size: 44px;
+  line-height: 44px;
+  margin-left: 15px;
+  transform: translateY(-3px);
+}
+
+.singleproject__comment-date {
   color: $font-secondary;
   margin-bottom: 5px;
   display: block;
@@ -148,9 +169,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 2px solid $ui;
 }
 
 .singleproject__date {
@@ -506,7 +524,7 @@
   height: 100%;
 }
 
-.singleproject__description-input {
+.singleproject__comment-input {
   width: 100%;
   height: 150px;
 }
@@ -528,7 +546,7 @@
   display: none;
 }
 
-.singleproject__description-submit,
+.singleproject__comment-submit,
 .singleproject-microtasks__create-submit,
 .singleproject-microtasks__create-edit {
   background: $yellow-color;
@@ -539,7 +557,7 @@
   }
 }
 
-.singleproject__description-close,
+.singleproject__comment-close,
 .singleproject-microtasks__create-close {
   background: $red-color;
   border-radius: 0 0 10px 0;
@@ -549,14 +567,15 @@
   }
 }
 
-.singleproject__description-form {
+.singleproject__comment-form {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   margin-top: 15px;
 }
 
-.singleproject__description-addition + .singleproject__description-addition {
+.singleproject__comment + .singleproject__comment {
   margin-top: 15px;
 }
 

@@ -1,12 +1,12 @@
 import { getDate } from '../../utils/getDate';
 import { MyFC } from '../../types/common';
-import SingleProjectDescriptionCreateForm from '../CreateForms/SingleProjectDescriptionCreateForm';
+import SingleProjectCommentCreateForm from '../CreateForms/SingleProjectCommentCreateForm';
 import { ISingleProjectDescription } from '../../types/singleProject';
 
 const SingleProjectDescription: MyFC<ISingleProjectDescription> = ({
-  additionalDescs,
+  comments,
   desc,
-  onSubmitAdditionalDesc,
+  onSubmitComment,
 }) => {
   return (
     <>
@@ -15,18 +15,16 @@ const SingleProjectDescription: MyFC<ISingleProjectDescription> = ({
           Description
         </h3>
         <p className="singleproject__description-text">{desc}</p>
-        {additionalDescs.map((desc) => (
-          <p key={desc.date} className="singleproject__description-addition">
-            <span className="singleproject__description-date">
-              {getDate(desc.date)}
+        {comments.map((comm) => (
+          <p key={comm.date} className="singleproject__comment">
+            <span className="singleproject__comment-date">
+              Created at {getDate(comm.date)}
             </span>
-            {desc.text}
+            {comm.text}
           </p>
         ))}
       </div>
-      <SingleProjectDescriptionCreateForm
-        onSubmitAdditionalDesc={onSubmitAdditionalDesc}
-      />
+      <SingleProjectCommentCreateForm onSubmitComment={onSubmitComment} />
     </>
   );
 };

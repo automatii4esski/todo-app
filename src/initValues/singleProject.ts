@@ -6,7 +6,7 @@ export const initProjectValue: IProject = {
   desc: '',
   title: '',
   tasks: [],
-  additionalDescs: [],
+  comments: [],
   tasksTotal: 0,
   tasksDone: 0,
   color: 'black',

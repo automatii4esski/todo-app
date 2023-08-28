@@ -1,5 +1,5 @@
 import { ChangeEvent, MouseEvent } from 'react';
-import { IAditionalDesc, IProject, IProjectTask } from './project';
+import { IProjectComment, IProject, IProjectTask } from './project';
 
 export interface IProjectTaskMethods {
   onTaskReturnClick: (taskToInteract: IProjectTask) => void;
@@ -63,7 +63,7 @@ export interface IFilterMethods {
   onAll: () => void;
 }
 
-export interface IAdditionalDescClass {
+export interface ICommentClass {
   button: string;
   input: string;
 }
@@ -73,8 +73,8 @@ export interface ICreateProjectTaskForm {
   id: number;
 }
 
-export interface ISingleProjectDescriptionCreateForm {
-  onSubmitAdditionalDesc: (value: string) => void;
+export interface ISingleProjectCommentCreateForm {
+  onSubmitComment: (value: string) => void;
 }
 
 export interface ISingleProjectMicrotasksCreateForm {
@@ -86,8 +86,8 @@ export interface ISingleProjectMicrotasksCreateForm {
 
 export interface ISingleProjectDescription {
   desc: string;
-  additionalDescs: IAditionalDesc[];
-  onSubmitAdditionalDesc: (newText: string) => void;
+  comments: IProjectComment[];
+  onSubmitComment: (newText: string) => void;
 }
 
 export interface ISingleProjectMicrotasksTop {

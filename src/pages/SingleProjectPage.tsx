@@ -59,11 +59,11 @@ const SingleProjectPage = () => {
     id as string
   );
 
-  const onSubmitAdditionalDesc = function (newDesc: string) {
-    const newData = {
+  const onSubmitComment = function (newDesc: string) {
+    const newData: IProject = {
       ...data,
-      additionalDescs: [
-        ...data.additionalDescs,
+      comments: [
+        ...data.comments,
         {
           date: Date.now(),
           text: newDesc,
@@ -97,8 +97,8 @@ const SingleProjectPage = () => {
           </h2>
           <SingleProjectDescription
             desc={data.desc}
-            additionalDescs={data.additionalDescs}
-            onSubmitAdditionalDesc={onSubmitAdditionalDesc}
+            comments={data.comments}
+            onSubmitComment={onSubmitComment}
           />
           <div className="singleproject__info-bottom">
             <div className="singleproject__bottom-box">

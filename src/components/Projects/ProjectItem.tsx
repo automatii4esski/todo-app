@@ -30,6 +30,7 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
           <span className="project-item__pre-desc">Description: </span>
           {desc}
         </p>
+
         <ProgressLine
           className="project-item__progress"
           width={progressLineWidth}
