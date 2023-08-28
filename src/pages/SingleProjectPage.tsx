@@ -26,6 +26,7 @@ import {
   setIsAllowedToLoad,
   setProjects,
 } from '../context/projectsContext/ProjectsContext';
+import { getProjectPriorityColor } from '../utils/projects/getProjectPriorityColor';
 
 const SingleProjectPage = () => {
   const [data, setData] = useState<IProject>(initProjectValue);
@@ -100,10 +101,23 @@ const SingleProjectPage = () => {
             onSubmitAdditionalDesc={onSubmitAdditionalDesc}
           />
           <div className="singleproject__info-bottom">
-            <div className="singleproject__date">
-              <div className="singleproject__date-text">Deadline:</div>
-              <DateElement>{getDate(Date.now())}</DateElement>
+            <div className="singleproject__bottom-box">
+              <div className="singleproject__date">
+                <div className="singleproject__date-text">Deadline:</div>
+                <DateElement>{getDate(Date.now())}</DateElement>
+              </div>
+              <div className="singleproject__priority">
+                <div className="singleproject__priority-text">Priority:</div>
+                <div
+                  className={`singleproject__priority-value singleproject__priority-value--${getProjectPriorityColor(
+                    data.priority
+                  )}`}
+                >
+                  {data.priority}
+                </div>
+              </div>
             </div>
+
             <div className="singleproject__actions">
               <MyButton
                 onClick={onCompleteClick}

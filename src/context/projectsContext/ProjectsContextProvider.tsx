@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { IContextProvider, IProjectsContext, MyFC } from '../../types/common';
 import {
   projectsContext,
+  setAll,
   setError,
   setIsAllowedToLoad,
   setIsLoading,
@@ -20,17 +21,21 @@ const ProjectsContextProvider: MyFC<IContextProvider<IProjectsContext>> = ({
   const [fetchProjects, _, error] = useFetch(async () => {
     dispatch(setIsLoading(true));
     const response = await ProjectService.getAll();
-    dispatch(setIsLoading(false));
-    dispatch(setIsAllowedToLoad(false));
-    dispatch(setError(error as string));
-    dispatch(setProjects(response.data));
+    dispatch(
+      setAll({
+        error: error as string,
+        isAllowedToLoad: false,
+        projects: response.data,
+        isLoading: false,
+      })
+    );
   });
 
   useEffect(() => {
     if (state.isAllowedToLoad) {
       fetchProjects();
     }
-  }, [state.isAllowedToLoad, fetchProjects]);
+  }, [state.isAllowedToLoad]);
 
   return (
     <projectsContext.Provider value={reducer}>

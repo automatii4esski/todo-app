@@ -25,7 +25,7 @@
 }
 
 .create__label-title {
-  font-size: 24px;
+  font-size: 18px;
   margin-right: 10px;
   font-weight: 600;
 }
@@ -139,6 +139,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
 .create__color-radio {
@@ -199,4 +200,19 @@
   &--purple::before {
     background: purple;
   }
+}
+
+.create-project__warning {
+  font-size: 14px;
+  margin-top: 10px;
+  text-decoration: underline;
+  text-transform: uppercase;
+  color: $font-secondary;
+}
+
+.create__input-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 15px;
 }

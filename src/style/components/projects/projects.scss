@@ -130,3 +130,27 @@
   max-width: 900px;
   width: 100%;
 }
+
+.project-item__priority {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 0;
+  right: 0;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 0 0 0 50%;
+
+  &--green {
+    background: green;
+  }
+
+  &--orange {
+    background: orange;
+  }
+
+  &--red {
+    background: red;
+  }
+}

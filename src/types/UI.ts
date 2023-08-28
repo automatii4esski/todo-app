@@ -31,8 +31,6 @@ export type MyProgressLineType = HTMLAttributes<any> & IProgressLine;
 
 interface IMySelect {
   options: ISortOption[];
-  sort: string;
-  onChange: (...args: any) => any;
   defaultText?: string;
 }
 

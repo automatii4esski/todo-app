@@ -159,7 +159,8 @@
   margin-right: 20px;
 }
 
-.singleproject__date-text {
+.singleproject__date-text,
+.singleproject__priority-text {
   margin-right: 20px;
   font-size: 16px;
   font-weight: 700;
@@ -582,4 +583,35 @@
 
 .singleproject__popup-btn {
   margin: 0 5px;
+}
+
+.singleproject__bottom-box {
+  display: flex;
+  align-items: center;
+}
+
+.singleproject__priority {
+  display: flex;
+  align-items: center;
+}
+
+.singleproject__priority-value {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+
+  &--green {
+    background: green;
+  }
+
+  &--orange {
+    background: orange;
+  }
+
+  &--red {
+    background: red;
+  }
 }

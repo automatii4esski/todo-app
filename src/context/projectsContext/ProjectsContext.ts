@@ -18,6 +18,8 @@ export const projectsReducer = function (
   action: IAction
 ): IProjectsContext['value'] {
   switch (action.type) {
+    case 'SET_ALL':
+      return action.payload;
     case 'SET_PROJECTS':
       return { ...state, projects: action.payload };
     case 'SET_IS_LOADING':
@@ -45,6 +47,13 @@ export const projectsReducer = function (
 };
 
 //Actions
+export const setAll = function (value: IProjectsContext['value']) {
+  return {
+    type: 'SET_ALL',
+    payload: value,
+  };
+};
+
 export const setIsLoading = function (isLoading: boolean) {
   return {
     type: 'SET_IS_LOADING',

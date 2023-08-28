@@ -10,6 +10,7 @@ export const initProjectValue: IProject = {
   tasksTotal: 0,
   tasksDone: 0,
   color: 'black',
+  priority: 1,
 };
 
 export const initProjectTaskValue: IProjectTask = {

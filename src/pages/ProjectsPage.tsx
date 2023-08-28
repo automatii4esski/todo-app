@@ -69,6 +69,7 @@ const ProjectsPage: MyFC = () => {
       </div>
       <PopupTemplate
         active={isPopupActive}
+        // active={true}
         onHideHandler={createFormMethods.onHideCreateForm}
         className="project-popup__wrapper"
       >

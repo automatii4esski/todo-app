@@ -35,6 +35,7 @@ export interface IProject {
   tasksTotal: number;
   tasks: IProjectTask[];
   color: ProjectColors;
+  priority: string | number;
 }
 
 export interface ICreateProjectForm {

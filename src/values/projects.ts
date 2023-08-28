@@ -1,3 +1,4 @@
+import { ISortOption } from '../types/common';
 import { IProjectSortOption } from '../types/project';
 
 export const sortOptions: IProjectSortOption[] = [
@@ -18,3 +19,14 @@ export const sortOptions: IProjectSortOption[] = [
     text: 'By total tasks',
   },
 ];
+
+export const projectPriority: ISortOption[] = [];
+
+for (let i = 1; i < 11; i++) {
+  const priority = i.toString();
+
+  projectPriority.push({
+    value: priority,
+    text: priority,
+  });
+}

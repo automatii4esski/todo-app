@@ -1,147 +1,106 @@
 {
   "projects": [
     {
-      "id": 1693138089485,
-      "deadline": 1693138029672,
+      "id": 1693218400638,
+      "deadline": 1693218391804,
       "desc": "",
-      "title": "zzzzzzzzzzz",
-      "tasks": [
-        {
-          "desc": "zzz",
-          "status": "done",
-          "id": 1693173624932
-        },
-        {
-          "desc": "asdasds",
-          "status": "done",
-          "id": 1693173239675
-        },
-        {
-          "desc": "фывфыв",
-          "status": "done",
-          "id": 1693140833225
-        }
-      ],
-      "additionalDescs": [],
-      "tasksTotal": 3,
-      "tasksDone": 3,
-      "color": "blue"
-    },
-    {
-      "id": 1693139936783,
-      "deadline": 1693138029672,
-      "desc": "",
-      "title": "ss",
-      "tasks": [
-        {
-          "desc": "ss",
-          "status": "done",
-          "id": 1693174459433
-        },
-        {
-          "desc": "лллл\n",
-          "status": "done",
-          "id": 1693172483932
-        }
-      ],
-      "additionalDescs": [],
-      "tasksTotal": 2,
-      "tasksDone": 2,
-      "color": "aqua"
-    },
-    {
-      "id": 1693140078745,
-      "deadline": 1693138029672,
-      "desc": "",
-      "title": "1",
+      "title": "asdasdasd",
       "tasks": [],
       "additionalDescs": [],
       "tasksTotal": 0,
       "tasksDone": 0,
-      "color": "gray"
+      "color": "purple",
+      "priority": "6"
     },
     {
-      "id": 1693140198512,
-      "deadline": 1693140194577,
+      "id": 1693218425581,
+      "deadline": 1693218391804,
       "desc": "",
-      "title": "2",
+      "title": "11123",
+      "tasks": [],
+      "additionalDescs": [],
+      "tasksTotal": 0,
+      "tasksDone": 0,
+      "color": "black",
+      "priority": "1"
+    },
+    {
+      "id": 1693218691629,
+      "deadline": 1693218680470,
+      "desc": "",
+      "title": "123123123123",
+      "tasks": [],
+      "additionalDescs": [],
+      "tasksTotal": 0,
+      "tasksDone": 0,
+      "color": "black",
+      "priority": 1
+    },
+    {
+      "id": 1693218766192,
+      "deadline": 1693218758568,
+      "desc": "",
+      "title": "xx",
+      "tasks": [],
+      "additionalDescs": [],
+      "tasksTotal": 0,
+      "tasksDone": 0,
+      "color": "black",
+      "priority": "7"
+    },
+    {
+      "id": 1693218783105,
+      "deadline": 1693218758568,
+      "desc": "",
+      "title": "b",
+      "tasks": [],
+      "additionalDescs": [],
+      "tasksTotal": 0,
+      "tasksDone": 0,
+      "color": "black",
+      "priority": 1
+    },
+    {
+      "id": 1693218907383,
+      "deadline": 1693218758568,
+      "desc": "",
+      "title": "sadasd",
+      "tasks": [],
+      "additionalDescs": [],
+      "tasksTotal": 0,
+      "tasksDone": 0,
+      "color": "green",
+      "priority": 1
+    },
+    {
+      "id": 1693218986979,
+      "deadline": 1693218965853,
+      "desc": "",
+      "title": "xxx",
+      "tasks": [],
+      "additionalDescs": [],
+      "tasksTotal": 0,
+      "tasksDone": 0,
+      "color": "blue",
+      "priority": 1
+    },
+    {
+      "id": 1693219889230,
+      "deadline": 1693219043334,
+      "desc": "",
+      "title": "zz",
       "tasks": [
         {
-          "desc": "asdasdasd",
-          "status": "active",
-          "id": 1693176415174
+          "id": 1693219888076,
+          "desc": "asdasdsa",
+          "status": "active"
         }
       ],
       "additionalDescs": [],
       "tasksTotal": 1,
       "tasksDone": 0,
-      "color": "black"
-    },
-    {
-      "id": 1693140204193,
-      "deadline": 1693140194577,
-      "desc": "",
-      "title": "3",
-      "tasks": [
-        {
-          "desc": "asdasd",
-          "status": "active",
-          "id": 1693144479608
-        },
-        {
-          "desc": "zxc",
-          "status": "done",
-          "id": 1693144477349
-        }
-      ],
-      "additionalDescs": [],
-      "tasksTotal": 2,
-      "tasksDone": 1,
-      "color": "green"
-    },
-    {
-      "id": 1693140211351,
-      "deadline": 1693140194577,
-      "desc": "",
-      "title": "5",
-      "tasks": [],
-      "additionalDescs": [],
-      "tasksTotal": 0,
-      "tasksDone": 0,
-      "color": "black"
-    },
-    {
-      "id": 1693140227338,
-      "deadline": 1693140194577,
-      "desc": "",
-      "title": "x",
-      "tasks": [],
-      "additionalDescs": [],
-      "tasksTotal": 0,
-      "tasksDone": 0,
-      "color": "orange"
-    },
-    {
-      "id": 1693140233648,
-      "deadline": 1693140194577,
-      "desc": "",
-      "title": "d",
-      "tasks": [],
-      "additionalDescs": [],
-      "tasksTotal": 0,
-      "tasksDone": 0,
-      "color": "red"
-    },
-    {
-      "id": 1693140239961,
-      "deadline": 1693140194577,
-      "desc": "",
-      "title": "ss",
-      "tasks": [],
-      "additionalDescs": [],
-      "tasksTotal": 0,
-      "tasksDone": 0,
-      "color": "purple"
+      "color": "aqua",
+      "priority": "9"
     }
   ],
   "tasks": [

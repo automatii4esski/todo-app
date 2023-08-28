@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent } from 'react';
-import { IProject, IProjectTask } from '../../types/project';
+import { IProject, IProjectTask, ProjectColors } from '../../types/project';
 import { initProjectValue } from '../../initValues/singleProject';
 import { ProjectService } from '../../API/ProjectService';
 
@@ -99,6 +99,33 @@ const onFormSubmit = function (
   };
 };
 
+const onSelectPriorityChange = function (
+  data: IProject,
+  setData: (data: IProject) => void
+) {
+  return (e: ChangeEvent<HTMLSelectElement>) => {
+    setData({
+      ...data,
+      priority: e.target.value,
+    });
+  };
+};
+
+const onInsideColorLabelChange = function (
+  data: IProject,
+  setData: (data: IProject) => void
+) {
+  return (e: FormEvent<HTMLLabelElement>) => {
+    const targetValue = (e.target as HTMLInputElement).value as ProjectColors;
+    if (targetValue) {
+      setData({
+        ...data,
+        color: targetValue,
+      });
+    }
+  };
+};
+
 const onChangeTaskDesc = function (setTaskValue: (value: string) => void) {
   return (e: ChangeEvent<HTMLInputElement>) => {
     setTaskValue(e.target.value);
@@ -120,5 +147,7 @@ export const getCreateProjectFormMethods = function (
     onDescChange: onDescChange(data, setData),
     onFormSubmit: onFormSubmit(data, setData, onCreateProject),
     onChangeTaskDesc: onChangeTaskDesc(setTaskValue),
+    onSelectPriorityChange: onSelectPriorityChange(data, setData),
+    onInsideColorLabelChange: onInsideColorLabelChange(data, setData),
   };
 };

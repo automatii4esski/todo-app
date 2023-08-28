@@ -11,8 +11,8 @@ const MySelect: MyFC<MySelectType> = ({
 }) => {
   return (
     <select
-      {...props}
       value={sort}
+      {...props}
       className={getConcatClassName('select', className)}
     >
       <option className="option" disabled value="">
