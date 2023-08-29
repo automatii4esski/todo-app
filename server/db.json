@@ -5,23 +5,38 @@
       "deadline": 1693250165783,
       "desc": "sdjkfh as asjlkdfhjksldaf asldkjfh sjlakdfhsd lasjdhfjlsadfh jalsdhfljksadf sd",
       "title": "123123",
-      "tasks": [],
+      "tasks": [
+        {
+          "desc": "zz",
+          "status": "active",
+          "id": 1693263434769
+        },
+        {
+          "desc": "asd",
+          "status": "done",
+          "id": 1693263432964
+        }
+      ],
       "comments": [
         {
-          "date": 1693262040891,
+          "date": 1693338019230,
           "text": "asdasdasd"
         },
         {
-          "date": 1693262524623,
-          "text": "asdasdad"
+          "date": 1693338023227,
+          "text": "zxcasdasdasdasdas"
         },
         {
-          "date": 1693262527033,
-          "text": "sssss"
+          "date": 1693338027450,
+          "text": "asdasdasdasdasdas"
+        },
+        {
+          "date": 1693338033138,
+          "text": "zxdasdqwdszd"
         }
       ],
-      "tasksTotal": 0,
-      "tasksDone": 0,
+      "tasksTotal": 2,
+      "tasksDone": 1,
       "color": "red",
       "priority": 1
     }

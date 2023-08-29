@@ -59,21 +59,6 @@ const SingleProjectPage = () => {
     id as string
   );
 
-  const onSubmitComment = function (newDesc: string) {
-    const newData: IProject = {
-      ...data,
-      comments: [
-        ...data.comments,
-        {
-          date: Date.now(),
-          text: newDesc,
-        },
-      ],
-    };
-    setData(newData);
-    ProjectService.putById(newData);
-  };
-
   const onCompleteClick = function () {
     setPopupStatus({ status: true, type: 'complete' });
   };
@@ -95,11 +80,7 @@ const SingleProjectPage = () => {
           >
             {data.title}
           </h2>
-          <SingleProjectDescription
-            desc={data.desc}
-            comments={data.comments}
-            onSubmitComment={onSubmitComment}
-          />
+          <SingleProjectDescription project={data} />
           <div className="singleproject__info-bottom">
             <div className="singleproject__bottom-box">
               <div className="singleproject__date">

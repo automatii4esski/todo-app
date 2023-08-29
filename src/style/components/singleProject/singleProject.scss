@@ -95,8 +95,8 @@
     content: '';
     position: absolute;
     width: 100px;
-    height: 2px;
-    background: $ui;
+    height: 1px;
+    background: $secondary;
     top: 0;
     left: 0;
   }
@@ -104,6 +104,12 @@
 
 .singleproject__sub-title {
   margin-bottom: 30px;
+}
+
+.singleproject__description {
+  overflow: auto;
+  border-top: 2px solid $ui;
+  padding-top: 15px;
 }
 
 .singleproject__description-title {
@@ -159,7 +165,6 @@
 
 .singleproject__comment-date {
   color: $font-secondary;
-  margin-bottom: 5px;
   display: block;
   padding-left: 10px;
   border-left: 1px solid $font-primary;
@@ -551,6 +556,7 @@
 .singleproject-microtasks__create-edit {
   background: $yellow-color;
   border-radius: 0 0 0 10px;
+  text-transform: capitalize;
 
   &:hover {
     background: darken($yellow-color, 10%);
@@ -632,5 +638,43 @@
 
   &--red {
     background: red;
+  }
+}
+
+.singleproject__comment-top {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 5px;
+}
+
+.singleproject__comment-action {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid $secondary;
+  margin: 0 5px;
+}
+
+.singleproject__edit-icon {
+  height: 20px;
+  width: 20px;
+  path {
+    stroke: $font-secondary;
+    transition: stroke 0.15s;
+  }
+
+  &:hover path {
+    stroke: $secondary;
+  }
+}
+
+.singleproject__delete-icon {
+  path {
+    fill: $font-secondary;
+    transition: fill 0.15s;
+  }
+
+  &:hover path {
+    fill: $secondary;
   }
 }

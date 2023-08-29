@@ -1,60 +1,86 @@
+import { ProjectService } from '../../API/ProjectService';
+import { IProject, IProjectComment } from '../../types/project';
 import { ICommentClass } from '../../types/singleProject';
 import { FormEvent, ChangeEvent } from 'react';
 const onCloseComment = function (
   setIsShowButton: (isShow: boolean) => void,
-  setComment: (value: string) => void
+  setCurrentComment: (comment: IProjectComment) => void
 ) {
   return () => {
     setIsShowButton(true);
 
-    setComment('');
+    setCurrentComment({ date: 0, text: '' });
   };
 };
 
 const onSubmitForm = function (
   setIsShowButton: (isShow: boolean) => void,
-  onSubmitComment: (comment: string) => void,
-  comment: string,
-  setComment: (value: string) => void
+  comment: IProjectComment,
+  setCurrentComment: (comment: IProjectComment) => void,
+  comments: IProjectComment[],
+  setComments: (comments: IProjectComment[]) => void,
+  project: IProject
 ) {
   return (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsShowButton(true);
 
     if (!comment) return;
+    const newComments = [
+      ...comments,
+      {
+        date: Date.now(),
+        text: comment.text,
+      },
+    ];
+    setComments(newComments);
 
-    onSubmitComment(comment);
-    setComment('');
+    project.comments = newComments;
+
+    ProjectService.putById(project);
+    setCurrentComment({ date: 0, text: '' });
   };
 };
 
-const addComment = function (setIsShowButton: (isShow: boolean) => void) {
+const addComment = function (
+  setIsShowButton: (isShow: boolean) => void,
+  setFormType: (value: 'edit' | 'add') => void
+) {
   return () => {
     setIsShowButton(false);
+    setFormType('add');
   };
 };
 
-const ocTextAreaChange = function (setComment: (value: string) => void) {
+const onTextAreaChange = function (
+  currentComment: IProjectComment,
+  setCurrentComment: (comment: IProjectComment) => void
+) {
   return (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
+    setCurrentComment({ ...currentComment, text: e.target.value });
   };
 };
 
 export const getCreateCommentFormMethods = function (
   setIsShowButton: (isShow: boolean) => void,
-  onSubmitComment: (comment: string) => void,
-  commentValue: string,
-  setCommentValue: (value: string) => void
+  currentComment: IProjectComment,
+  setComments: (comments: IProjectComment[]) => void,
+  setCurrentComment: (comment: IProjectComment) => void,
+  comments: IProjectComment[],
+  project: IProject,
+  setFormType: (value: 'edit' | 'add') => void
 ) {
   return {
-    onCloseComment: onCloseComment(setIsShowButton, setCommentValue),
+    onCloseComment: onCloseComment(setIsShowButton, setCurrentComment),
     onSubmitForm: onSubmitForm(
       setIsShowButton,
-      onSubmitComment,
-      commentValue,
-      setCommentValue
+      currentComment,
+      setCurrentComment,
+      comments,
+      setComments,
+      project
     ),
-    addComment: addComment(setIsShowButton),
-    ocTextAreaChange: ocTextAreaChange(setCommentValue),
+    addComment: addComment(setIsShowButton, setFormType),
+    onTextAreaChange: onTextAreaChange(currentComment, setCurrentComment),
   };
 };

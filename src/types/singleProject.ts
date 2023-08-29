@@ -85,9 +85,7 @@ export interface ISingleProjectMicrotasksCreateForm {
 }
 
 export interface ISingleProjectDescription {
-  desc: string;
-  comments: IProjectComment[];
-  onSubmitComment: (newText: string) => void;
+  project: IProject;
 }
 
 export interface ISingleProjectMicrotasksTop {

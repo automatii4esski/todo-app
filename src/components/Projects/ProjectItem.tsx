@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { cutString } from '../../utils/cutString';
 import { IProjectItem } from '../../types/project';
 import MyButton from '../UI/button/MyButton';
-import { getProjectPriorityColor } from '../../utils/projects/getProjectPriorityColor';
 
 const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
   const desc = cutString(project.desc, 100).stringSlice;
@@ -17,20 +16,12 @@ const ProjectItem: MyFC<IProjectItem> = ({ project }) => {
   const progressLineCount = `${project.tasksDone}/${project.tasksTotal}`;
   return (
     <div className={`project-item project-item--${project.color}`}>
-      <div
-        className={`project-item__priority project-item__priority--${getProjectPriorityColor(
-          project.priority
-        )}`}
-      >
-        {project.priority}
-      </div>
       <h3 className="project-item__title">{project.title}</h3>
       <div className="project-item__content">
         <p className="project-item__desc">
           <span className="project-item__pre-desc">Description: </span>
           {desc}
         </p>
-
         <ProgressLine
           className="project-item__progress"
           width={progressLineWidth}
