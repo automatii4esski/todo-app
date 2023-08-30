@@ -15,7 +15,7 @@ export class ProjectService {
     return response;
   }
 
-  static async patchTask(
+  static async patchProject(
     projectId: number | string,
     newData: Partial<IProject>
   ) {

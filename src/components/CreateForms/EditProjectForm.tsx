@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { MyFC } from '../../types/common';
 import MyInput from '../UI/Input/MyInput';
 import MyTextarea from '../UI/textarea/MyTextarea';
@@ -6,47 +6,49 @@ import MyButtonType from '../UI/button/MyButton';
 import CreateProjectTasksForm from './CreateProjectTasksForm';
 import { ICreateProjectForm, IProject } from '../../types/project';
 import { initProjectValue } from '../../initValues/singleProject';
-import { getCreateProjectFormMethods } from '../../utils/projects/createFormMethods';
+import {
+  getCreateProjectFormMethods,
+  getEditProjectFormMethods,
+} from '../../utils/projects/createFormMethods';
 import MyButton from '../UI/button/MyButton';
 import ColorsRadio from '../UI/Input/ColorsRadio';
 import MySelect from '../UI/select/MySelect';
 import { projectPriority } from '../../values/projects';
 import CreateProjectMainDataForm from './CreateProjectMainDataForm';
+import { IEditProjectForm } from '../../types/singleProject';
+import { ProjectService } from '../../API/ProjectService';
 
-const CreateProjectForm: MyFC<ICreateProjectForm> = ({ onCreateProject }) => {
-  const [data, setData] = useState<IProject>(initProjectValue);
-  const [taskValue, setTaskValue] = useState<string>('');
+const EditProjectForm: MyFC<IEditProjectForm> = ({
+  initProject,
+  onEditSubmit,
+}) => {
+  const [data, setData] = useState<IProject>(initProject);
 
-  const createProjectFormMethods = getCreateProjectFormMethods(
-    data,
-    setData,
-    taskValue,
-    setTaskValue,
-    onCreateProject
-  );
+  const editProjectFormMethods = getEditProjectFormMethods(data, setData);
+
+  const onFormSubmit = function (e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    onEditSubmit(data);
+  };
 
   return (
     <div className="create create-project">
-      <h4 className="create__title">Create Project</h4>
+      <h4 className="create__title">Edit Project</h4>
       <form
-        onSubmit={createProjectFormMethods.onFormSubmit}
+        onSubmit={onFormSubmit}
         className="create__form create-project__from"
       >
         <CreateProjectMainDataForm
           data={data}
-          formMethods={createProjectFormMethods}
-        />
-        <CreateProjectTasksForm
-          data={data}
-          formMethods={createProjectFormMethods}
-          taskInputValue={taskValue}
+          formMethods={editProjectFormMethods}
+          className="create__form-edit"
         />
         <MyButton className="create-project__submit" type="submit">
-          Add Project
+          Edit Project
         </MyButton>
       </form>
     </div>
   );
 };
 
-export default CreateProjectForm;
+export default EditProjectForm;

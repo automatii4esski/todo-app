@@ -19,7 +19,7 @@ const onSubmitEditTask = function (
       tasks: newTasks,
     };
     setData(newData);
-    ProjectService.patchTask(id as string, { tasks: newTasks });
+    ProjectService.patchProject(id as string, { tasks: newTasks });
   };
 };
 
@@ -34,7 +34,7 @@ const onSubmitCreateTask = function (
       tasksTotal: data.tasksTotal + 1,
       tasks: newTasks,
     };
-    ProjectService.patchTask(id as string, newData);
+    ProjectService.patchProject(id as string, newData);
     setData({ ...data, ...newData });
   };
 };

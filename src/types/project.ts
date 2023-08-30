@@ -41,3 +41,14 @@ export interface IProject {
 export interface ICreateProjectForm {
   onCreateProject: (project: IProject) => void;
 }
+
+export interface ICreateProjectMainDataForm {
+  data: IProject;
+  formMethods: {
+    onDateChange: (...args: any) => any;
+    onTitleChange: (...args: any) => any;
+    onDescChange: (...args: any) => any;
+    onSelectPriorityChange: (...args: any) => any;
+    onInsideColorLabelChange: (...args: any) => any;
+  };
+}

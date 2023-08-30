@@ -27,6 +27,7 @@ import {
   setProjects,
 } from '../context/projectsContext/ProjectsContext';
 import { getProjectPriorityColor } from '../utils/projects/getProjectPriorityColor';
+import EditProjectForm from '../components/CreateForms/EditProjectForm';
 
 const SingleProjectPage = () => {
   const [data, setData] = useState<IProject>(initProjectValue);
@@ -35,6 +36,9 @@ const SingleProjectPage = () => {
     type: ISingleProjectApprovePopupContent['type'];
   }>({ status: false, type: 'complete' });
   const { id } = useParams();
+  const [popuptTypeContent, setPopuptTypeContent] = useState<
+    'approve' | 'edit'
+  >('approve');
   const [isLoading, error] = useFetchProject(setData, id as string);
   const { dispatch, value } = useContext(projectsContext)!;
 
@@ -61,14 +65,38 @@ const SingleProjectPage = () => {
 
   const onCompleteClick = function () {
     setPopupStatus({ status: true, type: 'complete' });
+    setPopuptTypeContent('approve');
   };
 
   const onDeleteClick = function () {
     setPopupStatus({ status: true, type: 'delete' });
+    setPopuptTypeContent('approve');
   };
 
   const onHidePopup = function () {
     setPopupStatus({ status: false, type: 'delete' });
+  };
+
+  const onEditProjectClick = function () {
+    setPopupStatus({ status: true, type: 'delete' });
+    setPopuptTypeContent('edit');
+  };
+
+  const onEditSubmit = function (project: IProject) {
+    setPopupStatus({ status: false, type: 'delete' });
+    setData(project);
+    ProjectService.putById(project);
+  };
+
+  const popupContents = {
+    edit: <EditProjectForm initProject={data} onEditSubmit={onEditSubmit} />,
+    approve: (
+      <SingleProjectApprovePopupContent
+        type={popupStatus.type}
+        projectID={+id!}
+        onDeclineClick={onHidePopup}
+      />
+    ),
   };
 
   return (
@@ -97,6 +125,7 @@ const SingleProjectPage = () => {
                   {data.priority}
                 </div>
               </div>
+              <MyButton onClick={onEditProjectClick}>Edit project</MyButton>
             </div>
 
             <div className="singleproject__actions">
@@ -122,11 +151,7 @@ const SingleProjectPage = () => {
         />
       </div>
       <PopupTemplate onHideHandler={onHidePopup} active={popupStatus.status}>
-        <SingleProjectApprovePopupContent
-          type={popupStatus.type}
-          projectID={+id!}
-          onDeclineClick={onHidePopup}
-        />
+        {popupContents[popuptTypeContent]}
       </PopupTemplate>
     </div>
   );

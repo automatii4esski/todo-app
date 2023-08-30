@@ -151,3 +151,16 @@ export const getCreateProjectFormMethods = function (
     onInsideColorLabelChange: onInsideColorLabelChange(data, setData),
   };
 };
+
+export const getEditProjectFormMethods = function (
+  data: IProject,
+  setData: (data: IProject) => void
+) {
+  return {
+    onDateChange: onDateChange(data, setData),
+    onTitleChange: onTitleChange(data, setData),
+    onDescChange: onDescChange(data, setData),
+    onSelectPriorityChange: onSelectPriorityChange(data, setData),
+    onInsideColorLabelChange: onInsideColorLabelChange(data, setData),
+  };
+};

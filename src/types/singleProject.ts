@@ -68,9 +68,20 @@ export interface ICommentClass {
   input: string;
 }
 
-export interface ICreateProjectTaskForm {
-  onDelete: (id: number) => void;
-  id: number;
+export interface ICreateProjectTasksForm {
+  data: IProject;
+  formMethods: {
+    onAddTaskClick: (...args: any) => any;
+    onDeleteTask: (...args: any) => any;
+    onDateChange: (...args: any) => any;
+    onTitleChange: (...args: any) => any;
+    onDescChange: (...args: any) => any;
+    onFormSubmit: (...args: any) => any;
+    onChangeTaskDesc: (...args: any) => any;
+    onSelectPriorityChange: (...args: any) => any;
+    onInsideColorLabelChange: (...args: any) => any;
+  };
+  taskInputValue: string;
 }
 
 export interface ISingleProjectCommentCreateForm {
@@ -107,4 +118,9 @@ export interface ISingleProjectApprovePopupContent {
   type: 'complete' | 'delete';
   projectID: number;
   onDeclineClick: () => void;
+}
+
+export interface IEditProjectForm {
+  initProject: IProject;
+  onEditSubmit: (project: IProject) => void;
 }

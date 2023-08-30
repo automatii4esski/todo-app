@@ -28,7 +28,7 @@ const onTaskDoneOrReturnClick = function (
       tasksDone: data.tasksDone + (status === 'active' ? -1 : 1),
       tasks: newTasks,
     };
-    ProjectService.patchTask(id, newData);
+    ProjectService.patchProject(id, newData);
     setData({
       ...data,
       ...newData,
@@ -48,7 +48,7 @@ const onTaskDeleteClick = function (
       tasksDone: data.tasksDone - Number(taskToInteract.status === 'done'),
       tasks: newTasks,
     };
-    ProjectService.patchTask(id, newData);
+    ProjectService.patchProject(id, newData);
 
     setData({ ...data, ...newData });
   };
