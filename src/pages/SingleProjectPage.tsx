@@ -24,7 +24,9 @@ import { ISingleProjectApprovePopupContent } from '../types/singleProject';
 import {
   projectsContext,
   setIsAllowedToLoad,
+  setProjectIndex,
   setProjects,
+  updateSingleProject,
 } from '../context/projectsContext/ProjectsContext';
 import { getProjectPriorityColor } from '../utils/projects/getProjectPriorityColor';
 import EditProjectForm from '../components/CreateForms/EditProjectForm';
@@ -43,10 +45,12 @@ const SingleProjectPage = () => {
   const { dispatch, value } = useContext(projectsContext)!;
 
   useEffect(() => {
-    return () => {
-      dispatch(setIsAllowedToLoad(true));
-    };
-  }, []);
+    dispatch(setProjectIndex(data.id));
+  }, [data.id]);
+
+  useEffect(() => {
+    dispatch(updateSingleProject(data));
+  }, [data]);
 
   if (isLoading) {
     return (

@@ -159,3 +159,10 @@ select {
     background: $yellow-color;
   }
 }
+
+.error-message {
+  color: red;
+  text-decoration: underline;
+  text-transform: uppercase;
+  text-align: center;
+}

@@ -37,5 +37,10 @@ export interface IProjectsContext extends IDispatchContext {
     isLoading: boolean;
     error: undefined | string;
     isAllowedToLoad: boolean;
+    singleProjectIndex: number;
   };
+}
+
+export interface IErrorMessage {
+  text: string;
 }

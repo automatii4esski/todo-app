@@ -18,21 +18,22 @@ const ProjectsContextProvider: MyFC<IContextProvider<IProjectsContext>> = ({
 }) => {
   const { value: state, dispatch } = reducer;
 
-  const [fetchProjects, _, error] = useFetch(async () => {
+  const [fetchProjects, isLoading, error] = useFetch(async () => {
     dispatch(setIsLoading(true));
     const response = await ProjectService.getAll();
-    dispatch(
-      setAll({
-        error: error as string,
-        isAllowedToLoad: false,
-        projects: response.data,
-        isLoading: false,
-      })
-    );
+    dispatch(setProjects(response.data));
+    dispatch(setIsAllowedToLoad(false));
   });
 
   useEffect(() => {
+    dispatch(setIsLoading(isLoading));
+    dispatch(setError((error as any)?.message));
+  }, [error, isLoading]);
+
+  useEffect(() => {
     if (state.isAllowedToLoad) {
+      console.log('fetch');
+
       fetchProjects();
     }
   }, [state.isAllowedToLoad]);

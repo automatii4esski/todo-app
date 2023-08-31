@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import { IAction, IProjectsContext } from '../../types/common';
 import { IProject } from '../../types/project';
+import { initProjectValue } from '../../initValues/singleProject';
 
 export const projectsContext = createContext<IProjectsContext | null>(null);
 
@@ -10,6 +11,7 @@ export const initProjectContextValue: IProjectsContext['value'] = {
   error: undefined,
   isLoading: false,
   isAllowedToLoad: true,
+  singleProjectIndex: 0,
 };
 
 //Reducer
@@ -22,6 +24,16 @@ export const projectsReducer = function (
       return action.payload;
     case 'SET_PROJECTS':
       return { ...state, projects: action.payload };
+    case 'SET_PROJECT_INDEX':
+      return {
+        ...state,
+        singleProjectIndex: state.projects.findIndex(
+          (prj) => prj.id === action.payload
+        ),
+      };
+    case 'UPDATE_SINGLEPROJECT':
+      state.projects[state.singleProjectIndex] = action.payload;
+      return state;
     case 'SET_IS_LOADING':
       return { ...state, isLoading: action.payload };
     case 'SET_ERROR':
@@ -30,11 +42,13 @@ export const projectsReducer = function (
       return { ...state, isAllowedToLoad: action.payload };
 
     case 'DELETE_PROJECT_BY_ID':
+      const newProjects = state.projects.filter(
+        (project) => project.id !== action.payload
+      );
+
       return {
         ...state,
-        projects: state.projects.filter(
-          (project) => project.id !== action.payload
-        ),
+        projects: newProjects,
       };
     case 'ADD_PROJECT':
       return {
@@ -51,6 +65,20 @@ export const setAll = function (value: IProjectsContext['value']) {
   return {
     type: 'SET_ALL',
     payload: value,
+  };
+};
+
+export const setProjectIndex = function (projectId: number) {
+  return {
+    type: 'SET_PROJECT_INDEX',
+    payload: projectId,
+  };
+};
+
+export const updateSingleProject = function (project: IProject) {
+  return {
+    type: 'UPDATE_SINGLEPROJECT',
+    payload: project,
   };
 };
 

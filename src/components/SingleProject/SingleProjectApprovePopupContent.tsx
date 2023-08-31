@@ -12,12 +12,14 @@ import { useNavigate } from 'react-router-dom';
 import {
   deleteProjectById,
   projectsContext,
+  setIsAllowedToLoad,
 } from '../../context/projectsContext/ProjectsContext';
 
 const SingleProjectApprovePopupContent: MyFC<
   ISingleProjectApprovePopupContent
 > = ({ projectID, type: operationType, onDeclineClick }) => {
-  const { dispatch: projectDispatch } = useContext(projectsContext)!;
+  const { dispatch: projectDispatch, value: state } =
+    useContext(projectsContext)!;
   const { value: userState, dispatch: userDispatch } =
     useContext(userDataContext)!;
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ const SingleProjectApprovePopupContent: MyFC<
       userDispatch(addToTotalProjectsDone());
       UserService.updateTotalProjectsDone(userState.projectsDone + 1);
     }
+    projectDispatch(setIsAllowedToLoad(false));
     projectDispatch(deleteProjectById(projectID));
     ProjectService.deleteProject(projectID);
     navigate('/projects');

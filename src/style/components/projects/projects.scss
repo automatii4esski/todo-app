@@ -154,3 +154,13 @@
     background: red;
   }
 }
+
+.projects__loader {
+  margin: 0 auto;
+}
+
+.projects__message {
+  text-align: center;
+  font-size: 22px;
+  color: $font-secondary;
+}

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import ProjectItem from '../components/Projects/ProjectItem';
 import { MyFC } from '../types/common';
 import MyInput from '../components/UI/Input/MyInput';
@@ -15,8 +15,13 @@ import MyButton from '../components/UI/button/MyButton';
 import {
   addProject,
   projectsContext,
+  setProjectIndex,
   setProjects,
+  updateSingleProject,
 } from '../context/projectsContext/ProjectsContext';
+import Loader from '../components/UI/loader/Loader';
+import Error from '../components/UI/message/Error';
+import { initProjectValue } from '../initValues/singleProject';
 
 const ProjectsPage: MyFC = () => {
   const { value: state, dispatch } = useContext(projectsContext)!;
@@ -31,6 +36,25 @@ const ProjectsPage: MyFC = () => {
     sort,
     query
   );
+
+  if (state.isLoading) {
+    return <Loader className="projects__loader" />;
+  }
+  if (state.error) {
+    return <Error text={state.error} />;
+  }
+
+  const renderProjects = function () {
+    return state.projects.length !== 0 ? (
+      <div className="projects-content">
+        {searchedAndSortedProjects.map((project) => (
+          <ProjectItem key={project.id} project={project} />
+        ))}
+      </div>
+    ) : (
+      <p className="projects__message">No projects</p>
+    );
+  };
 
   const onCreateProjectClick = function (project: IProject) {
     dispatch(addProject(project));
@@ -62,11 +86,7 @@ const ProjectsPage: MyFC = () => {
           Create Project
         </MyButton>
       </div>
-      <div className="projects-content">
-        {searchedAndSortedProjects.map((project) => (
-          <ProjectItem key={project.id} project={project} />
-        ))}
-      </div>
+      {renderProjects()}
       <PopupTemplate
         active={isPopupActive}
         // active={true}
